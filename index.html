@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ira & Angel - Wedding June 27, 2026</title>
+    <link rel="stylesheet" href="style.css">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // SVG Icons as React components
+        const Heart = ({ className, fill, ...props }) => (
+            <svg className={className} fill={fill || "none"} stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.682l-1.318-1.364a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+        );
+
+        const MapPin = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+        );
+
+        const Clock = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12,6 12,12 16,14"></polyline>
+            </svg>
+        );
+
+        const Calendar = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+        );
+
+        const Camera = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+        );
+
+        const Users = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+        );
+
+        const Mail = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+        );
+
+        const ChevronDown = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <polyline points="6,9 12,15 18,9"></polyline>
+            </svg>
+        );
+
+        const Sparkles = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+        );
+
+        const WeddingWebsite = () => {
+            const [activeSection, setActiveSection] = useState('hero');
+            const [showRsvpConfirm, setShowRsvpConfirm] = useState(false);
+            const [isSubmitting, setIsSubmitting] = useState(false);
+            const [submitError, setSubmitError] = useState('');
+            const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+            const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            const [isWeddingDay, setIsWeddingDay] = useState(false);
+            const [formData, setFormData] = useState({
+                name: '',
+                email: '',
+                guests: '1',
+                attending: 'yes',
+                message: ''
+            });
+
+            // REPLACE THIS URL with your Google Apps Script Web App URL
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8I7l2S9h7LUaQ-enyscRberi4xEtNKPkF2Czn-H8i3ci-ppnKEuDY75BfM-DZF3s/exec';
+
+            // Countdown Timer
+            useEffect(() => {
+                const weddingDate = new Date('2026-06-27T14:00:00').getTime();
+                
+                const updateCountdown = () => {
+                    const now = new Date().getTime();
+                    const distance = weddingDate - now;
+
+                    if (distance < 0) {
+                        setIsWeddingDay(true);
+                        setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+                    } else {
+                        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                        
+                        setCountdown({ days, hours, minutes, seconds });
+                        setIsWeddingDay(false);
+                    }
+                };
+
+                updateCountdown();
+                const interval = setInterval(updateCountdown, 1000);
+
+                return () => clearInterval(interval);
+            }, []);
+
+            useEffect(() => {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                setActiveSection(entry.target.id);
+                                entry.target.classList.add('section-visible');
+                            }
+                        });
+                    },
+                    { threshold: 0.2 }
+                );
+
+                document.querySelectorAll('section[id]').forEach((section) => {
+                    observer.observe(section);
+                });
+
+                const handleMouseMove = (e) => {
+                    setMousePos({ x: e.clientX, y: e.clientY });
+                };
+
+                window.addEventListener('mousemove', handleMouseMove);
+
+                return () => {
+                    observer.disconnect();
+                    window.removeEventListener('mousemove', handleMouseMove);
+                };
+            }, []);
+
+            const handleSubmit = async () => {
+                if (!formData.name || !formData.email) {
+                    setSubmitError('Please fill in all required fields.');
+                    return;
+                }
+
+                setIsSubmitting(true);
+                setSubmitError('');
+
+                try {
+                    const response = await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name: formData.name,
+                            email: formData.email,
+                            guests: formData.guests,
+                            attending: formData.attending,
+                            message: formData.message,
+                            timestamp: new Date().toLocaleString()
+                        })
+                    });
+
+                    // Since we're using no-cors, we can't read the response
+                    // We'll assume success if no error is thrown
+                    setShowRsvpConfirm(true);
+                    setTimeout(() => setShowRsvpConfirm(false), 5000);
+                    setFormData({
+                        name: '',
+                        email: '',
+                        guests: '1',
+                        attending: 'yes',
+                        message: ''
+                    });
+                } catch (error) {
+                    console.error('Error submitting RSVP:', error);
+                    setSubmitError('There was an error submitting your RSVP. Please try again or contact us directly.');
+                } finally {
+                    setIsSubmitting(false);
+                }
+            };
+
+            const scrollToSection = (id) => {
+                document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+            };
+
+            return React.createElement('div', { className: 'wedding-container' }, [
+                // Floating Hearts Animation
+                React.createElement('div', { 
+                    key: 'floating-hearts',
+                    className: 'floating-hearts-container' 
+                }, 
+                    [...Array(6)].map((_, i) =>
+                        React.createElement('div', {
+                            key: i,
+                            className: 'floating-heart',
+                            style: {
+                                left: `${15 + i * 15}%`,
+                                animationDelay: `${i * 2}s`,
+                                animationDuration: `${15 + i * 2}s`
+                            }
+                        }, React.createElement(Heart, { className: 'heart-icon-float' }))
+                    )
+                ),
+
+                // Cursor Trail Effect
+                React.createElement('div', {
+                    key: 'cursor-trail',
+                    className: 'cursor-trail',
+                    style: {
+                        left: mousePos.x - 16,
+                        top: mousePos.y - 16
+                    }
+                }, React.createElement('div', { className: 'cursor-trail-inner' })),
+
+                // Navigation
+                React.createElement('nav', { key: 'nav', className: 'navigation' },
+                    React.createElement('div', { className: 'nav-container' }, [
+                        React.createElement('div', { key: 'nav-content', className: 'nav-content' }, [
+                            React.createElement('div', { key: 'nav-logo', className: 'nav-logo' }, [
+                                React.createElement(Heart, { key: 'nav-heart', className: 'nav-heart' }),
+                                React.createElement('span', { key: 'nav-text', className: 'nav-text' }, 'Ira & Angel')
+                            ]),
+                            React.createElement('div', { key: 'nav-links', className: 'nav-links' },
+                                ['Our Story', 'Details', 'Gallery', 'RSVP'].map((item, i) =>
+                                    React.createElement('button', {
+                                        key: item,
+                                        onClick: () => scrollToSection(item.toLowerCase().replace(' ', '-')),
+                                        className: 'nav-link',
+                                        style: { animationDelay: `${i * 0.1}s` }
+                                    }, [
+                                        item,
+                                        React.createElement('span', { key: 'underline', className: 'nav-underline' })
+                                    ])
+                                )
+                            ),
+                            React.createElement('button', {
+                                key: 'nav-cta',
+                                onClick: () => scrollToSection('rsvp'),
+                                className: 'nav-cta'
+                            }, 'RSVP Now')
+                        ])
+                    ])
+                ),
+
+                // Hero Section
+                React.createElement('section', { key: 'hero', id: 'hero', className: 'hero-section' }, [
+                    React.createElement('div', { key: 'hero-bg', className: 'hero-background' }),
+                    React.createElement('div', { key: 'hero-elements', className: 'hero-elements' }, [
+                        React.createElement('div', { key: 'bloom1', className: 'flower-bloom bloom-1' }),
+                        React.createElement('div', { key: 'bloom2', className: 'flower-bloom bloom-2' }),
+                        React.createElement('div', { key: 'bloom3', className: 'flower-bloom bloom-3' })
+                    ]),
+                    React.createElement('div', { key: 'hero-content', className: 'hero-content' }, [
+                        React.createElement('div', { key: 'hero-heart', className: 'hero-heart' },
+                            React.createElement(Heart, { className: 'hero-heart-icon' })
+                        ),
+                        React.createElement('div', { key: 'hero-title', className: 'hero-title' },
+                            React.createElement('h1', { className: 'hero-heading' }, 'Ira & Angel')
+                        ),
+                        React.createElement('div', { key: 'hero-divider', className: 'hero-divider' }),
+                        React.createElement('p', { key: 'hero-subtitle', className: 'hero-subtitle' }, [
+                            'Merging our branches into one repository of love',
+                            React.createElement('br', { key: 'br' }),
+                            React.createElement('span', { key: 'comment', className: 'hero-comment' }, '// Committing to forever 💕')
+                        ]),
+                        React.createElement('div', { key: 'hero-date', className: 'hero-date' }, [
+                            React.createElement('p', { key: 'date-text', className: 'hero-date-text' }, [
+                                React.createElement(Sparkles, { key: 'sparkle1', className: 'sparkle-icon' }),
+                                'JUNE 27, 2026',
+                                React.createElement(Sparkles, { key: 'sparkle2', className: 'sparkle-icon' })
+                            ]),
+                            React.createElement('p', { key: 'venue', className: 'hero-venue' }, 'Nuestra Señora de Gracia Parish')
+                        ]),
+                        !isWeddingDay && React.createElement('div', { key: 'countdown', className: 'countdown-container' }, [
+                            React.createElement('p', { key: 'countdown-label', className: 'countdown-label' }, 'Counting down to our special day'),
+                            React.createElement('div', { key: 'countdown-grid', className: 'countdown-grid' },
+                                ['days', 'hours', 'minutes', 'seconds'].map((unit, i) => {
+                                    const labels = ['Days', 'Hours', 'Mins', 'Secs'];
+                                    const values = [countdown.days, countdown.hours, countdown.minutes, countdown.seconds];
+                                    return React.createElement('div', {
+                                        key: unit,
+                                        className: 'countdown-box'
+                                    }, [
+                                        React.createElement('div', { key: 'number', className: 'countdown-number' }, values[i]),
+                                        React.createElement('div', { key: 'label', className: 'countdown-unit' }, labels[i])
+                                    ]);
+                                })
+                            )
+                        ]),
+                        React.createElement('button', {
+                            key: 'hero-cta',
+                            onClick: () => scrollToSection('our-story'),
+                            className: 'hero-cta'
+                        }, [
+                            React.createElement('span', { key: 'text' }, 'Discover Our Story'),
+                            React.createElement(ChevronDown, { key: 'icon', className: 'chevron-icon' })
+                        ])
+                    ])
+                ]),
+
+                // Our Story Section
+                React.createElement('section', { key: 'our-story', id: 'our-story', className: 'story-section' },
+                    React.createElement('div', { className: 'story-container' }, [
+                        React.createElement('div', { key: 'story-header', className: 'section-header' }, [
+                            React.createElement('h2', { className: 'section-title' }, 'Our Story'),
+                            React.createElement('div', { className: 'section-divider' })
+                        ]),
+                        React.createElement('div', { key: 'story-content', className: 'story-content' },
+                            [
+                                {
+                                    title: 'The Beginning',
+                                    color: 'rose',
+                                    text: 'It was a crisp autumn evening in October 2019 when our paths first crossed at a mutual friend\'s gallery opening in Brooklyn. James was admiring a piece of abstract art, and Sophia accidentally bumped into him while stepping back to get a better view. That clumsy moment turned into hours of conversation about art, travel, and our shared love of terrible puns.'
+                                },
+                                {
+                                    title: 'Growing Together',
+                                    color: 'green',
+                                    text: 'What started as coffee dates at our favorite corner café evolved into weekend adventures exploring hidden bookstores, cooking experiments that sometimes ended in laughter and takeout, and long walks through Central Park during every season. Through career changes, family celebrations, and everything in between, we discovered that home isn\'t a place—it\'s being together.'
+                                },
+                                {
+                                    title: 'The Proposal',
+                                    color: 'rose',
+                                    text: 'On a surprise trip to the Amalfi Coast in May 2024, James took Sophia to a secluded cliff overlooking the Mediterranean at sunset. As the golden hour painted the sky in shades of pink and orange, he got down on one knee and asked the question that would change everything. Through happy tears, Sophia said yes, and we celebrated with limoncello and the promise of forever.'
+                                }
+                            ].map((story, i) =>
+                                React.createElement('div', { key: i, className: 'story-card' }, [
+                                    React.createElement('div', { key: 'header', className: 'story-card-header' }, [
+                                        React.createElement('div', { key: 'icon', className: `story-icon ${story.color}` },
+                                            React.createElement(Heart, { className: 'story-heart' })
+                                        ),
+                                        React.createElement('h3', { key: 'title', className: `story-title ${story.color}` }, story.title)
+                                    ]),
+                                    React.createElement('p', { key: 'text', className: 'story-text' }, story.text)
+                                ])
+                            )
+                        )
+                    ])
+                ),
+
+                // Event Details Section
+                React.createElement('section', { key: 'details', id: 'details', className: 'details-section' },
+                    React.createElement('div', { className: 'details-container' }, [
+                        React.createElement('div', { key: 'details-header', className: 'section-header' }, [
+                            React.createElement('h2', { className: 'section-title' }, 'Event Details'),
+                            React.createElement('div', { className: 'section-divider' })
+                        ]),
+                        React.createElement('div', { key: 'details-grid', className: 'details-grid' }, [
+                            // Ceremony Card
+                            React.createElement('div', { key: 'ceremony', className: 'detail-card ceremony-card' }, [
+                                React.createElement('div', { key: 'ceremony-header', className: 'detail-card-header' }, [
+                                    React.createElement('div', { key: 'ceremony-icon', className: 'detail-icon rose' },
+                                        React.createElement(Heart, { className: 'detail-heart' })
+                                    ),
+                                    React.createElement('h3', { key: 'ceremony-title', className: 'detail-title' }, 'Ceremony')
+                                ]),
+                                React.createElement('div', { key: 'ceremony-details', className: 'detail-items' },
+                                    [
+                                        { icon: Calendar, text: 'June 27, 2026', sub: 'Saturday' },
+                                        { icon: Clock, text: '2:00 PM', sub: 'Ceremony begins promptly' },
+                                        { icon: MapPin, text: 'Nuestra Señora de Gracia Parish', sub: 'Makati City, Metro Manila' }
+                                    ].map((item, i) =>
+                                        React.createElement('div', { key: i, className: 'detail-item rose' }, [
+                                            React.createElement(item.icon, { key: 'icon', className: 'detail-item-icon' }),
+                                            React.createElement('div', { key: 'content' }, [
+                                                React.createElement('p', { key: 'text', className: 'detail-item-text' }, item.text),
+                                                React.createElement('p', { key: 'sub', className: 'detail-item-sub' }, item.sub)
+                                            ])
+                                        ])
+                                    )
+                                )
+                            ]),
+                            // Reception Card
+                            React.createElement('div', { key: 'reception', className: 'detail-card reception-card' }, [
+                                React.createElement('div', { key: 'reception-header', className: 'detail-card-header' }, [
+                                    React.createElement('div', { key: 'reception-icon', className: 'detail-icon green' },
+                                        React.createElement(Users, { className: 'detail-heart' })
+                                    ),
+                                    React.createElement('h3', { key: 'reception-title', className: 'detail-title' }, 'Reception')
+                                ]),
+                                React.createElement('div', { key: 'reception-details', className: 'detail-items' },
+                                    [
+                                        { icon: Calendar, text: 'June 27, 2026', sub: 'Immediately following ceremony' },
+                                        { icon: Clock, text: '4:00 PM - 10:00 PM', sub: 'Cocktails, dinner, and dancing' },
+                                        { icon: MapPin, text: 'The Manila Peninsula', sub: 'Makati City, Metro Manila' }
+                                    ].map((item, i) =>
+                                        React.createElement('div', { key: i, className: 'detail-item green' }, [
+                                            React.createElement(item.icon, { key: 'icon', className: 'detail-item-icon' }),
+                                            React.createElement('div', { key: 'content' }, [
+                                                React.createElement('p', { key: 'text', className: 'detail-item-text' }, item.text),
+                                                React.createElement('p', { key: 'sub', className: 'detail-item-sub' }, item.sub)
+                                            ])
+                                        ])
+                                    )
+                                )
+                            ])
+                        ])
+                    ])
+                ),
+
+                // Gallery Section
+                React.createElement('section', { key: 'gallery', id: 'gallery', className: 'gallery-section' },
+                    React.createElement('div', { className: 'gallery-container' }, [
+                        React.createElement('div', { key: 'gallery-header', className: 'section-header' }, [
+                            React.createElement('div', { key: 'gallery-icon', className: 'section-icon' },
+                                React.createElement(Camera, { className: 'section-icon-svg' })
+                            ),
+                            React.createElement('h2', { className: 'section-title' }, 'Our Gallery'),
+                            React.createElement('div', { className: 'section-divider' }),
+                            React.createElement('p', { className: 'section-subtitle' }, 'Moments from our journey together')
+                        ]),
+                        React.createElement('div', { key: 'gallery-grid', className: 'gallery-grid' },
+                            [...Array(6)].map((_, i) =>
+                                React.createElement('div', {
+                                    key: i,
+                                    className: 'gallery-item',
+                                    style: { animationDelay: `${i * 0.1}s` }
+                                }, [
+                                    React.createElement('div', { key: 'shimmer', className: 'gallery-shimmer' }),
+                                    React.createElement(Camera, { key: 'camera', className: 'gallery-camera' })
+                                ])
+                            )
+                        )
+                    ])
+                ),
+
+                // RSVP Section
+                React.createElement('section', { key: 'rsvp', id: 'rsvp', className: 'rsvp-section' },
+                    React.createElement('div', { className: 'rsvp-container' }, [
+                        React.createElement('div', { key: 'rsvp-header', className: 'section-header' }, [
+                            React.createElement('div', { key: 'rsvp-icon', className: 'section-icon' },
+                                React.createElement(Mail, { className: 'section-icon-svg' })
+                            ),
+                            React.createElement('h2', { className: 'section-title' }, 'RSVP'),
+                            React.createElement('div', { className: 'section-divider' }),
+                            React.createElement('p', { className: 'section-subtitle' }, 'Please respond by April 15, 2026')
+                        ]),
+
+                        showRsvpConfirm && React.createElement('div', { key: 'confirm', className: 'rsvp-confirm' },
+                            React.createElement('p', { className: 'rsvp-confirm-text' }, 'Thank you for your RSVP! We can\'t wait to celebrate with you. ✨')
+                        ),
+
+                        submitError && React.createElement('div', { key: 'error', className: 'rsvp-error' },
+                            React.createElement('p', { className: 'rsvp-error-text' }, submitError)
+                        ),
+
+                        React.createElement('div', { key: 'rsvp-form', className: 'rsvp-form' }, [
+                            // Name Field
+                            React.createElement('div', { key: 'name', className: 'form-group' }, [
+                                React.createElement('label', { className: 'form-label' }, 'Full Name *'),
+                                React.createElement('input', {
+                                    type: 'text',
+                                    value: formData.name,
+                                    onChange: (e) => setFormData({...formData, name: e.target.value}),
+                                    className: 'form-input',
+                                    placeholder: 'John & Jane Doe'
+                                })
+                            ]),
+
+                            // Email Field
+                            React.createElement('div', { key: 'email', className: 'form-group' }, [
+                                React.createElement('label', { className: 'form-label' }, 'Email Address *'),
+                                React.createElement('input', {
+                                    type: 'email',
+                                    value: formData.email,
+                                    onChange: (e) => setFormData({...formData, email: e.target.value}),
+                                    className: 'form-input',
+                                    placeholder: 'you@example.com'
+                                })
+                            ]),
+
+                            // Guests Field
+                            React.createElement('div', { key: 'guests', className: 'form-group' }, [
+                                React.createElement('label', { className: 'form-label' }, 'Number of Guests *'),
+                                React.createElement('select', {
+                                    value: formData.guests,
+                                    onChange: (e) => setFormData({...formData, guests: e.target.value}),
+                                    className: 'form-select'
+                                }, [1, 2, 3, 4].map(n =>
+                                    React.createElement('option', { key: n, value: n }, `${n} ${n === 1 ? 'Guest' : 'Guests'}`)
+                                ))
+                            ]),
+
+                            // Attending Field
+                            React.createElement('div', { key: 'attending', className: 'form-group' }, [
+                                React.createElement('label', { className: 'form-label' }, 'Will you be attending? *'),
+                                React.createElement('div', { className: 'radio-group' }, [
+                                    React.createElement('label', { key: 'yes', className: `radio-label ${formData.attending === 'yes' ? 'selected' : ''}` }, [
+                                        React.createElement('input', {
+                                            type: 'radio',
+                                            name: 'attending',
+                                            value: 'yes',
+                                            checked: formData.attending === 'yes',
+                                            onChange: (e) => setFormData({...formData, attending: e.target.value}),
+                                            className: 'radio-input'
+                                        }),
+                                        React.createElement('span', { className: 'radio-text' }, 'Joyfully accept')
+                                    ]),
+                                    React.createElement('label', { key: 'no', className: `radio-label ${formData.attending === 'no' ? 'selected' : ''}` }, [
+                                        React.createElement('input', {
+                                            type: 'radio',
+                                            name: 'attending',
+                                            value: 'no',
+                                            checked: formData.attending === 'no',
+                                            onChange: (e) => setFormData({...formData, attending: e.target.value}),
+                                            className: 'radio-input'
+                                        }),
+                                        React.createElement('span', { className: 'radio-text' }, 'Regretfully decline')
+                                    ])
+                                ])
+                            ]),
+
+                            // Message Field
+                            React.createElement('div', { key: 'message', className: 'form-group' }, [
+                                React.createElement('label', { className: 'form-label' }, 'Message for the Couple'),
+                                React.createElement('textarea', {
+                                    value: formData.message,
+                                    onChange: (e) => setFormData({...formData, message: e.target.value}),
+                                    rows: 4,
+                                    className: 'form-textarea',
+                                    placeholder: 'Share your well wishes...'
+                                })
+                            ]),
+
+                            // Submit Button
+                            React.createElement('button', {
+                                key: 'submit',
+                                onClick: handleSubmit,
+                                disabled: isSubmitting,
+                                className: `form-submit ${isSubmitting ? 'submitting' : ''}`
+                            }, isSubmitting ? 'Sending...' : 'Send RSVP ✨')
+                        ])
+                    ])
+                ),
+
+                // Footer
+                React.createElement('footer', { key: 'footer', className: 'footer' },
+                    React.createElement('div', { className: 'footer-container' }, [
+                        React.createElement('div', { key: 'footer-heart', className: 'footer-heart' },
+                            React.createElement(Heart, { className: 'footer-heart-icon' })
+                        ),
+                        React.createElement('p', { key: 'footer-title', className: 'footer-title' }, 'Thank You'),
+                        React.createElement('div', { key: 'footer-divider', className: 'footer-divider' }),
+                        React.createElement('p', { key: 'footer-text', className: 'footer-text' }, 
+                            'We are so grateful for your love and support as we begin this new chapter. Your presence means the world to us, and we cannot wait to celebrate with you.'
+                        ),
+                        React.createElement('p', { key: 'footer-info', className: 'footer-info' }, 
+                            'Ira & Angel • June 27, 2026 • #IraAndAngel2026'
+                        )
+                    ])
+                )
+            ]);
+        };
+
+        ReactDOM.render(React.createElement(WeddingWebsite), document.getElementById('root'));
+    </script>
+</body>
+</html>
