@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ira & Angel - Wedding June 27, 2026</title>
+    <!-- Beautiful Wedding Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&family=Great+Vibes&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -90,7 +94,6 @@
             const [isWeddingDay, setIsWeddingDay] = useState(false);
             const [formData, setFormData] = useState({
                 name: '',
-                email: '',
                 guests: '1',
                 attending: 'yes',
                 message: ''
@@ -157,8 +160,8 @@
             }, []);
 
             const handleSubmit = async () => {
-                if (!formData.name || !formData.email) {
-                    setSubmitError('Please fill in all required fields.');
+                if (!formData.name) {
+                    setSubmitError('Please fill in your name.');
                     return;
                 }
 
@@ -174,7 +177,6 @@
                         },
                         body: JSON.stringify({
                             name: formData.name,
-                            email: formData.email,
                             guests: formData.guests,
                             attending: formData.attending,
                             message: formData.message,
@@ -188,7 +190,6 @@
                     setTimeout(() => setShowRsvpConfirm(false), 5000);
                     setFormData({
                         name: '',
-                        email: '',
                         guests: '1',
                         attending: 'yes',
                         message: ''
@@ -240,13 +241,13 @@
                         React.createElement('div', { key: 'nav-content', className: 'nav-content' }, [
                             React.createElement('div', { key: 'nav-logo', className: 'nav-logo' }, [
                                 React.createElement(Heart, { key: 'nav-heart', className: 'nav-heart' }),
-                                React.createElement('span', { key: 'nav-text', className: 'nav-text' }, 'Ira & Angel')
+                                // React.createElement('span', { key: 'nav-text', className: 'nav-text' }, 'Ira & Angel')
                             ]),
                             React.createElement('div', { key: 'nav-links', className: 'nav-links' },
-                                ['Our Story', 'Details', 'Gallery', 'RSVP'].map((item, i) =>
+                                ['Our Story', 'Details', 'Timeline', 'Wedding Party', 'Dress Code', 'RSVP'].map((item, i) =>
                                     React.createElement('button', {
                                         key: item,
-                                        onClick: () => scrollToSection(item.toLowerCase().replace(' ', '-')),
+                                        onClick: () => scrollToSection(item.toLowerCase().replace(/ /g, '-')),
                                         className: 'nav-link',
                                         style: { animationDelay: `${i * 0.1}s` }
                                     }, [
@@ -332,17 +333,20 @@
                                 {
                                     title: 'The Beginning',
                                     color: 'rose',
-                                    text: 'It was a crisp autumn evening in October 2019 when our paths first crossed at a mutual friend\'s gallery opening in Brooklyn. James was admiring a piece of abstract art, and Sophia accidentally bumped into him while stepping back to get a better view. That clumsy moment turned into hours of conversation about art, travel, and our shared love of terrible puns.'
+                                    // text: 'It was a crisp autumn evening in October 2019 when our paths first crossed at a mutual friend\'s gallery opening in Brooklyn. James was admiring a piece of abstract art, and Sophia accidentally bumped into him while stepping back to get a better view. That clumsy moment turned into hours of conversation about art, travel, and our shared love of terrible puns.'
+                                    text: 'COMPOSE PA NG MESSAGE PARA DITO'
                                 },
                                 {
                                     title: 'Growing Together',
                                     color: 'green',
-                                    text: 'What started as coffee dates at our favorite corner café evolved into weekend adventures exploring hidden bookstores, cooking experiments that sometimes ended in laughter and takeout, and long walks through Central Park during every season. Through career changes, family celebrations, and everything in between, we discovered that home isn\'t a place—it\'s being together.'
+                                    // text: 'What started as coffee dates at our favorite corner café evolved into weekend adventures exploring hidden bookstores, cooking experiments that sometimes ended in laughter and takeout, and long walks through Central Park during every season. Through career changes, family celebrations, and everything in between, we discovered that home isn\'t a place—it\'s being together.'
+                                    text: 'COMPOSE PA NG MESSAGE PARA DITO'
                                 },
                                 {
                                     title: 'The Proposal',
                                     color: 'rose',
-                                    text: 'On a surprise trip to the Amalfi Coast in May 2024, James took Sophia to a secluded cliff overlooking the Mediterranean at sunset. As the golden hour painted the sky in shades of pink and orange, he got down on one knee and asked the question that would change everything. Through happy tears, Sophia said yes, and we celebrated with limoncello and the promise of forever.'
+                                    // text: 'On a surprise trip to the Amalfi Coast in May 2024, James took Sophia to a secluded cliff overlooking the Mediterranean at sunset. As the golden hour painted the sky in shades of pink and orange, he got down on one knee and asked the question that would change everything. Through happy tears, Sophia said yes, and we celebrated with limoncello and the promise of forever.'
+                                    text: 'COMPOSE PA NG MESSAGE PARA DITO'
                                 }
                             ].map((story, i) =>
                                 React.createElement('div', { key: i, className: 'story-card' }, [
@@ -419,7 +423,48 @@
                     ])
                 ),
 
-                // Gallery Section
+                // Timeline Section
+                React.createElement('section', { key: 'timeline', id: 'timeline', className: 'timeline-section' },
+                    React.createElement('div', { className: 'timeline-container' }, [
+                        React.createElement('div', { key: 'timeline-header', className: 'section-header' }, [
+                            React.createElement('h2', { className: 'section-title' }, 'Timeline'),
+                            React.createElement('div', { className: 'section-divider' })
+                        ]),
+                        React.createElement('div', { key: 'timeline-content', className: 'timeline-content' }, [
+                            React.createElement('div', { key: 'timeline-line', className: 'timeline-line' }),
+                            [
+                                { time: '1:30 PM', title: 'Guest Arrival', desc: 'Welcome to the church', color: 'rose' },
+                                { time: '2:00 PM', title: 'Ceremony Begins', desc: 'Please be seated by 1:55 PM', color: 'green' },
+                                { time: '3:00 PM', title: 'Cocktail Hour', desc: 'Transfer to Manila Peninsula', color: 'rose' },
+                                { time: '4:00 PM', title: 'Reception Begins', desc: 'Dinner service starts', color: 'green' },
+                                { time: '5:30 PM', title: 'First Dance & Toasts', desc: 'Speeches from loved ones', color: 'rose' },
+                                { time: '6:00 PM', title: 'Dancing & Celebration', desc: 'Live band performance', color: 'green' },
+                                { time: '10:00 PM', title: 'Send-Off', desc: 'Grand exit with sparklers', color: 'rose' }
+                            ].map((event, index) =>
+                                React.createElement('div', {
+                                    key: index,
+                                    className: `timeline-item ${index % 2 === 0 ? 'timeline-left' : 'timeline-right'}`
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'dot',
+                                        className: `timeline-dot ${event.color}`
+                                    }),
+                                    React.createElement('div', {
+                                        key: 'card',
+                                        className: `timeline-card ${event.color}`
+                                    }, [
+                                        React.createElement('p', { key: 'time', className: 'timeline-time' }, event.time),
+                                        React.createElement('h3', { key: 'title', className: 'timeline-title' }, event.title),
+                                        React.createElement('p', { key: 'desc', className: 'timeline-desc' }, event.desc)
+                                    ])
+                                ])
+                            )
+                        ])
+                    ])
+                ),
+
+                // Gallery Section - Commented out temporarily
+                /*
                 React.createElement('section', { key: 'gallery', id: 'gallery', className: 'gallery-section' },
                     React.createElement('div', { className: 'gallery-container' }, [
                         React.createElement('div', { key: 'gallery-header', className: 'section-header' }, [
@@ -439,6 +484,98 @@
                                 }, [
                                     React.createElement('div', { key: 'shimmer', className: 'gallery-shimmer' }),
                                     React.createElement(Camera, { key: 'camera', className: 'gallery-camera' })
+                                ])
+                            )
+                        )
+                    ])
+                ),
+                */
+
+                // Wedding Party Section
+                React.createElement('section', { key: 'party', id: 'party', className: 'party-section' },
+                    React.createElement('div', { className: 'party-container' }, [
+                        React.createElement('div', { key: 'party-header', className: 'section-header' }, [
+                            React.createElement('h2', { className: 'section-title' }, 'Our Wedding Party'),
+                            React.createElement('div', { className: 'section-divider' })
+                        ]),
+                        React.createElement('div', { key: 'party-grid', className: 'party-grid' }, [
+                            // Bridesmaids
+                            React.createElement('div', { key: 'bridesmaids', className: 'party-group' }, [
+                                React.createElement('h3', { key: 'bridesmaids-title', className: 'party-group-title rose' }, 'Bridesmaids'),
+                                React.createElement('div', { key: 'bridesmaids-list', className: 'party-members' },
+                                    [
+                                        { name: 'Sharmaine Balino', role: 'Maid of Honor', relation: 'Sister' },
+                                        { name: 'Julie', role: 'Bridesmaid', relation: 'Best Friend' },
+                                        { name: 'Pau Llaneta', role: 'Bridesmaid', relation: 'Sister in Law' }
+                                    ].map((person, i) =>
+                                        React.createElement('div', { key: i, className: 'party-member', style: { animationDelay: `${i * 0.15}s` } }, [
+                                            React.createElement('div', { key: 'avatar', className: 'party-avatar rose' },
+                                                React.createElement(Users, { className: 'party-avatar-icon' })
+                                            ),
+                                            React.createElement('h4', { key: 'name', className: 'party-member-name' }, person.name),
+                                            React.createElement('p', { key: 'role', className: 'party-member-role rose' }, person.role),
+                                            React.createElement('p', { key: 'relation', className: 'party-member-relation' }, person.relation)
+                                        ])
+                                    )
+                                )
+                            ]),
+                            // Groomsmen
+                            React.createElement('div', { key: 'groomsmen', className: 'party-group' }, [
+                                React.createElement('h3', { key: 'groomsmen-title', className: 'party-group-title green' }, 'Groomsmen'),
+                                React.createElement('div', { key: 'groomsmen-list', className: 'party-members' },
+                                    [
+                                        { name: 'Armand Vallejo', role: 'Best Man', relation: 'Childhood friend' },
+                                        { name: 'Jayson Avestrus', role: 'Groomsman', relation: 'College friend' },
+                                        { name: 'Jurineil Llaneta', role: 'Groomsman', relation: 'Brother in law' }
+                                    ].map((person, i) =>
+                                        React.createElement('div', { key: i, className: 'party-member', style: { animationDelay: `${i * 0.15}s` } }, [
+                                            React.createElement('div', { key: 'avatar', className: 'party-avatar green' },
+                                                React.createElement(Users, { className: 'party-avatar-icon' })
+                                            ),
+                                            React.createElement('h4', { key: 'name', className: 'party-member-name' }, person.name),
+                                            React.createElement('p', { key: 'role', className: 'party-member-role green' }, person.role),
+                                            React.createElement('p', { key: 'relation', className: 'party-member-relation' }, person.relation)
+                                        ])
+                                    )
+                                )
+                            ])
+                        ])
+                    ])
+                ),
+
+                // Dress Code Section
+                React.createElement('section', { key: 'dress-code', id: 'dress-code', className: 'dress-code-section' },
+                    React.createElement('div', { className: 'dress-code-container' }, [
+                        React.createElement('div', { key: 'dress-code-header', className: 'section-header' }, [
+                            React.createElement('h2', { className: 'section-title' }, 'Dress Code'),
+                            React.createElement('div', { className: 'section-divider' }),
+                            React.createElement('p', { className: 'dress-code-theme' }, 'Formal')
+                        ]),
+                        React.createElement('div', { key: 'dress-code-grid', className: 'dress-code-grid' }, [
+                            React.createElement('div', { key: 'for-her', className: 'dress-code-card' }, [
+                                React.createElement('h3', { key: 'her-title', className: 'dress-code-title' }, 'For Her'),
+                                React.createElement('p', { key: 'her-text', className: 'dress-code-text' }, 
+                                    'Floor-length gowns or elegant cocktail dresses in soft, romantic colors. Think flowing fabrics, floral prints, and pastel tones. Comfortable shoes recommended'
+                                )
+                            ]),
+                            React.createElement('div', { key: 'for-him', className: 'dress-code-card', style: { animationDelay: '0.2s' } }, [
+                                React.createElement('h3', { key: 'him-title', className: 'dress-code-title' }, 'For Him'),
+                                React.createElement('p', { key: 'him-text', className: 'dress-code-text' }, 
+                                    'Suits in light colors such as tan, beige, or light gray. Ties optional. Linen or lightweight fabrics perfect for the season. Dress shoes suitable for indoor settings.'
+                                )
+                            ])
+                        ]),
+                        React.createElement('div', { key: 'color-palette', className: 'color-palette' },
+                            [
+                                { name: 'Dusty Pink', color: 'dusty-pink' },
+                                { name: 'Sage Green', color: 'sage-green' },
+                                { name: 'Blush', color: 'blush' },
+                                { name: 'Ivory', color: 'ivory' },
+                                { name: 'Mint', color: 'mint' }
+                            ].map((item, i) =>
+                                React.createElement('div', { key: item.name, className: 'color-swatch', style: { animationDelay: `${i * 0.1}s` } }, [
+                                    React.createElement('div', { key: 'color', className: `color-circle ${item.color}` }),
+                                    React.createElement('p', { key: 'name', className: 'color-name' }, item.name)
                                 ])
                             )
                         )
@@ -478,18 +615,6 @@
                                 })
                             ]),
 
-                            // Email Field
-                            React.createElement('div', { key: 'email', className: 'form-group' }, [
-                                React.createElement('label', { className: 'form-label' }, 'Email Address *'),
-                                React.createElement('input', {
-                                    type: 'email',
-                                    value: formData.email,
-                                    onChange: (e) => setFormData({...formData, email: e.target.value}),
-                                    className: 'form-input',
-                                    placeholder: 'you@example.com'
-                                })
-                            ]),
-
                             // Guests Field
                             React.createElement('div', { key: 'guests', className: 'form-group' }, [
                                 React.createElement('label', { className: 'form-label' }, 'Number of Guests *'),
@@ -497,7 +622,7 @@
                                     value: formData.guests,
                                     onChange: (e) => setFormData({...formData, guests: e.target.value}),
                                     className: 'form-select'
-                                }, [1, 2, 3, 4].map(n =>
+                                }, [1, 2].map(n =>
                                     React.createElement('option', { key: n, value: n }, `${n} ${n === 1 ? 'Guest' : 'Guests'}`)
                                 ))
                             ]),

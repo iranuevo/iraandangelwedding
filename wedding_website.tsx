@@ -11,7 +11,6 @@ const WeddingWebsite = () => {
   const [isWeddingDay, setIsWeddingDay] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     guests: '1',
     attending: 'yes',
     message: ''
@@ -78,8 +77,8 @@ const WeddingWebsite = () => {
   }, []);
 
   const handleSubmit = async () => {
-    if (!formData.name || !formData.email) {
-      setSubmitError('Please fill in all required fields.');
+    if (!formData.name) {
+      setSubmitError('Please fill in your name.');
       return;
     }
 
@@ -95,7 +94,6 @@ const WeddingWebsite = () => {
         },
         body: JSON.stringify({
           name: formData.name,
-          email: formData.email,
           guests: formData.guests,
           attending: formData.attending,
           message: formData.message,
@@ -109,7 +107,6 @@ const WeddingWebsite = () => {
       setTimeout(() => setShowRsvpConfirm(false), 5000);
       setFormData({
         name: '',
-        email: '',
         guests: '1',
         attending: 'yes',
         message: ''
@@ -571,17 +568,6 @@ const WeddingWebsite = () => {
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
                 className="w-full px-6 py-4 rounded-2xl border-2 border-rose-200 focus:outline-none focus:border-rose-400 focus:ring-4 focus:ring-rose-100 transition-all duration-300 bg-white text-lg"
                 placeholder="John & Jane Doe"
-              />
-            </div>
-
-            <div className="input-group">
-              <label className="block text-gray-700 mb-3 font-medium tracking-wide text-sm uppercase">Email Address *</label>
-              <input
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
-                className="w-full px-6 py-4 rounded-2xl border-2 border-rose-200 focus:outline-none focus:border-rose-400 focus:ring-4 focus:ring-rose-100 transition-all duration-300 bg-white text-lg"
-                placeholder="you@example.com"
               />
             </div>
 

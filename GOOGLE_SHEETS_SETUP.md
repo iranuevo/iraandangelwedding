@@ -10,10 +10,9 @@ This guide will walk you through setting up Google Sheets integration for your w
 4. In the first row, create the following headers:
    - A1: `Timestamp`
    - B1: `Name`
-   - C1: `Email`
-   - D1: `Number of Guests`
-   - E1: `Attending`
-   - F1: `Message`
+   - C1: `Number of Guests`
+   - D1: `Attending`
+   - E1: `Message`
 
 ## Step 2: Create Google Apps Script
 
@@ -30,11 +29,10 @@ function doPost(e) {
     // Parse the JSON data from the request
     var data = JSON.parse(e.postData.contents);
     
-    // Prepare the row data
+    // Prepare the row data (without email field)
     var rowData = [
       data.timestamp,
       data.name,
-      data.email,
       data.guests,
       data.attending === 'yes' ? 'Yes' : 'No',
       data.message || ''
@@ -133,7 +131,7 @@ Replace `YOUR_SCRIPT_ID` with your actual Web App URL from Step 3.
    - The form should still work despite these console messages
 
 4. **Data not appearing in sheet**
-   - Check that your sheet headers match exactly: Timestamp, Name, Email, Number of Guests, Attending, Message
+   - Check that your sheet headers match exactly: Timestamp, Name, Number of Guests, Attending, Message
    - Verify the Web App URL is correct in your website code
 
 ### Testing the Endpoint Directly:
@@ -152,7 +150,6 @@ You can test your Google Apps Script endpoint by visiting the Web App URL in you
 Your RSVP responses will automatically appear in your Google Sheet with:
 - Timestamp of submission
 - Guest name(s)
-- Email address
 - Number of guests
 - Attendance status (Yes/No)
 - Optional message
