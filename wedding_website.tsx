@@ -445,7 +445,7 @@ const WeddingWebsite = () => {
       </section>
 
       {/* Wedding Party */}
-      <section id="party" className="py-32 px-6 bg-white section-fade">
+      <section id="wedding-party" className="py-32 px-6 bg-white section-fade">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="font-serif text-6xl md:text-7xl mb-4 text-gray-800 fade-in-up">Our Wedding Party</h2>
