@@ -127,6 +127,21 @@
                 updateCountdown();
                 const interval = setInterval(updateCountdown, 1000);
 
+                // Handle initial hash navigation for GitHub Pages
+                const handleInitialHash = () => {
+                    const hash = window.location.hash.substring(1);
+                    if (hash) {
+                        setTimeout(() => {
+                            const element = document.getElementById(hash);
+                            if (element) {
+                                element.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }, 500); // Wait for page to fully render
+                    }
+                };
+
+                handleInitialHash();
+
                 return () => clearInterval(interval);
             }, []);
 
@@ -203,7 +218,23 @@
             };
 
             const scrollToSection = (id) => {
-                document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+                console.log('Scrolling to:', id); // Debug log
+                const element = document.getElementById(id);
+                if (element) {
+                    // Update URL hash for GitHub Pages compatibility
+                    window.history.pushState(null, null, `#${id}`);
+                    element.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    console.error('Element not found:', id);
+                    // Fallback: try to find the element after a short delay
+                    setTimeout(() => {
+                        const retryElement = document.getElementById(id);
+                        if (retryElement) {
+                            window.history.pushState(null, null, `#${id}`);
+                            retryElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 100);
+                }
             };
 
             return React.createElement('div', { className: 'wedding-container' }, [
