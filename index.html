@@ -104,7 +104,7 @@
 
             // Countdown Timer
             useEffect(() => {
-                const weddingDate = new Date('2026-06-27T14:00:00').getTime();
+                const weddingDate = new Date('2026-06-27T12:30:00').getTime();
                 
                 const updateCountdown = () => {
                     const now = new Date().getTime();
@@ -275,7 +275,7 @@
                                 // React.createElement('span', { key: 'nav-text', className: 'nav-text' }, 'Ira & Angel')
                             ]),
                             React.createElement('div', { key: 'nav-links', className: 'nav-links' },
-                                ['Our Story', 'Details', 'Timeline', 'Wedding Party', 'Dress Code', 'RSVP'].map((item, i) =>
+                                ['Our Story', 'Details', 'Location', 'Timeline', 'Wedding Party', 'Dress Code', 'RSVP'].map((item, i) =>
                                     React.createElement('button', {
                                         key: item,
                                         onClick: () => scrollToSection(item.toLowerCase().replace(/ /g, '-')),
@@ -323,7 +323,7 @@
                                 'JUNE 27, 2026',
                                 React.createElement(Sparkles, { key: 'sparkle2', className: 'sparkle-icon' })
                             ]),
-                            React.createElement('p', { key: 'venue', className: 'hero-venue' }, 'Nuestra Señora de Gracia Parish')
+                            React.createElement('p', { key: 'venue', className: 'hero-venue' }, 'San Agustin Church')
                         ]),
                         !isWeddingDay && React.createElement('div', { key: 'countdown', className: 'countdown-container' }, [
                             React.createElement('p', { key: 'countdown-label', className: 'countdown-label' }, 'Counting down to our special day'),
@@ -413,8 +413,8 @@
                                 React.createElement('div', { key: 'ceremony-details', className: 'detail-items' },
                                     [
                                         { icon: Calendar, text: 'June 27, 2026', sub: 'Saturday' },
-                                        { icon: Clock, text: '2:00 PM', sub: 'Ceremony begins promptly' },
-                                        { icon: MapPin, text: 'Nuestra Señora de Gracia Parish', sub: 'Makati City, Metro Manila' }
+                                        { icon: Clock, text: '12:30 PM - 2:00 PM', sub: 'Ceremony duration' },
+                                        { icon: MapPin, text: 'San Agustin Church', sub: 'General Luna Street, Intramuros, Manila' }
                                     ].map((item, i) =>
                                         React.createElement('div', { key: i, className: 'detail-item rose' }, [
                                             React.createElement(item.icon, { key: 'icon', className: 'detail-item-icon' }),
@@ -454,6 +454,47 @@
                     ])
                 ),
 
+                // Map Section
+                React.createElement('section', { key: 'map', id: 'map', className: 'map-section' },
+                    React.createElement('div', { className: 'map-container' }, [
+                        React.createElement('div', { key: 'map-header', className: 'section-header' }, [
+                            React.createElement('h2', { className: 'section-title' }, 'Location & Directions'),
+                            React.createElement('div', { className: 'section-divider' })
+                        ]),
+                        React.createElement('div', { key: 'map-content', className: 'map-content' }, [
+                            React.createElement('div', { key: 'map-info', className: 'map-info' }, [
+                                React.createElement('h3', { key: 'church-name', className: 'map-church-name' }, 'San Agustin Church'),
+                                React.createElement('p', { key: 'address', className: 'map-address' }, 'General Luna Street, Intramuros, Manila'),
+                                React.createElement('p', { key: 'description', className: 'map-description' }, 'The oldest stone church in the Philippines, a UNESCO World Heritage Site located in the historic walled city of Intramuros.'),
+                                React.createElement('div', { key: 'map-actions', className: 'map-actions' }, [
+                                    React.createElement('a', {
+                                        key: 'directions',
+                                        href: 'https://www.google.com/maps/dir//San+Agustin+Church,+General+Luna+St,+Intramuros,+Manila,+1002+Metro+Manila/@14.5888889,120.9752778,17z',
+                                        target: '_blank',
+                                        rel: 'noopener noreferrer',
+                                        className: 'map-button'
+                                    }, [
+                                        React.createElement(MapPin, { key: 'icon', className: 'map-button-icon' }),
+                                        'Get Directions'
+                                    ])
+                                ])
+                            ]),
+                            React.createElement('div', { key: 'map-embed', className: 'map-embed' },
+                                React.createElement('iframe', {
+                                    src: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.2156789!2d120.9752778!3d14.5888889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ca21ac302007%3A0x5b5031b1fd7b0c0a!2sSan%20Agustin%20Church!5e0!3m2!1sen!2sph!4v1642000000000!5m2!1sen!2sph',
+                                    width: '100%',
+                                    height: '400',
+                                    style: { border: 0, borderRadius: '12px' },
+                                    allowFullScreen: true,
+                                    loading: 'lazy',
+                                    referrerPolicy: 'no-referrer-when-downgrade',
+                                    title: 'San Agustin Church Location'
+                                })
+                            )
+                        ])
+                    ])
+                ),
+
                 // Timeline Section
                 React.createElement('section', { key: 'timeline', id: 'timeline', className: 'timeline-section' },
                     React.createElement('div', { className: 'timeline-container' }, [
@@ -464,8 +505,8 @@
                         React.createElement('div', { key: 'timeline-content', className: 'timeline-content' }, [
                             React.createElement('div', { key: 'timeline-line', className: 'timeline-line' }),
                             [
-                                { time: '1:30 PM', title: 'Guest Arrival', desc: 'Welcome to the church', color: 'rose' },
-                                { time: '2:00 PM', title: 'Ceremony Begins', desc: 'Please be seated by 1:55 PM', color: 'green' },
+                                { time: '12:00 PM', title: 'Guest Arrival', desc: 'Welcome to the church', color: 'rose' },
+                                { time: '12:30 PM', title: 'Ceremony Begins', desc: 'Please be seated by 12:25 PM', color: 'green' },
                                 { time: '3:00 PM', title: 'Cocktail Hour', desc: 'Transfer to Manila Peninsula', color: 'rose' },
                                 { time: '4:00 PM', title: 'Reception Begins', desc: 'Dinner service starts', color: 'green' },
                                 { time: '5:30 PM', title: 'First Dance & Toasts', desc: 'Speeches from loved ones', color: 'rose' },
