@@ -1,0 +1,9 @@
+{
+  "why": "To manually commit and push changes when triggered by user",
+  "id": "manual-commit-push",
+  "name": "Manual Commit and Push",
+  "description": "Manually commits all changes with a detailed commit message and pushes to main branch",
+  "eventType": "userTriggered",
+  "hookAction": "askAgent",
+  "outputPrompt": "Run the following git commands to commit and push changes:\n\ngit diff --quiet && git diff --staged --quiet && echo \"No changes to commit\" && exit 0\necho \"Files changed:\"\ngit diff --cached --name-only\ngit add .\nCOMMIT_MSG=\"$(\n  echo \"$(git diff --cached --name-only | head -1 | sed 's/\\.[^.]*$//' | sed 's/.*\\///'): $(date +'%Y-%m-%d %H:%M')\"\n  echo \"\"\n  echo \"Modified files:\"\n  git diff --cached --name-only | sed 's/^/- /'\n  echo \"\"\n  echo \"Changes: $(git diff --cached --shortstat)\"\n)\"\ngit commit -m \"$COMMIT_MSG\"\ngit push origin main"
+}
