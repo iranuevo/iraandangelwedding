@@ -26,6 +26,33 @@
             </svg>
         );
 
+        const DaisyFlower = ({ className, ...props }) => (
+            <svg className={className} viewBox="0 0 24 24" fill="none" {...props}>
+                {/* Petals - Dusty Pink */}
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(0 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(30 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(60 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(90 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(120 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(150 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(180 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(210 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(240 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(270 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(300 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(330 12 12)"/>
+                
+                {/* Center - Yellow */}
+                <circle cx="12" cy="12" r="2.5" fill="#fbbf24"/>
+                
+                {/* Stem - Sage Green */}
+                <rect x="11.5" y="14.5" width="1" height="7" fill="#86efac" rx="0.5"/>
+                
+                {/* Leaf - Sage Green */}
+                <ellipse cx="9" cy="18" rx="2" ry="1" fill="#86efac" transform="rotate(-30 9 18)"/>
+            </svg>
+        );
+
         const MapPin = ({ className, ...props }) => (
             <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -270,8 +297,12 @@
                 React.createElement('nav', { key: 'nav', className: 'navigation' },
                     React.createElement('div', { className: 'nav-container' }, [
                         React.createElement('div', { key: 'nav-content', className: 'nav-content' }, [
-                            React.createElement('div', { key: 'nav-logo', className: 'nav-logo' }, [
-                                React.createElement(Heart, { key: 'nav-heart', className: 'nav-heart' }),
+                            React.createElement('button', { 
+                                key: 'nav-logo', 
+                                className: 'nav-logo',
+                                onClick: () => scrollToSection('hero')
+                            }, [
+                                React.createElement(DaisyFlower, { key: 'nav-daisy', className: 'nav-heart' }),
                                 // React.createElement('span', { key: 'nav-text', className: 'nav-text' }, 'Ira & Angel')
                             ]),
                             React.createElement('div', { key: 'nav-links', className: 'nav-links' },
@@ -455,7 +486,7 @@
                 ),
 
                 // Map Section
-                React.createElement('section', { key: 'map', id: 'map', className: 'map-section' },
+                React.createElement('section', { key: 'location', id: 'location', className: 'map-section' },
                     React.createElement('div', { className: 'map-container' }, [
                         React.createElement('div', { key: 'map-header', className: 'section-header' }, [
                             React.createElement('h2', { className: 'section-title' }, 'Location & Directions'),
@@ -506,7 +537,7 @@
                             React.createElement('div', { key: 'timeline-line', className: 'timeline-line' }),
                             [
                                 { time: '12:00 PM', title: 'Guest Arrival', desc: 'Welcome to the church', color: 'rose' },
-                                { time: '12:30 PM', title: 'Ceremony Begins', desc: 'Please be seated by 12:25 PM', color: 'green' },
+                                { time: '12:30 PM', title: 'Ceremony Begins', desc: 'Please be seated by 12:30 PM', color: 'green' },
                                 { time: '3:00 PM', title: 'Cocktail Hour', desc: 'Transfer to Manila Peninsula', color: 'rose' },
                                 { time: '4:00 PM', title: 'Reception Begins', desc: 'Dinner service starts', color: 'green' },
                                 { time: '5:30 PM', title: 'First Dance & Toasts', desc: 'Speeches from loved ones', color: 'rose' },
@@ -577,7 +608,7 @@
                                 React.createElement('div', { key: 'bridesmaids-list', className: 'party-members' },
                                     [
                                         { name: 'Sharmaine Balino', role: 'Maid of Honor', relation: 'Sister' },
-                                        { name: 'Julie', role: 'Bridesmaid', relation: 'Best Friend' },
+                                        { name: 'Julie', role: 'Bridesmaid', relation: 'Soul Sister' },
                                         { name: 'Pau Llaneta', role: 'Bridesmaid', relation: 'Sister in Law' }
                                     ].map((person, i) =>
                                         React.createElement('div', { key: i, className: 'party-member', style: { animationDelay: `${i * 0.15}s` } }, [
