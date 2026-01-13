@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story - Ira & Angel Wedding</title>
+    <!-- Beautiful Wedding Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&family=Great+Vibes&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <!-- Bottom-right RSVP link -->
+    <div id="fallback-rsvp" style="position: fixed; bottom: 20px; right: 20px; background: #f43f5e; color: white; padding: 15px 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1000; display: none;">
+        <a href="index.html#rsvp" onclick="goToRSVP(); return false;" style="color: white; text-decoration: none; font-weight: bold;">📝 RSVP Now</a>
+    </div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // SVG Icons as React components
+        const Heart = ({ className, fill, ...props }) => (
+            <svg className={className} fill={fill || "none"} stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.682l-1.318-1.364a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+        );
+
+        const DaisyFlower = ({ className, ...props }) => (
+            <svg className={className} viewBox="0 0 24 24" fill="none" {...props}>
+                {/* Petals - Dusty Pink */}
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(0 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(30 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(60 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(90 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(120 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(150 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(180 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(210 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(240 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(270 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(300 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(330 12 12)"/>
+                
+                {/* Center - Yellow */}
+                <circle cx="12" cy="12" r="2.5" fill="#fbbf24"/>
+                
+                {/* Stem - Sage Green */}
+                <rect x="11.5" y="14.5" width="1" height="7" fill="#86efac" rx="0.5"/>
+                
+                {/* Leaf - Sage Green */}
+                <ellipse cx="9" cy="18" rx="2" ry="1" fill="#86efac" transform="rotate(-30 9 18)"/>
+            </svg>
+        );
+
+        const ArrowLeft = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 12H5m7-7l-7 7 7 7" />
+            </svg>
+        );
+
+        const OurStoryPage = () => {
+            const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+            useEffect(() => {
+                const handleMouseMove = (e) => {
+                    setMousePos({ x: e.clientX, y: e.clientY });
+                };
+
+                window.addEventListener('mousemove', handleMouseMove);
+
+                return () => {
+                    window.removeEventListener('mousemove', handleMouseMove);
+                };
+            }, []);
+
+            return React.createElement('div', { className: 'wedding-container' }, [
+                // Floating Hearts Animation
+                React.createElement('div', { 
+                    key: 'floating-hearts',
+                    className: 'floating-hearts-container' 
+                }, 
+                    [...Array(6)].map((_, i) =>
+                        React.createElement('div', {
+                            key: i,
+                            className: 'floating-heart',
+                            style: {
+                                left: `${15 + i * 15}%`,
+                                animationDelay: `${i * 2}s`,
+                                animationDuration: `${15 + i * 2}s`
+                            }
+                        }, React.createElement(Heart, { className: 'heart-icon-float' }))
+                    )
+                ),
+
+                // Cursor Trail Effect
+                React.createElement('div', {
+                    key: 'cursor-trail',
+                    className: 'cursor-trail',
+                    style: {
+                        left: mousePos.x - 16,
+                        top: mousePos.y - 16
+                    }
+                }, React.createElement('div', { className: 'cursor-trail-inner' })),
+
+                // Navigation
+                React.createElement('nav', { key: 'nav', className: 'navigation' },
+                    React.createElement('div', { className: 'nav-container' }, [
+                        React.createElement('div', { key: 'nav-content', className: 'nav-content' }, [
+                            React.createElement('a', { 
+                                key: 'nav-logo', 
+                                href: 'index.html',
+                                className: 'nav-logo'
+                            }, [
+                                React.createElement(DaisyFlower, { key: 'nav-daisy', className: 'nav-heart' })
+                            ]),
+                            React.createElement('div', { key: 'nav-center', className: 'nav-center' }, [
+                                React.createElement('h1', { className: 'story-page-title' }, 'Our Story')
+                            ]),
+                            React.createElement('a', {
+                                key: 'back-button',
+                                href: 'index.html',
+                                className: 'back-button'
+                            }, [
+                                React.createElement(ArrowLeft, { key: 'arrow', className: 'back-arrow' }),
+                                'Back to Wedding'
+                            ])
+                        ])
+                    ])
+                ),
+
+                // Story Hero Section
+                React.createElement('section', { key: 'story-hero', className: 'story-hero-section' }, [
+                    React.createElement('div', { key: 'story-hero-bg', className: 'hero-background' }),
+                    React.createElement('div', { key: 'story-hero-content', className: 'story-hero-content' }, [
+                        React.createElement('div', { key: 'story-hero-heart', className: 'hero-heart' },
+                            React.createElement(Heart, { className: 'hero-heart-icon' })
+                        ),
+                        React.createElement('h1', { key: 'story-hero-title', className: 'story-hero-title' }, 'Our Love Story'),
+                        React.createElement('div', { key: 'story-hero-divider', className: 'hero-divider' }),
+                        React.createElement('p', { key: 'story-hero-subtitle', className: 'story-hero-subtitle' }, 
+                            'From colleagues to soulmates, here\'s how our journey began...'
+                        )
+                    ])
+                ]),
+
+                // Our Story Section
+                React.createElement('section', { key: 'our-story', className: 'story-section story-page-section' },
+                    React.createElement('div', { className: 'story-container' }, [
+                        React.createElement('div', { key: 'story-content', className: 'story-content' },
+                            [
+                                {
+                                    title: 'The Beginning',
+                                    color: 'rose',
+                                    text: 'We were workmates who started as colleagues, sharing the same workspace and daily routines. Over time, we discovered we had so much in common - our quiet personalities, shared interests, and similar perspectives on life. What began as professional interactions slowly blossomed into something deeper. Our first real date was at North Park, where we spent hours talking and getting to know each other beyond work. It was there, surrounded by the peaceful atmosphere, that we realized we were falling in love.'
+                                },
+                                {
+                                    title: 'Growing Together',
+                                    color: 'green',
+                                    text: 'Both of us being naturally quiet souls, we found comfort in each other\'s presence. We learned to communicate in our own gentle way, supporting each other through life\'s ups and downs. We discovered that we complemented each other perfectly - where one was weak, the other was strong. Through shared experiences, quiet conversations, and countless moments together, we grew not just as individuals but as a couple, learning from each other every step of the way.'
+                                },
+                                {
+                                    title: 'The Proposal',
+                                    color: 'rose',
+                                    text: 'After four beautiful years together, a special trip to Manila Peninsula was planned with the intention of a proposal. Like many perfect love stories, the plan didn\'t go exactly as expected - but sometimes the most beautiful moments happen when we least expect them. Despite the unexpected turns, the perfect timing was found for the most important question of our lives. And in that spontaneous, heartfelt moment, our forever began.'
+                                }
+                            ].map((story, i) =>
+                                React.createElement('div', { key: i, className: 'story-card' }, [
+                                    React.createElement('div', { key: 'header', className: 'story-card-header' }, [
+                                        React.createElement('div', { key: 'icon', className: `story-icon ${story.color}` },
+                                            React.createElement(Heart, { className: 'story-heart' })
+                                        ),
+                                        React.createElement('h3', { key: 'title', className: `story-title ${story.color}` }, story.title)
+                                    ]),
+                                    React.createElement('p', { key: 'text', className: 'story-text' }, story.text)
+                                ])
+                            )
+                        )
+                    ])
+                ),
+
+                // Footer
+                React.createElement('footer', { key: 'footer', className: 'footer' },
+                    React.createElement('div', { className: 'footer-container' }, [
+                        React.createElement('div', { key: 'footer-heart', className: 'footer-heart' },
+                            React.createElement(Heart, { className: 'footer-heart-icon' })
+                        ),
+                        React.createElement('p', { key: 'footer-title', className: 'footer-title' }, 'Ira & Angel'),
+                        React.createElement('div', { key: 'footer-divider', className: 'footer-divider' }),
+                        React.createElement('p', { key: 'footer-info', className: 'footer-info' }, 
+                            'June 27, 2026 • #IraAndAngel2026'
+                        ),
+                        React.createElement('p', { key: 'footer-copyright', className: 'footer-copyright' }, 
+                            '© 2026 Ira & Angel Anonuevo. All rights reserved.'
+                        )
+                    ])
+                )
+            ]);
+        };
+
+        ReactDOM.render(React.createElement(OurStoryPage), document.getElementById('root'));
+        
+        // Show RSVP button immediately
+        const fallback = document.getElementById('fallback-rsvp');
+        if (fallback) {
+            fallback.style.display = 'block';
+        }
+        
+        // Add a simple function to navigate to RSVP
+        window.goToRSVP = function() {
+            console.log('Navigating to RSVP...');
+            try {
+                sessionStorage.setItem('scrollToRSVP', 'true');
+                window.location.href = 'index.html';
+            } catch (e) {
+                console.error('Error:', e);
+                // Fallback to direct hash navigation
+                window.location.href = 'index.html#rsvp';
+            }
+        };
+    </script>
+</body>
+</html>

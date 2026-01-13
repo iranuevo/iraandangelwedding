@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Party - Ira & Angel</title>
+    <!-- Beautiful Wedding Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&family=Great+Vibes&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <!-- Bottom-right RSVP link -->
+    <div id="fallback-rsvp" style="position: fixed; bottom: 20px; right: 20px; background: #f43f5e; color: white; padding: 15px 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1000; display: none;">
+        <a href="index.html#rsvp" onclick="goToRSVP(); return false;" style="color: white; text-decoration: none; font-weight: bold;">📝 RSVP Now</a>
+    </div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // SVG Icons as React components
+        const Heart = ({ className, fill, ...props }) => (
+            <svg className={className} fill={fill || "none"} stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.682l-1.318-1.364a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+        );
+
+        const DaisyFlower = ({ className, ...props }) => (
+            <svg className={className} viewBox="0 0 24 24" fill="none" {...props}>
+                {/* Petals - Dusty Pink */}
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(0 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(30 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(60 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(90 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(120 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(150 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(180 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(210 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(240 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(270 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(300 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(330 12 12)"/>
+                
+                {/* Center - Yellow */}
+                <circle cx="12" cy="12" r="2.5" fill="#fbbf24"/>
+                
+                {/* Stem - Sage Green */}
+                <rect x="11.5" y="14.5" width="1" height="7" fill="#86efac" rx="0.5"/>
+                
+                {/* Leaf - Sage Green */}
+                <ellipse cx="9" cy="18" rx="2" ry="1" fill="#86efac" transform="rotate(-30 9 18)"/>
+            </svg>
+        );
+
+        const Users = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+        );
+
+        const ArrowLeft = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 12H5m7-7l-7 7 7 7" />
+            </svg>
+        );
+
+        const WeddingPartyPage = () => {
+            const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+            useEffect(() => {
+                const handleMouseMove = (e) => {
+                    setMousePos({ x: e.clientX, y: e.clientY });
+                };
+
+                window.addEventListener('mousemove', handleMouseMove);
+
+                // Add fade-in animation to sections
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('section-visible');
+                            }
+                        });
+                    },
+                    { threshold: 0.2 }
+                );
+
+                document.querySelectorAll('section[id]').forEach((section) => {
+                    observer.observe(section);
+                });
+
+                return () => {
+                    window.removeEventListener('mousemove', handleMouseMove);
+                    observer.disconnect();
+                };
+            }, []);
+
+            return React.createElement('div', { className: 'wedding-container' }, [
+                // Floating Hearts Animation
+                React.createElement('div', { 
+                    key: 'floating-hearts',
+                    className: 'floating-hearts-container' 
+                }, 
+                    [...Array(6)].map((_, i) =>
+                        React.createElement('div', {
+                            key: i,
+                            className: 'floating-heart',
+                            style: {
+                                left: `${15 + i * 15}%`,
+                                animationDelay: `${i * 2}s`,
+                                animationDuration: `${15 + i * 2}s`
+                            }
+                        }, React.createElement(Heart, { className: 'heart-icon-float' }))
+                    )
+                ),
+
+                // Cursor Trail Effect
+                React.createElement('div', {
+                    key: 'cursor-trail',
+                    className: 'cursor-trail',
+                    style: {
+                        left: mousePos.x - 16,
+                        top: mousePos.y - 16
+                    }
+                }, React.createElement('div', { className: 'cursor-trail-inner' })),
+
+                // Navigation
+                React.createElement('nav', { key: 'nav', className: 'navigation' },
+                    React.createElement('div', { className: 'nav-container' }, [
+                        React.createElement('div', { key: 'nav-content', className: 'nav-content' }, [
+                            React.createElement('a', { 
+                                key: 'nav-logo', 
+                                href: 'index.html',
+                                className: 'nav-logo'
+                            }, [
+                                React.createElement(DaisyFlower, { key: 'nav-daisy', className: 'nav-heart' })
+                            ]),
+                            React.createElement('div', { key: 'nav-center', className: 'nav-center' }, [
+                                React.createElement('h1', { className: 'story-page-title' }, 'Wedding Party')
+                            ]),
+                            React.createElement('a', {
+                                key: 'back-button',
+                                href: 'index.html',
+                                className: 'back-button'
+                            }, [
+                                React.createElement(ArrowLeft, { key: 'arrow', className: 'back-arrow' }),
+                                'Back to Wedding'
+                            ])
+                        ])
+                    ])
+                ),
+
+                // Wedding Party Section
+                React.createElement('section', { key: 'wedding-party', id: 'wedding-party', className: 'party-section party-page' },
+                    React.createElement('div', { className: 'party-container' }, [
+                        React.createElement('div', { key: 'party-header', className: 'section-header' }, [
+                            React.createElement('h1', { className: 'section-title party-page-title' }, 'Our Wedding Party'),
+                            React.createElement('div', { className: 'section-divider' }),
+                            React.createElement('p', { className: 'party-intro' }, 'Meet the special people who will be standing with us on our big day')
+                        ]),
+                        React.createElement('div', { key: 'party-grid', className: 'party-grid' }, [
+                            // Bridesmaids
+                            React.createElement('div', { key: 'bridesmaids', className: 'party-group' }, [
+                                React.createElement('h2', { key: 'bridesmaids-title', className: 'party-group-title rose' }, 'Bridesmaids'),
+                                React.createElement('div', { key: 'bridesmaids-list', className: 'party-members' },
+                                    [
+                                        { name: 'Sharmaine Balino', role: 'Maid of Honor', relation: 'Sister' },
+                                        { name: 'Julie', role: 'Bridesmaid', relation: 'Soul Sister' },
+                                        { name: 'Pau Llaneta', role: 'Bridesmaid', relation: 'Sister in Law' }
+                                    ].map((person, i) =>
+                                        React.createElement('div', { key: i, className: 'party-member', style: { animationDelay: `${i * 0.15}s` } }, [
+                                            React.createElement('div', { key: 'avatar', className: 'party-avatar rose' },
+                                                React.createElement(Users, { className: 'party-avatar-icon' })
+                                            ),
+                                            React.createElement('h3', { key: 'name', className: 'party-member-name' }, person.name),
+                                            React.createElement('p', { key: 'role', className: 'party-member-role rose' }, person.role),
+                                            React.createElement('p', { key: 'relation', className: 'party-member-relation' }, person.relation)
+                                        ])
+                                    )
+                                )
+                            ]),
+                            // Groomsmen
+                            React.createElement('div', { key: 'groomsmen', className: 'party-group' }, [
+                                React.createElement('h2', { key: 'groomsmen-title', className: 'party-group-title green' }, 'Groomsmen'),
+                                React.createElement('div', { key: 'groomsmen-list', className: 'party-members' },
+                                    [
+                                        { name: 'Armand Vallejo', role: 'Best Man', relation: 'Childhood friend' },
+                                        { name: 'Jayson Avestrus', role: 'Groomsman', relation: 'College friend' },
+                                        { name: 'Jurineil Llaneta', role: 'Groomsman', relation: 'Brother in law' }
+                                    ].map((person, i) =>
+                                        React.createElement('div', { key: i, className: 'party-member', style: { animationDelay: `${i * 0.15}s` } }, [
+                                            React.createElement('div', { key: 'avatar', className: 'party-avatar green' },
+                                                React.createElement(Users, { className: 'party-avatar-icon' })
+                                            ),
+                                            React.createElement('h3', { key: 'name', className: 'party-member-name' }, person.name),
+                                            React.createElement('p', { key: 'role', className: 'party-member-role green' }, person.role),
+                                            React.createElement('p', { key: 'relation', className: 'party-member-relation' }, person.relation)
+                                        ])
+                                    )
+                                )
+                            ])
+                        ])
+                    ])
+                ),
+
+                // Call to Action
+                React.createElement('section', { key: 'cta', className: 'party-cta-section' },
+                    React.createElement('div', { className: 'party-cta-container' }, [
+                        React.createElement('h2', { key: 'cta-title', className: 'party-cta-title' }, 'Ready to Celebrate With Us?'),
+                        React.createElement('p', { key: 'cta-text', className: 'party-cta-text' }, 'We can\'t wait to share this special day with all our loved ones')
+                    ])
+                ),
+
+                // Footer
+                React.createElement('footer', { key: 'footer', className: 'footer' },
+                    React.createElement('div', { className: 'footer-container' }, [
+                        React.createElement('div', { key: 'footer-heart', className: 'footer-heart' },
+                            React.createElement(Heart, { className: 'footer-heart-icon' })
+                        ),
+                        React.createElement('p', { key: 'footer-title', className: 'footer-title' }, 'Ira & Angel'),
+                        React.createElement('div', { key: 'footer-divider', className: 'footer-divider' }),
+                        React.createElement('p', { key: 'footer-info', className: 'footer-info' }, 
+                            'June 27, 2026 • #IraAndAngel2026'
+                        ),
+                        React.createElement('p', { key: 'footer-copyright', className: 'footer-copyright' }, 
+                            '© 2026 Ira & Angel Anonuevo. All rights reserved.'
+                        )
+                    ])
+                )
+            ]);
+        };
+
+        ReactDOM.render(React.createElement(WeddingPartyPage), document.getElementById('root'));
+        
+        // Show RSVP button immediately
+        const fallback = document.getElementById('fallback-rsvp');
+        if (fallback) {
+            fallback.style.display = 'block';
+        }
+        
+        // Add a simple function to navigate to RSVP
+        window.goToRSVP = function() {
+            console.log('Navigating to RSVP...');
+            try {
+                sessionStorage.setItem('scrollToRSVP', 'true');
+                window.location.href = 'index.html';
+            } catch (e) {
+                console.error('Error:', e);
+                // Fallback to direct hash navigation
+                window.location.href = 'index.html#rsvp';
+            }
+        };
+    </script>
+</body>
+</html>

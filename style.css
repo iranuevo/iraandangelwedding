@@ -2029,3 +2029,559 @@ body {
         height: 300px;
     }
 }
+
+/* Story Link Section */
+.story-link-section {
+    padding: 80px 24px;
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(253, 164, 175, 0.08) 0%, transparent 60%),
+        linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.98) 0%, 
+            rgba(253, 242, 248, 0.4) 50%, 
+            rgba(255, 255, 255, 0.98) 100%
+        );
+    position: relative;
+    text-align: center;
+}
+
+.story-link-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 3px 3px, rgba(251, 113, 133, 0.1) 1px, transparent 0);
+    background-size: 30px 30px;
+    opacity: 0.3;
+    animation: gentleDrift 20s linear infinite;
+}
+
+.story-link-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.story-link-content {
+    background: white;
+    padding: 48px;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--rose-100);
+    transition: all 0.5s ease;
+}
+
+.story-link-content:hover {
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+}
+
+.story-link-heart {
+    margin-bottom: 24px;
+    animation: heartbeat 2s infinite;
+}
+
+.story-link-heart-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto;
+    color: var(--rose-300);
+    fill: currentColor;
+}
+
+.story-link-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    margin-bottom: 20px;
+    color: #2d3748;
+    font-weight: 500;
+}
+
+.story-link-text {
+    color: #718096;
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+    font-family: 'Crimson Text', serif;
+}
+
+.story-link-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: linear-gradient(to right, var(--rose-400), #ec4899);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(251, 113, 133, 0.3);
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.05em;
+}
+
+.story-link-button:hover {
+    box-shadow: 0 15px 35px rgba(251, 113, 133, 0.4);
+    transform: translateY(-2px);
+}
+
+.story-link-button-heart {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+/* Story Page Specific Styles */
+.story-page-section {
+    padding-top: 40px;
+}
+
+.story-page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    color: #2d3748;
+    font-weight: 500;
+}
+
+.nav-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--rose-50);
+    color: var(--rose-500);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid var(--rose-200);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.back-button:hover {
+    background: var(--rose-100);
+    transform: translateX(-2px);
+}
+
+.back-arrow {
+    width: 16px;
+    height: 16px;
+}
+
+.story-hero-section {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.story-hero-content {
+    text-align: center;
+    z-index: 10;
+    padding: 0 24px;
+    animation: slideUp 1s ease-out;
+}
+
+.story-hero-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin-bottom: 24px;
+    color: #2d3748;
+    letter-spacing: 0.02em;
+    animation: fadeInScale 1s ease-out;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.story-hero-subtitle {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    color: #718096;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.7;
+    animation: fadeInUp 1s ease-out 0.3s both;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.story-cta-section {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.story-cta-content {
+    background: linear-gradient(135deg, var(--rose-50), #fce7f3);
+    padding: 48px;
+    border-radius: 24px;
+    border: 2px solid var(--rose-100);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+}
+
+.story-cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    margin-bottom: 16px;
+    color: #2d3748;
+    font-weight: 500;
+}
+
+.story-cta-text {
+    color: #718096;
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+    font-family: 'Crimson Text', serif;
+}
+
+.story-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    background: linear-gradient(to right, var(--rose-400), #ec4899);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(251, 113, 133, 0.3);
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.05em;
+}
+
+.story-cta-button:hover {
+    box-shadow: 0 15px 35px rgba(251, 113, 133, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Mobile Responsive for Story Page */
+@media (max-width: 768px) {
+    .nav-center {
+        display: none;
+    }
+    
+    .story-hero-section {
+        min-height: 50vh;
+    }
+    
+    .story-cta-content {
+        padding: 32px;
+    }
+    
+    .story-cta-title {
+        font-size: 28px;
+    }
+}
+/* Navigation link styling for Our Story */
+.nav-links a.nav-link {
+    position: relative;
+    background: none;
+    border: none;
+    color: #4a5568;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.nav-links a.nav-link:hover {
+    color: var(--rose-400);
+}
+
+.nav-links a.nav-link:hover .nav-underline {
+    width: 100%;
+}
+/* Hero CTA Group */
+.hero-cta-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.hero-cta-secondary {
+    color: var(--rose-400) !important;
+    text-decoration: none;
+    border: 2px solid var(--rose-200);
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.hero-cta-secondary:hover {
+    background: var(--rose-50);
+    border-color: var(--rose-400);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .hero-cta-group {
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+/* Wedding Party Page Specific Styles */
+.party-page {
+    padding-top: 160px; /* Account for fixed navigation */
+    min-height: 100vh;
+}
+
+.party-page-title {
+    font-size: 72px;
+    margin-bottom: 24px;
+}
+
+.party-intro {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: var(--gray-600);
+    text-align: center;
+    margin-top: 24px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.back-button-container {
+    position: fixed;
+    top: 120px;
+    left: 24px;
+    z-index: 100;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--rose-200);
+    border-radius: 50px;
+    color: var(--gray-700);
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.back-button:hover {
+    background: var(--rose-50);
+    border-color: var(--rose-300);
+    transform: translateX(-4px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.back-arrow {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover .back-arrow {
+    transform: translateX(-2px);
+}
+
+.nav-link-active {
+    color: var(--rose-500) !important;
+}
+
+.nav-link-active .nav-underline {
+    width: 100% !important;
+    background: var(--rose-500) !important;
+}
+
+/* Party CTA Section */
+.party-cta-section {
+    padding: 80px 24px;
+    background: linear-gradient(135deg, var(--rose-50) 0%, var(--green-50) 100%);
+    text-align: center;
+}
+
+.party-cta-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.party-cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-bottom: 16px;
+}
+
+.party-cta-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: var(--gray-600);
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.party-cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.party-cta-button {
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 160px;
+}
+
+.party-cta-button.primary {
+    background: linear-gradient(135deg, var(--rose-500) 0%, var(--rose-600) 100%);
+    color: white;
+    box-shadow: 0 4px 20px rgba(244, 63, 94, 0.3);
+}
+
+.party-cta-button.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(244, 63, 94, 0.4);
+}
+
+.party-cta-button.secondary {
+    background: white;
+    color: var(--gray-700);
+    border: 2px solid var(--gray-300);
+}
+
+.party-cta-button.secondary:hover {
+    background: var(--gray-50);
+    border-color: var(--gray-400);
+    transform: translateY(-2px);
+}
+
+/* Enhanced party member cards for the dedicated page */
+.party-page .party-member {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 24px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.party-page .party-member:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.party-page .party-avatar {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+}
+
+.party-page .party-member-name {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.party-page .party-member-role {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.party-page .party-member-relation {
+    font-size: 14px;
+}
+
+/* Responsive adjustments for wedding party page */
+@media (max-width: 768px) {
+    .party-page-title {
+        font-size: 48px;
+    }
+    
+    .party-intro {
+        font-size: 16px;
+        padding: 0 16px;
+    }
+    
+    .back-button-container {
+        top: 100px;
+        left: 16px;
+    }
+    
+    .back-button {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+    
+    .party-cta-title {
+        font-size: 36px;
+    }
+    
+    .party-cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .party-cta-button {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+/* Story page navigation links */
+.story-nav-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.story-nav-link {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--gray-600);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.story-nav-link:hover {
+    color: var(--rose-500);
+    background: var(--rose-50);
+    border-color: var(--rose-200);
+}
+
+@media (max-width: 768px) {
+    .story-nav-links {
+        display: none; /* Hide on mobile to keep navigation clean */
+    }
+}

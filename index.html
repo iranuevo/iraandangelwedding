@@ -129,6 +129,18 @@
             // REPLACE THIS URL with your Google Apps Script Web App URL
             const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8I7l2S9h7LUaQ-enyscRberi4xEtNKPkF2Czn-H8i3ci-ppnKEuDY75BfM-DZF3s/exec';
 
+            // Add a global function for testing
+            window.testScrollToRSVP = () => {
+                const element = document.getElementById('rsvp');
+                console.log('RSVP element:', element);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    console.log('Scrolled to RSVP');
+                } else {
+                    console.log('RSVP element not found');
+                }
+            };
+
             // Countdown Timer
             useEffect(() => {
                 const weddingDate = new Date('2026-06-27T12:30:00').getTime();
@@ -154,22 +166,92 @@
                 updateCountdown();
                 const interval = setInterval(updateCountdown, 1000);
 
-                // Handle initial hash navigation for GitHub Pages
-                const handleInitialHash = () => {
+                // Simple and reliable hash navigation
+                const scrollToHashElement = () => {
                     const hash = window.location.hash.substring(1);
                     if (hash) {
-                        setTimeout(() => {
-                            const element = document.getElementById(hash);
-                            if (element) {
-                                element.scrollIntoView({ behavior: 'smooth' });
-                            }
-                        }, 500); // Wait for page to fully render
+                        const element = document.getElementById(hash);
+                        if (element) {
+                            element.scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
                     }
                 };
 
-                handleInitialHash();
+                // Handle hash navigation on page load and hash changes
+                setTimeout(scrollToHashElement, 500); // Initial delay for page load
+                setTimeout(scrollToHashElement, 1500); // Backup attempt
+                window.addEventListener('hashchange', scrollToHashElement);
 
-                return () => clearInterval(interval);
+                return () => {
+                    clearInterval(interval);
+                    window.removeEventListener('hashchange', scrollToHashElement);
+                };
+            }, []);
+
+            // Separate useEffect for hash navigation after component mount
+            useEffect(() => {
+                console.log('Index page loaded, checking for RSVP flag...'); // Debug log
+                
+                // Check if we came from our-story page and need to scroll to RSVP
+                const shouldScrollToRSVP = sessionStorage.getItem('scrollToRSVP');
+                console.log('ScrollToRSVP flag:', shouldScrollToRSVP); // Debug log
+                
+                if (shouldScrollToRSVP) {
+                    console.log('RSVP flag found, attempting to scroll...'); // Debug log
+                    sessionStorage.removeItem('scrollToRSVP'); // Clear the flag
+                    
+                    // Scroll to RSVP with multiple attempts
+                    const scrollToRSVP = () => {
+                        const element = document.getElementById('rsvp');
+                        console.log('RSVP element found:', element); // Debug log
+                        if (element) {
+                            element.scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                            console.log('Scrolled to RSVP successfully!'); // Debug log
+                            return true;
+                        }
+                        return false;
+                    };
+
+                    // Multiple attempts with increasing delays
+                    setTimeout(() => {
+                        if (!scrollToRSVP()) {
+                            console.log('First attempt failed, trying again...'); // Debug log
+                            setTimeout(() => {
+                                if (!scrollToRSVP()) {
+                                    console.log('Second attempt failed, final try...'); // Debug log
+                                    setTimeout(scrollToRSVP, 1000);
+                                }
+                            }, 500);
+                        }
+                    }, 200);
+                }
+
+                // Also handle regular hash navigation
+                const handlePostMountHash = () => {
+                    const hash = window.location.hash.substring(1);
+                    if (hash) {
+                        console.log('Hash found:', hash); // Debug log
+                        const element = document.getElementById(hash);
+                        if (element) {
+                            element.scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                };
+
+                // Multiple attempts to ensure it works
+                setTimeout(handlePostMountHash, 100);
+                setTimeout(handlePostMountHash, 500);
+                setTimeout(handlePostMountHash, 1000);
+                
             }, []);
 
             useEffect(() => {
@@ -306,17 +388,39 @@
                                 // React.createElement('span', { key: 'nav-text', className: 'nav-text' }, 'Ira & Angel')
                             ]),
                             React.createElement('div', { key: 'nav-links', className: 'nav-links' },
-                                ['Our Story', 'Details', 'Location', 'Timeline', 'Wedding Party', 'Dress Code', 'RSVP'].map((item, i) =>
-                                    React.createElement('button', {
-                                        key: item,
-                                        onClick: () => scrollToSection(item.toLowerCase().replace(/ /g, '-')),
-                                        className: 'nav-link',
-                                        style: { animationDelay: `${i * 0.1}s` }
-                                    }, [
-                                        item,
-                                        React.createElement('span', { key: 'underline', className: 'nav-underline' })
-                                    ])
-                                )
+                                ['Our Story', 'Details', 'Location', 'Timeline', 'Wedding Party', 'Dress Code', 'RSVP'].map((item, i) => {
+                                    if (item === 'Our Story') {
+                                        return React.createElement('a', {
+                                            key: item,
+                                            href: 'our-story.html',
+                                            className: 'nav-link',
+                                            style: { animationDelay: `${i * 0.1}s`, textDecoration: 'none' }
+                                        }, [
+                                            item,
+                                            React.createElement('span', { key: 'underline', className: 'nav-underline' })
+                                        ]);
+                                    } else if (item === 'Wedding Party') {
+                                        return React.createElement('a', {
+                                            key: item,
+                                            href: 'wedding-party.html',
+                                            className: 'nav-link',
+                                            style: { animationDelay: `${i * 0.1}s`, textDecoration: 'none' }
+                                        }, [
+                                            item,
+                                            React.createElement('span', { key: 'underline', className: 'nav-underline' })
+                                        ]);
+                                    } else {
+                                        return React.createElement('button', {
+                                            key: item,
+                                            onClick: () => scrollToSection(item.toLowerCase().replace(/ /g, '-')),
+                                            className: 'nav-link',
+                                            style: { animationDelay: `${i * 0.1}s` }
+                                        }, [
+                                            item,
+                                            React.createElement('span', { key: 'underline', className: 'nav-underline' })
+                                        ]);
+                                    }
+                                })
                             ),
                             React.createElement('button', {
                                 key: 'nav-cta',
@@ -372,55 +476,26 @@
                                 })
                             )
                         ]),
-                        React.createElement('button', {
-                            key: 'hero-cta',
-                            onClick: () => scrollToSection('our-story'),
-                            className: 'hero-cta'
-                        }, [
-                            React.createElement('span', { key: 'text' }, 'Discover Our Story'),
-                            React.createElement(ChevronDown, { key: 'icon', className: 'chevron-icon' })
+                        React.createElement('div', { key: 'hero-cta-group', className: 'hero-cta-group' }, [
+                            React.createElement('button', {
+                                key: 'hero-cta-details',
+                                onClick: () => scrollToSection('details'),
+                                className: 'hero-cta'
+                            }, [
+                                React.createElement('span', { key: 'text' }, 'View Event Details'),
+                                React.createElement(ChevronDown, { key: 'icon', className: 'chevron-icon' })
+                            ]),
+                            React.createElement('a', {
+                                key: 'hero-cta-story',
+                                href: 'our-story.html',
+                                className: 'hero-cta hero-cta-secondary'
+                            }, [
+                                React.createElement('span', { key: 'text' }, 'Read Our Story'),
+                                React.createElement(Heart, { key: 'icon', className: 'chevron-icon' })
+                            ])
                         ])
                     ])
                 ]),
-
-                // Our Story Section
-                React.createElement('section', { key: 'our-story', id: 'our-story', className: 'story-section' },
-                    React.createElement('div', { className: 'story-container' }, [
-                        React.createElement('div', { key: 'story-header', className: 'section-header' }, [
-                            React.createElement('h2', { className: 'section-title' }, 'Our Story'),
-                            React.createElement('div', { className: 'section-divider' })
-                        ]),
-                        React.createElement('div', { key: 'story-content', className: 'story-content' },
-                            [
-                                {
-                                    title: 'The Beginning',
-                                    color: 'rose',
-                                    text: 'We were workmates who started as colleagues, sharing the same workspace and daily routines. Over time, we discovered we had so much in common - our quiet personalities, shared interests, and similar perspectives on life. What began as professional interactions slowly blossomed into something deeper. Our first real date was at North Park, where we spent hours talking and getting to know each other beyond work. It was there, surrounded by the peaceful atmosphere, that we realized we were falling in love.'
-                                },
-                                {
-                                    title: 'Growing Together',
-                                    color: 'green',
-                                    text: 'Both of us being naturally quiet souls, we found comfort in each other\'s presence. We learned to communicate in our own gentle way, supporting each other through life\'s ups and downs. We discovered that we complemented each other perfectly - where one was weak, the other was strong. Through shared experiences, quiet conversations, and countless moments together, we grew not just as individuals but as a couple, learning from each other every step of the way.'
-                                },
-                                {
-                                    title: 'The Proposal',
-                                    color: 'rose',
-                                    text: 'After four beautiful years together, a special trip to Manila Peninsula was planned with the intention of a proposal. Like many perfect love stories, the plan didn\'t go exactly as expected - but sometimes the most beautiful moments happen when we least expect them. Despite the unexpected turns, the perfect timing was found for the most important question of our lives. And in that spontaneous, heartfelt moment, our forever began.'
-                                }
-                            ].map((story, i) =>
-                                React.createElement('div', { key: i, className: 'story-card' }, [
-                                    React.createElement('div', { key: 'header', className: 'story-card-header' }, [
-                                        React.createElement('div', { key: 'icon', className: `story-icon ${story.color}` },
-                                            React.createElement(Heart, { className: 'story-heart' })
-                                        ),
-                                        React.createElement('h3', { key: 'title', className: `story-title ${story.color}` }, story.title)
-                                    ]),
-                                    React.createElement('p', { key: 'text', className: 'story-text' }, story.text)
-                                ])
-                            )
-                        )
-                    ])
-                ),
 
                 // Event Details Section
                 React.createElement('section', { key: 'details', id: 'details', className: 'details-section' },
@@ -591,58 +666,6 @@
                 ),
                 */
 
-                // Wedding Party Section
-                React.createElement('section', { key: 'wedding-party', id: 'wedding-party', className: 'party-section' },
-                    React.createElement('div', { className: 'party-container' }, [
-                        React.createElement('div', { key: 'party-header', className: 'section-header' }, [
-                            React.createElement('h2', { className: 'section-title' }, 'Our Wedding Party'),
-                            React.createElement('div', { className: 'section-divider' })
-                        ]),
-                        React.createElement('div', { key: 'party-grid', className: 'party-grid' }, [
-                            // Bridesmaids
-                            React.createElement('div', { key: 'bridesmaids', className: 'party-group' }, [
-                                React.createElement('h3', { key: 'bridesmaids-title', className: 'party-group-title rose' }, 'Bridesmaids'),
-                                React.createElement('div', { key: 'bridesmaids-list', className: 'party-members' },
-                                    [
-                                        { name: 'Sharmaine Balino', role: 'Maid of Honor', relation: 'Sister' },
-                                        { name: 'Julie', role: 'Bridesmaid', relation: 'Soul Sister' },
-                                        { name: 'Pau Llaneta', role: 'Bridesmaid', relation: 'Sister in Law' }
-                                    ].map((person, i) =>
-                                        React.createElement('div', { key: i, className: 'party-member', style: { animationDelay: `${i * 0.15}s` } }, [
-                                            React.createElement('div', { key: 'avatar', className: 'party-avatar rose' },
-                                                React.createElement(Users, { className: 'party-avatar-icon' })
-                                            ),
-                                            React.createElement('h4', { key: 'name', className: 'party-member-name' }, person.name),
-                                            React.createElement('p', { key: 'role', className: 'party-member-role rose' }, person.role),
-                                            React.createElement('p', { key: 'relation', className: 'party-member-relation' }, person.relation)
-                                        ])
-                                    )
-                                )
-                            ]),
-                            // Groomsmen
-                            React.createElement('div', { key: 'groomsmen', className: 'party-group' }, [
-                                React.createElement('h3', { key: 'groomsmen-title', className: 'party-group-title green' }, 'Groomsmen'),
-                                React.createElement('div', { key: 'groomsmen-list', className: 'party-members' },
-                                    [
-                                        { name: 'Armand Vallejo', role: 'Best Man', relation: 'Childhood friend' },
-                                        { name: 'Jayson Avestrus', role: 'Groomsman', relation: 'College friend' },
-                                        { name: 'Jurineil Llaneta', role: 'Groomsman', relation: 'Brother in law' }
-                                    ].map((person, i) =>
-                                        React.createElement('div', { key: i, className: 'party-member', style: { animationDelay: `${i * 0.15}s` } }, [
-                                            React.createElement('div', { key: 'avatar', className: 'party-avatar green' },
-                                                React.createElement(Users, { className: 'party-avatar-icon' })
-                                            ),
-                                            React.createElement('h4', { key: 'name', className: 'party-member-name' }, person.name),
-                                            React.createElement('p', { key: 'role', className: 'party-member-role green' }, person.role),
-                                            React.createElement('p', { key: 'relation', className: 'party-member-relation' }, person.relation)
-                                        ])
-                                    )
-                                )
-                            ])
-                        ])
-                    ])
-                ),
-
                 // Dress Code Section
                 React.createElement('section', { key: 'dress-code', id: 'dress-code', className: 'dress-code-section' },
                     React.createElement('div', { className: 'dress-code-container' }, [
@@ -802,7 +825,48 @@
         };
 
         ReactDOM.render(React.createElement(WeddingWebsite), document.getElementById('root'));
+        
+        // Simple hash navigation function
+        window.handleRSVPNavigation = function() {
+            console.log('Handling RSVP navigation...');
+            
+            // Check sessionStorage first
+            const shouldScrollToRSVP = sessionStorage.getItem('scrollToRSVP');
+            if (shouldScrollToRSVP) {
+                console.log('SessionStorage flag found, scrolling to RSVP...');
+                sessionStorage.removeItem('scrollToRSVP');
+                
+                setTimeout(() => {
+                    const element = document.getElementById('rsvp');
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        console.log('Scrolled to RSVP via sessionStorage');
+                    }
+                }, 1000);
+                return;
+            }
+            
+            // Check hash
+            const hash = window.location.hash.substring(1);
+            if (hash === 'rsvp') {
+                console.log('Hash navigation to RSVP...');
+                setTimeout(() => {
+                    const element = document.getElementById('rsvp');
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        console.log('Scrolled to RSVP via hash');
+                    }
+                }, 1000);
+            }
+        };
+        
+        // Call the function on page load
+        setTimeout(window.handleRSVPNavigation, 500);
+        setTimeout(window.handleRSVPNavigation, 1500);
+        setTimeout(window.handleRSVPNavigation, 3000);
+        
+        // Also handle hash changes
+        window.addEventListener('hashchange', window.handleRSVPNavigation);
     </script>
 </body>
-</html>< ! - -   T r i g g e r   d e p l o y m e n t   - - >  
- 
+</html>
