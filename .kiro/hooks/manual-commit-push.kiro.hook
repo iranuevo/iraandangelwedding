@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "Manual Commit & Push",
+  "description": "Manually commit all changes and push to main branch",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "git add .; if (git status --porcelain) { Write-Host 'Committing changes...'; git commit -m 'chore: update project files - automated commit'; Write-Host 'Pushing to remote...'; git push origin main; Write-Host 'Successfully committed and pushed!' } else { Write-Host 'No changes to commit' }"
+  },
+  "shortName": "manual-commit-push"
+}
