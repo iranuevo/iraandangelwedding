@@ -1922,12 +1922,16 @@ body {
             rgba(134, 239, 172, 0.015) 82px
         );
     opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .map-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
+    position: relative;
+    z-index: 1;
 }
 
 .map-content {
@@ -1984,6 +1988,9 @@ body {
     font-weight: 500;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(251, 113, 133, 0.3);
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
 }
 
 .map-button:hover {
