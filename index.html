@@ -347,6 +347,23 @@
             };
 
             return React.createElement('div', { className: 'wedding-container' }, [
+                // Toast Notifications
+                showRsvpConfirm && React.createElement('div', { 
+                    key: 'toast-success',
+                    className: 'toast toast-success'
+                }, [
+                    React.createElement('div', { key: 'icon', className: 'toast-icon' }, '✨'),
+                    React.createElement('p', { key: 'text', className: 'toast-text' }, 'Thank you for your RSVP! We can\'t wait to celebrate with you.')
+                ]),
+
+                submitError && React.createElement('div', { 
+                    key: 'toast-error',
+                    className: 'toast toast-error'
+                }, [
+                    React.createElement('div', { key: 'icon', className: 'toast-icon' }, '⚠️'),
+                    React.createElement('p', { key: 'text', className: 'toast-text' }, submitError)
+                ]),
+
                 // Floating Hearts Animation
                 React.createElement('div', { 
                     key: 'floating-hearts',
@@ -678,7 +695,7 @@
                         ]),
                         React.createElement('div', { key: 'registry-content', className: 'registry-content' }, [
                             React.createElement('p', { key: 'registry-intro', className: 'registry-intro' }, 
-                                'Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a gift, a monetary contribution towards our future together would be deeply appreciated.'
+                                'Your presence at our wedding is the greatest gift of all.'
                             ),
                             React.createElement('div', { key: 'registry-card', className: 'registry-card' }, [
                                 React.createElement('div', { key: 'registry-icon', className: 'registry-icon' },
@@ -686,10 +703,7 @@
                                 ),
                                 React.createElement('h3', { key: 'registry-title', className: 'registry-title' }, 'Wishing Well'),
                                 React.createElement('p', { key: 'registry-text', className: 'registry-text' }, 
-                                    'We are blessed to have a home filled with everything we need. As we begin our married life together, we are saving for our dream home and future adventures. Your generous contribution will help us build the foundation for our life together.'
-                                ),
-                                React.createElement('p', { key: 'registry-note', className: 'registry-note' }, 
-                                    'A wishing well will be available at the reception, or you may give your gift to our coordinators.'
+                                    'If you wish to bless us with a gift, a monetary contribution towards our future home would be deeply appreciated. A wishing well will be available at the reception.'
                                 )
                             ])
                         ])
@@ -747,14 +761,6 @@
                             React.createElement('p', { className: 'section-subtitle' }, 'Please respond by April 15, 2026')
                         ]),
 
-                        showRsvpConfirm && React.createElement('div', { key: 'confirm', className: 'rsvp-confirm' },
-                            React.createElement('p', { className: 'rsvp-confirm-text' }, 'Thank you for your RSVP! We can\'t wait to celebrate with you. ✨')
-                        ),
-
-                        submitError && React.createElement('div', { key: 'error', className: 'rsvp-error' },
-                            React.createElement('p', { className: 'rsvp-error-text' }, submitError)
-                        ),
-
                         React.createElement('div', { key: 'rsvp-form', className: 'rsvp-form' }, [
                             // Name Field
                             React.createElement('div', { key: 'name', className: 'form-group' }, [
@@ -764,7 +770,7 @@
                                     value: formData.name,
                                     onChange: (e) => setFormData({...formData, name: e.target.value}),
                                     className: 'form-input',
-                                    placeholder: 'Ira & Angel Anonuevo'
+                                    placeholder: 'Enter your full name'
                                 })
                             ]),
 
@@ -775,7 +781,8 @@
                                     value: formData.guests,
                                     onChange: (e) => setFormData({...formData, guests: e.target.value}),
                                     className: 'form-select'
-                                }, [1, 2].map(n =>
+                                // }, [1, 2].map(n =>
+                                }, [1].map(n =>
                                     React.createElement('option', { key: n, value: n }, `${n} ${n === 1 ? 'Guest' : 'Guests'}`)
                                 ))
                             ]),
@@ -827,7 +834,19 @@
                                 onClick: handleSubmit,
                                 disabled: isSubmitting,
                                 className: `form-submit ${isSubmitting ? 'submitting' : ''}`
-                            }, isSubmitting ? 'Sending...' : 'Send RSVP ✨')
+                            }, [
+                                isSubmitting ? React.createElement('span', { 
+                                    key: 'spinner',
+                                    className: 'button-spinner' 
+                                }, [
+                                    React.createElement('span', { key: 'dot1', className: 'spinner-dot' }),
+                                    React.createElement('span', { key: 'dot2', className: 'spinner-dot' }),
+                                    React.createElement('span', { key: 'dot3', className: 'spinner-dot' })
+                                ]) : React.createElement('span', { 
+                                    key: 'text',
+                                    className: 'button-text'
+                                }, 'Send RSVP ✨')
+                            ])
                         ])
                     ])
                 ),
