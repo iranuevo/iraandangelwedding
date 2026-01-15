@@ -388,7 +388,7 @@
                                 // React.createElement('span', { key: 'nav-text', className: 'nav-text' }, 'Ira & Angel')
                             ]),
                             React.createElement('div', { key: 'nav-links', className: 'nav-links' },
-                                ['Our Story', 'Details', 'Location', 'Timeline', 'Wedding Party', 'Dress Code', 'RSVP'].map((item, i) => {
+                                ['Our Story', 'Details', 'Location', 'Timeline', 'Wedding Party', 'Registry', 'RSVP'].map((item, i) => {
                                     if (item === 'Our Story') {
                                         return React.createElement('a', {
                                             key: item,
@@ -665,6 +665,36 @@
                     ])
                 ),
                 */
+
+                // Registry Section
+                React.createElement('section', { key: 'registry', id: 'registry', className: 'registry-section' },
+                    React.createElement('div', { className: 'registry-container' }, [
+                        React.createElement('div', { key: 'registry-header', className: 'section-header' }, [
+                            React.createElement('div', { key: 'registry-heart', className: 'section-icon' },
+                                React.createElement(Heart, { className: 'section-icon-svg', fill: 'currentColor' })
+                            ),
+                            React.createElement('h2', { className: 'section-title' }, 'Registry'),
+                            React.createElement('div', { className: 'section-divider' })
+                        ]),
+                        React.createElement('div', { key: 'registry-content', className: 'registry-content' }, [
+                            React.createElement('p', { key: 'registry-intro', className: 'registry-intro' }, 
+                                'Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a gift, a monetary contribution towards our future together would be deeply appreciated.'
+                            ),
+                            React.createElement('div', { key: 'registry-card', className: 'registry-card' }, [
+                                React.createElement('div', { key: 'registry-icon', className: 'registry-icon' },
+                                    React.createElement(Sparkles, { className: 'registry-sparkle' })
+                                ),
+                                React.createElement('h3', { key: 'registry-title', className: 'registry-title' }, 'Wishing Well'),
+                                React.createElement('p', { key: 'registry-text', className: 'registry-text' }, 
+                                    'We are blessed to have a home filled with everything we need. As we begin our married life together, we are saving for our dream home and future adventures. Your generous contribution will help us build the foundation for our life together.'
+                                ),
+                                React.createElement('p', { key: 'registry-note', className: 'registry-note' }, 
+                                    'A wishing well will be available at the reception, or you may give your gift to our coordinators.'
+                                )
+                            ])
+                        ])
+                    ])
+                ),
 
                 // Dress Code Section
                 React.createElement('section', { key: 'dress-code', id: 'dress-code', className: 'dress-code-section' },
