@@ -130,7 +130,7 @@ body {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(12px);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    z-index: 50;
+    z-index: 100;
     transition: all 0.5s ease;
     border-bottom: 1px solid var(--rose-100);
 }
@@ -1335,6 +1335,14 @@ body {
 @media (max-width: 768px) {
     .nav-links {
         display: none;
+    }
+    
+    .hero-section {
+        padding-top: 80px;
+    }
+    
+    .hero-content {
+        padding-top: 40px;
     }
     
     .hero-heading {
