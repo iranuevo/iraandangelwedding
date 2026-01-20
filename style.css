@@ -1936,6 +1936,82 @@ body {
     font-weight: 400;
 }
 
+.no-gifts-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+    padding: 28px 36px;
+    background: linear-gradient(135deg, 
+        rgba(253, 242, 248, 0.4) 0%, 
+        rgba(240, 253, 244, 0.3) 100%);
+    border: 1px solid rgba(253, 164, 175, 0.12);
+    border-radius: 12px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 2px 15px rgba(253, 164, 175, 0.06);
+    transition: all 0.3s ease;
+}
+
+.no-gifts-notice:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 25px rgba(253, 164, 175, 0.08);
+}
+
+.no-gifts-visual {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 24px;
+    padding: 18px 36px;
+    background: rgba(251, 113, 133, 0.08);
+    border-radius: 12px;
+    border: 2px solid rgba(251, 113, 133, 0.15);
+}
+
+.gift-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: #4a5568;
+    letter-spacing: 3px;
+}
+
+.cross-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: #f43f5e;
+    transform: translateY(-50%) rotate(-12deg);
+    border-radius: 3px;
+    opacity: 0.95;
+}
+
+.no-gifts-content {
+    text-align: center;
+}
+
+.no-gifts-text {
+    font-size: 19px;
+    color: #2d3748;
+    font-weight: 400;
+    margin: 0 0 10px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+.no-gifts-subtext {
+    font-size: 14px;
+    color: #4a5568;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+}
+
 .registry-note {
     font-size: 16px;
     color: #718096;
@@ -2051,6 +2127,26 @@ body {
     line-height: 1.8;
     font-size: 16px;
     font-family: 'Crimson Text', serif;
+}
+
+.dress-code-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.dress-icon,
+.suit-icon {
+    width: 64px;
+    height: 64px;
+    color: var(--rose-400);
+    transition: all 0.3s ease;
+}
+
+.dress-code-card:hover .dress-icon,
+.dress-code-card:hover .suit-icon {
+    transform: scale(1.1);
+    color: var(--rose-500);
 }
 
 .color-palette {

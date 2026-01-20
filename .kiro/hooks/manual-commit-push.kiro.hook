@@ -7,8 +7,9 @@
     "type": "userTriggered"
   },
   "then": {
-    "type": "runCommand",
-    "command": "git add .; if (git status --porcelain) { Write-Host 'Committing changes...'; git commit -m 'chore: update project files - automated commit'; Write-Host 'Pushing to remote...'; git push origin main; Write-Host 'Successfully committed and pushed!' } else { Write-Host 'No changes to commit' }"
+    "type": "askAgent",
+    "prompt": ""
   },
-  "shortName": "manual-commit-push"
+  "shortName": "manual-commit-push",
+  "workspaceFolderName": "iraandangelwedding"
 }
