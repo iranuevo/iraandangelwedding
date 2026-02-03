@@ -172,6 +172,7 @@
             const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
             const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
             const [isWeddingDay, setIsWeddingDay] = useState(false);
+            const [activeLocationTab, setActiveLocationTab] = useState('ceremony');
             const [formData, setFormData] = useState({
                 name: '',
                 guests: '1',
@@ -196,7 +197,7 @@
 
             // Countdown Timer
             useEffect(() => {
-                const weddingDate = new Date('2026-06-27T12:30:00').getTime();
+                const weddingDate = new Date('2026-06-27T12:00:00').getTime();
                 
                 const updateCountdown = () => {
                     const now = new Date().getTime();
@@ -586,7 +587,7 @@
                                 React.createElement('div', { key: 'ceremony-details', className: 'detail-items' },
                                     [
                                         { icon: Calendar, text: 'June 27, 2026', sub: 'Saturday' },
-                                        { icon: Clock, text: '12:30 PM - 2:00 PM', sub: 'Ceremony duration' },
+                                        { icon: Clock, text: '12:00 PM - 2:00 PM', sub: 'Ceremony duration' },
                                         { icon: MapPin, text: 'San Agustin Church', sub: 'General Luna Street, Intramuros, Manila' }
                                     ].map((item, i) =>
                                         React.createElement('div', { key: i, className: 'detail-item rose' }, [
@@ -611,7 +612,7 @@
                                     [
                                         { icon: Calendar, text: 'June 27, 2026', sub: 'Immediately following ceremony' },
                                         { icon: Clock, text: '4:00 PM - 10:00 PM', sub: 'Cocktails, dinner, and dancing' },
-                                        { icon: MapPin, text: 'The Manila Peninsula', sub: 'Makati City, Metro Manila' }
+                                        { icon: MapPin, text: 'The Heritage Hotel Manila', sub: 'Roxas Boulevard, Manila' }
                                     ].map((item, i) =>
                                         React.createElement('div', { key: i, className: 'detail-item green' }, [
                                             React.createElement(item.icon, { key: 'icon', className: 'detail-item-icon' }),
@@ -634,8 +635,26 @@
                             React.createElement('h2', { className: 'section-title' }, 'Location & Directions'),
                             React.createElement('div', { className: 'section-divider' })
                         ]),
-                        React.createElement('div', { key: 'map-content', className: 'map-content' }, [
-                            React.createElement('div', { key: 'map-info', className: 'map-info' }, [
+                        React.createElement('div', { key: 'location-tabs', className: 'location-tabs' }, [
+                            React.createElement('button', {
+                                key: 'ceremony-tab',
+                                className: `location-tab ${activeLocationTab === 'ceremony' ? 'active' : ''}`,
+                                onClick: () => setActiveLocationTab('ceremony')
+                            }, [
+                                React.createElement(Heart, { key: 'ceremony-icon', className: 'location-tab-icon' }),
+                                'Ceremony'
+                            ]),
+                            React.createElement('button', {
+                                key: 'reception-tab',
+                                className: `location-tab ${activeLocationTab === 'reception' ? 'active' : ''}`,
+                                onClick: () => setActiveLocationTab('reception')
+                            }, [
+                                React.createElement(Users, { key: 'reception-icon', className: 'location-tab-icon' }),
+                                'Reception'
+                            ])
+                        ]),
+                        React.createElement('div', { key: 'ceremony-content', className: `location-content ceremony-content ${activeLocationTab === 'ceremony' ? 'active' : ''}` }, [
+                            React.createElement('div', { key: 'ceremony-info', className: 'map-info' }, [
                                 React.createElement('h3', { key: 'church-name', className: 'map-church-name' }, 'San Agustin Church'),
                                 React.createElement('p', { key: 'address', className: 'map-address' }, 'General Luna Street, Intramuros, Manila'),
                                 React.createElement('p', { key: 'description', className: 'map-description' }, 'The oldest stone church in the Philippines, a UNESCO World Heritage Site located in the historic walled city of Intramuros.'),
@@ -652,9 +671,9 @@
                                     ])
                                 ])
                             ]),
-                            React.createElement('div', { key: 'map-embed', className: 'map-embed' },
+                            React.createElement('div', { key: 'ceremony-map', className: 'map-embed' },
                                 React.createElement('iframe', {
-                                    src: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.2156789!2d120.9752778!3d14.5888889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ca21ac302007%3A0x5b5031b1fd7b0c0a!2sSan%20Agustin%20Church!5e0!3m2!1sen!2sph!4v1642000000000!5m2!1sen!2sph',
+                                    src: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.1741333110404!2d120.97260371073054!3d14.589151385837042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ca3d23445363%3A0x6c2d1781ec26636a!2sSan%20Agustin%20Church!5e0!3m2!1sen!2sph!4v1770128488693!5m2!1sen!2sph',
                                     width: '100%',
                                     height: '400',
                                     style: { border: 0, borderRadius: '12px' },
@@ -662,6 +681,37 @@
                                     loading: 'lazy',
                                     referrerPolicy: 'no-referrer-when-downgrade',
                                     title: 'San Agustin Church Location'
+                                })
+                            )
+                        ]),
+                        React.createElement('div', { key: 'reception-content', className: `location-content reception-content ${activeLocationTab === 'reception' ? 'active' : ''}` }, [
+                            React.createElement('div', { key: 'reception-info', className: 'map-info' }, [
+                                React.createElement('h3', { key: 'hotel-name', className: 'map-church-name' }, 'The Heritage Hotel Manila'),
+                                React.createElement('p', { key: 'hotel-address', className: 'map-address' }, 'Roxas Boulevard, Manila'),
+                                React.createElement('p', { key: 'hotel-description', className: 'map-description' }, 'A luxury heritage hotel offering elegant venues and exceptional service, perfect for celebrating our special day with family and friends.'),
+                                React.createElement('div', { key: 'hotel-actions', className: 'map-actions' }, [
+                                    React.createElement('a', {
+                                        key: 'hotel-directions',
+                                        href: 'https://www.google.com/maps/dir//The+Heritage+Hotel+Manila,+Roxas+Boulevard,+Manila',
+                                        target: '_blank',
+                                        rel: 'noopener noreferrer',
+                                        className: 'map-button'
+                                    }, [
+                                        React.createElement(MapPin, { key: 'icon', className: 'map-button-icon' }),
+                                        'Get Directions'
+                                    ])
+                                ])
+                            ]),
+                            React.createElement('div', { key: 'reception-map', className: 'map-embed' },
+                                React.createElement('iframe', {
+                                    src: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3862.0912215536123!2d120.99041561072958!3d14.536774485883395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c95a03a03a65%3A0xc78b6e0c562f13bf!2sThe%20Heritage%20Hotel%20Manila!5e0!3m2!1sen!2sph!4v1770128316216!5m2!1sen!2sph',
+                                    width: '100%',
+                                    height: '400',
+                                    style: { border: 0, borderRadius: '12px' },
+                                    allowFullScreen: true,
+                                    loading: 'lazy',
+                                    referrerPolicy: 'no-referrer-when-downgrade',
+                                    title: 'The Heritage Hotel Manila Location'
                                 })
                             )
                         ])
@@ -678,9 +728,9 @@
                         React.createElement('div', { key: 'timeline-content', className: 'timeline-content' }, [
                             React.createElement('div', { key: 'timeline-line', className: 'timeline-line' }),
                             [
-                                { time: '12:00 PM', title: 'Guest Arrival', desc: 'Welcome to the church', color: 'rose' },
-                                { time: '12:30 PM', title: 'Ceremony Begins', desc: 'Please be seated by 12:30 PM', color: 'green' },
-                                { time: '3:00 PM', title: 'Cocktail Hour', desc: 'Transfer to Manila Peninsula', color: 'rose' },
+                                { time: '11:30 AM', title: 'Guest Arrival', desc: 'Welcome to the church', color: 'rose' },
+                                { time: '12:00 PM', title: 'Ceremony Begins', desc: 'Please be seated by 12:00 PM', color: 'green' },
+                                { time: '3:00 PM', title: 'Cocktail Hour', desc: 'Transfer to The Heritage Hotel Manila', color: 'rose' },
                                 { time: '4:00 PM', title: 'Reception Begins', desc: 'Dinner service starts', color: 'green' },
                                 { time: '5:30 PM', title: 'First Dance & Toasts', desc: 'Speeches from loved ones', color: 'rose' },
                                 { time: '6:00 PM', title: 'Dancing & Celebration', desc: 'Live band performance', color: 'green' },
