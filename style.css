@@ -429,10 +429,18 @@ body {
     font-size: clamp(1rem, 2.5vw, 1.125rem);
 }
 
+.hero-date-small {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+}
+
 .sparkle-icon {
     width: 16px;
     height: 16px;
     color: var(--rose-400);
+}
+
+.hero-venue-container {
+    text-align: center;
 }
 
 .hero-venue {
@@ -440,6 +448,21 @@ body {
     color: #a0aec0;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
+}
+
+.hero-venue-large {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.hero-venue-subtitle {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    color: #9ca3af;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    letter-spacing: 0.05em;
 }
 
 /* Countdown */
