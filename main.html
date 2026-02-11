@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ira & Angel - Wedding June 27, 2026</title>
+    <!-- Beautiful Wedding Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&family=Great+Vibes&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // SVG Icons as React components
+        const Heart = ({ className, fill, ...props }) => (
+            <svg className={className} fill={fill || "none"} stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.682l-1.318-1.364a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+        );
+
+        const DaisyFlower = ({ className, ...props }) => (
+            <svg className={className} viewBox="0 0 24 24" fill="none" {...props}>
+                {/* Petals - Dusty Pink */}
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(0 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(30 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(60 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(90 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(120 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(150 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(180 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(210 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(240 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(270 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(300 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(330 12 12)"/>
+                
+                {/* Center - Yellow */}
+                <circle cx="12" cy="12" r="2.5" fill="#fbbf24"/>
+                
+                {/* Stem - Sage Green */}
+                <rect x="11.5" y="14.5" width="1" height="7" fill="#86efac" rx="0.5"/>
+                
+                {/* Leaf - Sage Green */}
+                <ellipse cx="9" cy="18" rx="2" ry="1" fill="#86efac" transform="rotate(-30 9 18)"/>
+            </svg>
+        );
+
+        const MapPin = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+        );
+
+        const Clock = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12,6 12,12 16,14"></polyline>
+            </svg>
+        );
+
+        const Calendar = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+        );
+
+        const Camera = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+        );
+
+        const Users = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+        );
+
+        const Mail = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+        );
+
+        const ChevronDown = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <polyline points="6,9 12,15 18,9"></polyline>
+            </svg>
+        );
+
+        const Sparkles = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+        );
+
+        const Gift = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                {/* Gift box base */}
+                <rect x="3" y="8" width="18" height="12" rx="2" strokeWidth="2"/>
+                {/* Gift box lid */}
+                <path d="M3 8h18V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2z" strokeWidth="2"/>
+                {/* Ribbon vertical */}
+                <line x1="12" y1="4" x2="12" y2="20" strokeWidth="2"/>
+                {/* Ribbon horizontal */}
+                <line x1="3" y1="8" x2="21" y2="8" strokeWidth="2"/>
+                {/* Bow left */}
+                <path d="M8 4c0-1.5 1.5-2 3-1s2 2 1 3-2.5 1-4-2z" fill="currentColor" fillOpacity="0.2"/>
+                {/* Bow right */}
+                <path d="M16 4c0-1.5-1.5-2-3-1s-2 2-1 3 2.5 1 4-2z" fill="currentColor" fillOpacity="0.2"/>
+            </svg>
+        );
+
+        const Dress = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                {/* Dress top/bodice */}
+                <path d="M8 6 L16 6 L15 10 L9 10 Z" strokeWidth="2" fill="currentColor" fillOpacity="0.1"/>
+                {/* Dress skirt - flowing */}
+                <path d="M9 10 L6 22 L18 22 L15 10" strokeWidth="2" fill="currentColor" fillOpacity="0.05"/>
+                {/* Waistline */}
+                <line x1="9" y1="10" x2="15" y2="10" strokeWidth="2"/>
+                {/* Shoulder straps */}
+                <line x1="10" y1="6" x2="10" y2="3" strokeWidth="2"/>
+                <line x1="14" y1="6" x2="14" y2="3" strokeWidth="2"/>
+                {/* Decorative flowers */}
+                <circle cx="7" cy="16" r="1" fill="currentColor" fillOpacity="0.3"/>
+                <circle cx="17" cy="14" r="0.8" fill="currentColor" fillOpacity="0.3"/>
+                <circle cx="11" cy="18" r="0.6" fill="currentColor" fillOpacity="0.3"/>
+            </svg>
+        );
+
+        const Suit = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                {/* Suit jacket */}
+                <path d="M7 8 L17 8 L17 22 L7 22 Z" strokeWidth="2" fill="currentColor" fillOpacity="0.05"/>
+                {/* Jacket lapels */}
+                <path d="M7 8 L10 12 L12 10 L14 12 L17 8" strokeWidth="2" fill="none"/>
+                {/* Shirt */}
+                <rect x="9" y="10" width="6" height="12" strokeWidth="1.5" fill="white" fillOpacity="0.8"/>
+                {/* Tie */}
+                <path d="M12 10 L12 18 L11 20 L13 20 Z" strokeWidth="1.5" fill="currentColor" fillOpacity="0.2"/>
+                {/* Jacket buttons */}
+                <circle cx="11" cy="14" r="0.5" fill="currentColor"/>
+                <circle cx="11" cy="16" r="0.5" fill="currentColor"/>
+                {/* Collar */}
+                <path d="M9 10 L12 8 L15 10" strokeWidth="1.5" fill="none"/>
+            </svg>
+        );
+
+        const WeddingWebsite = () => {
+            const [activeSection, setActiveSection] = useState('hero');
+            const [showRsvpConfirm, setShowRsvpConfirm] = useState(false);
+            const [isSubmitting, setIsSubmitting] = useState(false);
+            const [submitError, setSubmitError] = useState('');
+            const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+            const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            const [isWeddingDay, setIsWeddingDay] = useState(false);
+            const [activeLocationTab, setActiveLocationTab] = useState('ceremony');
+            const [formData, setFormData] = useState({
+                name: '',
+                guests: '1',
+                attending: 'yes',
+                message: ''
+            });
+
+            // REPLACE THIS URL with your Google Apps Script Web App URL
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8I7l2S9h7LUaQ-enyscRberi4xEtNKPkF2Czn-H8i3ci-ppnKEuDY75BfM-DZF3s/exec';
+
+            // Add a global function for testing
+            window.testScrollToRSVP = () => {
+                const element = document.getElementById('rsvp');
+                console.log('RSVP element:', element);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    console.log('Scrolled to RSVP');
+                } else {
+                    console.log('RSVP element not found');
+                }
+            };
+
+            // Countdown Timer
+            useEffect(() => {
+                const weddingDate = new Date('2026-06-27T12:00:00').getTime();
+                
+                const updateCountdown = () => {
+                    const now = new Date().getTime();
+                    const distance = weddingDate - now;
+
+                    if (distance < 0) {
+                        setIsWeddingDay(true);
+                        setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+                    } else {
+                        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                        
+                        setCountdown({ days, hours, minutes, seconds });
+                        setIsWeddingDay(false);
+                    }
+                };
+
+                updateCountdown();
+                const interval = setInterval(updateCountdown, 1000);
+
+                // Simple and reliable hash navigation
+                const scrollToHashElement = () => {
+                    const hash = window.location.hash.substring(1);
+                    if (hash) {
+                        const element = document.getElementById(hash);
+                        if (element) {
+                            element.scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                };
+
+                // Handle hash navigation on page load and hash changes
+                setTimeout(scrollToHashElement, 500); // Initial delay for page load
+                setTimeout(scrollToHashElement, 1500); // Backup attempt
+                window.addEventListener('hashchange', scrollToHashElement);
+
+                return () => {
+                    clearInterval(interval);
+                    window.removeEventListener('hashchange', scrollToHashElement);
+                };
+            }, []);
+
+            // Separate useEffect for hash navigation after component mount
+            useEffect(() => {
+                console.log('Index page loaded, checking for RSVP flag...'); // Debug log
+                
+                // Check if we came from our-story page and need to scroll to RSVP
+                const shouldScrollToRSVP = sessionStorage.getItem('scrollToRSVP');
+                console.log('ScrollToRSVP flag:', shouldScrollToRSVP); // Debug log
+                
+                if (shouldScrollToRSVP) {
+                    console.log('RSVP flag found, attempting to scroll...'); // Debug log
+                    sessionStorage.removeItem('scrollToRSVP'); // Clear the flag
+                    
+                    // Scroll to RSVP with multiple attempts
+                    const scrollToRSVP = () => {
+                        const element = document.getElementById('rsvp');
+                        console.log('RSVP element found:', element); // Debug log
+                        if (element) {
+                            element.scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                            console.log('Scrolled to RSVP successfully!'); // Debug log
+                            return true;
+                        }
+                        return false;
+                    };
+
+                    // Multiple attempts with increasing delays
+                    setTimeout(() => {
+                        if (!scrollToRSVP()) {
+                            console.log('First attempt failed, trying again...'); // Debug log
+                            setTimeout(() => {
+                                if (!scrollToRSVP()) {
+                                    console.log('Second attempt failed, final try...'); // Debug log
+                                    setTimeout(scrollToRSVP, 1000);
+                                }
+                            }, 500);
+                        }
+                    }, 200);
+                }
+
+                // Also handle regular hash navigation
+                const handlePostMountHash = () => {
+                    const hash = window.location.hash.substring(1);
+                    if (hash) {
+                        console.log('Hash found:', hash); // Debug log
+                        const element = document.getElementById(hash);
+                        if (element) {
+                            element.scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                };
+
+                // Multiple attempts to ensure it works
+                setTimeout(handlePostMountHash, 100);
+                setTimeout(handlePostMountHash, 500);
+                setTimeout(handlePostMountHash, 1000);
+                
+            }, []);
+
+            useEffect(() => {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                setActiveSection(entry.target.id);
+                                entry.target.classList.add('section-visible');
+                            }
+                        });
+                    },
+                    { threshold: 0.2 }
+                );
+
+                document.querySelectorAll('section[id]').forEach((section) => {
+                    observer.observe(section);
+                });
+
+                const handleMouseMove = (e) => {
+                    setMousePos({ x: e.clientX, y: e.clientY });
+                };
+
+                window.addEventListener('mousemove', handleMouseMove);
+
+                return () => {
+                    observer.disconnect();
+                    window.removeEventListener('mousemove', handleMouseMove);
+                };
+            }, []);
+
+            const handleSubmit = async () => {
+                if (!formData.name) {
+                    setSubmitError('Please fill in your name.');
+                    return;
+                }
+
+                setIsSubmitting(true);
+                setSubmitError('');
+
+                try {
+                    const response = await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name: formData.name,
+                            guests: formData.guests,
+                            attending: formData.attending,
+                            message: formData.message,
+                            timestamp: new Date().toLocaleString()
+                        })
+                    });
+
+                    // Since we're using no-cors, we can't read the response
+                    // We'll assume success if no error is thrown
+                    setShowRsvpConfirm(true);
+                    setTimeout(() => setShowRsvpConfirm(false), 5000);
+                    setFormData({
+                        name: '',
+                        guests: '1',
+                        attending: 'yes',
+                        message: ''
+                    });
+                } catch (error) {
+                    console.error('Error submitting RSVP:', error);
+                    setSubmitError('There was an error submitting your RSVP. Please try again or contact us directly.');
+                } finally {
+                    setIsSubmitting(false);
+                }
+            };
+
+            const scrollToSection = (id) => {
+                console.log('Scrolling to:', id); // Debug log
+                const element = document.getElementById(id);
+                if (element) {
+                    // Update URL hash for GitHub Pages compatibility
+                    window.history.pushState(null, null, `#${id}`);
+                    element.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    console.error('Element not found:', id);
+                    // Fallback: try to find the element after a short delay
+                    setTimeout(() => {
+                        const retryElement = document.getElementById(id);
+                        if (retryElement) {
+                            window.history.pushState(null, null, `#${id}`);
+                            retryElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 100);
+                }
+            };
+
+            return React.createElement('div', { className: 'wedding-container' }, [
+                // Toast Notifications
+                showRsvpConfirm && React.createElement('div', { 
+                    key: 'toast-success',
+                    className: 'toast toast-success'
+                }, [
+                    React.createElement('div', { key: 'icon', className: 'toast-icon' }, '✨'),
+                    React.createElement('p', { key: 'text', className: 'toast-text' }, 'Thank you for your RSVP! We can\'t wait to celebrate with you.')
+                ]),
+
+                submitError && React.createElement('div', { 
+                    key: 'toast-error',
+                    className: 'toast toast-error'
+                }, [
+                    React.createElement('div', { key: 'icon', className: 'toast-icon' }, '⚠️'),
+                    React.createElement('p', { key: 'text', className: 'toast-text' }, submitError)
+                ]),
+
+                // Floating Hearts Animation
+                React.createElement('div', { 
+                    key: 'floating-hearts',
+                    className: 'floating-hearts-container' 
+                }, 
+                    [...Array(6)].map((_, i) =>
+                        React.createElement('div', {
+                            key: i,
+                            className: 'floating-heart',
+                            style: {
+                                left: `${15 + i * 15}%`,
+                                animationDelay: `${i * 2}s`,
+                                animationDuration: `${15 + i * 2}s`
+                            }
+                        }, React.createElement(Heart, { className: 'heart-icon-float' }))
+                    )
+                ),
+
+                // Cursor Trail Effect
+                React.createElement('div', {
+                    key: 'cursor-trail',
+                    className: 'cursor-trail',
+                    style: {
+                        left: mousePos.x - 16,
+                        top: mousePos.y - 16
+                    }
+                }, React.createElement('div', { className: 'cursor-trail-inner' })),
+
+                // Navigation
+                React.createElement('nav', { key: 'nav', className: 'navigation' },
+                    React.createElement('div', { className: 'nav-container' }, [
+                        React.createElement('div', { key: 'nav-content', className: 'nav-content' }, [
+                            React.createElement('button', { 
+                                key: 'nav-logo', 
+                                className: 'nav-logo',
+                                onClick: () => scrollToSection('hero')
+                            }, [
+                                React.createElement(DaisyFlower, { key: 'nav-daisy', className: 'nav-heart' }),
+                                // React.createElement('span', { key: 'nav-text', className: 'nav-text' }, 'Ira & Angel')
+                            ]),
+                            React.createElement('div', { key: 'nav-links', className: 'nav-links' },
+                                ['Our Story', 'Details', 'Location', 'Timeline', 'Wedding Party', 'Registry', 'RSVP'].map((item, i) => {
+                                    if (item === 'Our Story') {
+                                        return React.createElement('a', {
+                                            key: item,
+                                            href: 'our-story.html',
+                                            className: 'nav-link',
+                                            style: { animationDelay: `${i * 0.1}s`, textDecoration: 'none' }
+                                        }, [
+                                            item,
+                                            React.createElement('span', { key: 'underline', className: 'nav-underline' })
+                                        ]);
+                                    } else if (item === 'Wedding Party') {
+                                        return React.createElement('a', {
+                                            key: item,
+                                            href: 'wedding-party.html',
+                                            className: 'nav-link',
+                                            style: { animationDelay: `${i * 0.1}s`, textDecoration: 'none' }
+                                        }, [
+                                            item,
+                                            React.createElement('span', { key: 'underline', className: 'nav-underline' })
+                                        ]);
+                                    } else {
+                                        return React.createElement('button', {
+                                            key: item,
+                                            onClick: () => scrollToSection(item.toLowerCase().replace(/ /g, '-')),
+                                            className: 'nav-link',
+                                            style: { animationDelay: `${i * 0.1}s` }
+                                        }, [
+                                            item,
+                                            React.createElement('span', { key: 'underline', className: 'nav-underline' })
+                                        ]);
+                                    }
+                                })
+                            ),
+                            React.createElement('button', {
+                                key: 'nav-cta',
+                                onClick: () => scrollToSection('rsvp'),
+                                className: 'nav-cta'
+                            }, 'RSVP Now')
+                        ])
+                    ])
+                ),
+
+                // Hero Section
+                React.createElement('section', { key: 'hero', id: 'hero', className: 'hero-section' }, [
+                    React.createElement('div', { key: 'hero-bg', className: 'hero-background' }),
+                    React.createElement('div', { key: 'hero-elements', className: 'hero-elements' }, [
+                        React.createElement('div', { key: 'bloom1', className: 'flower-bloom bloom-1' }),
+                        React.createElement('div', { key: 'bloom2', className: 'flower-bloom bloom-2' }),
+                        React.createElement('div', { key: 'bloom3', className: 'flower-bloom bloom-3' })
+                    ]),
+                    React.createElement('div', { key: 'hero-content', className: 'hero-content' }, [
+                        React.createElement('div', { key: 'hero-heart', className: 'hero-heart' },
+                            React.createElement(Heart, { className: 'hero-heart-icon' })
+                        ),
+                        React.createElement('div', { key: 'hero-title', className: 'hero-title' },
+                            React.createElement('h1', { className: 'hero-heading' }, 'Ira & Angel')
+                        ),
+                        React.createElement('div', { key: 'hero-divider', className: 'hero-divider' }),
+                        React.createElement('p', { key: 'hero-subtitle', className: 'hero-subtitle' }, [
+                            'They are no longer two, but one.',
+                            React.createElement('br', { key: 'br' }),
+                            React.createElement('span', { key: 'comment', className: 'hero-comment' }, 'Mattew 19:6')
+                        ]),
+                        React.createElement('div', { key: 'hero-date', className: 'hero-date' }, [
+                            React.createElement('p', { key: 'date-text', className: 'hero-date-text hero-date-small' }, [
+                                React.createElement(Heart, { key: 'heart1', className: 'sparkle-icon' }),
+                                React.createElement('strong', { key: 'date-bold' }, 'JUNE 27, 2026'),
+                                React.createElement(Heart, { key: 'heart2', className: 'sparkle-icon' })
+                            ]),
+                            React.createElement('p', { key: 'venue', className: 'hero-venue hero-venue-large' }, 'San Agustin Church')
+                        ]),
+                        !isWeddingDay && React.createElement('div', { key: 'countdown', className: 'countdown-container' }, [
+                            React.createElement('p', { key: 'countdown-label', className: 'countdown-label' }, 'Counting down to our special day'),
+                            React.createElement('div', { key: 'countdown-grid', className: 'countdown-grid' },
+                                ['days', 'hours', 'minutes', 'seconds'].map((unit, i) => {
+                                    const labels = ['Days', 'Hours', 'Mins', 'Secs'];
+                                    const values = [countdown.days, countdown.hours, countdown.minutes, countdown.seconds];
+                                    return React.createElement('div', {
+                                        key: unit,
+                                        className: 'countdown-box'
+                                    }, [
+                                        React.createElement('div', { key: 'number', className: 'countdown-number' }, values[i]),
+                                        React.createElement('div', { key: 'label', className: 'countdown-unit' }, labels[i])
+                                    ]);
+                                })
+                            )
+                        ]),
+                        React.createElement('div', { key: 'hero-cta-group', className: 'hero-cta-group' }, [
+                            React.createElement('button', {
+                                key: 'hero-cta-details',
+                                onClick: () => scrollToSection('details'),
+                                className: 'hero-cta'
+                            }, [
+                                React.createElement('span', { key: 'text' }, 'View Event Details'),
+                                React.createElement(ChevronDown, { key: 'icon', className: 'chevron-icon' })
+                            ]),
+                            React.createElement('a', {
+                                key: 'hero-cta-story',
+                                href: 'our-story.html',
+                                className: 'hero-cta hero-cta-secondary'
+                            }, [
+                                React.createElement('span', { key: 'text' }, 'Read Our Story'),
+                                React.createElement(Heart, { key: 'icon', className: 'chevron-icon' })
+                            ])
+                        ])
+                    ])
+                ]),
+
+                // Event Details Section
+                React.createElement('section', { key: 'details', id: 'details', className: 'details-section' },
+                    React.createElement('div', { className: 'details-container' }, [
+                        React.createElement('div', { key: 'details-header', className: 'section-header' }, [
+                            React.createElement('h2', { className: 'section-title' }, 'Event Details'),
+                            React.createElement('div', { className: 'section-divider' })
+                        ]),
+                        React.createElement('div', { key: 'details-grid', className: 'details-grid' }, [
+                            // Ceremony Card
+                            React.createElement('div', { key: 'ceremony', className: 'detail-card ceremony-card' }, [
+                                React.createElement('div', { key: 'ceremony-header', className: 'detail-card-header' }, [
+                                    React.createElement('div', { key: 'ceremony-icon', className: 'detail-icon rose' },
+                                        React.createElement(Heart, { className: 'detail-heart' })
+                                    ),
+                                    React.createElement('h3', { key: 'ceremony-title', className: 'detail-title' }, 'Ceremony')
+                                ]),
+                                React.createElement('div', { key: 'ceremony-details', className: 'detail-items' },
+                                    [
+                                        { icon: Calendar, text: 'June 27, 2026', sub: 'Saturday' },
+                                        { icon: Clock, text: '12:00 PM - 2:00 PM', sub: 'Ceremony duration' },
+                                        { icon: MapPin, text: 'San Agustin Church', sub: 'General Luna Street, Intramuros, Manila' }
+                                    ].map((item, i) =>
+                                        React.createElement('div', { key: i, className: 'detail-item rose' }, [
+                                            React.createElement(item.icon, { key: 'icon', className: 'detail-item-icon' }),
+                                            React.createElement('div', { key: 'content' }, [
+                                                React.createElement('p', { key: 'text', className: 'detail-item-text' }, item.text),
+                                                React.createElement('p', { key: 'sub', className: 'detail-item-sub' }, item.sub)
+                                            ])
+                                        ])
+                                    )
+                                )
+                            ]),
+                            // Reception Card
+                            React.createElement('div', { key: 'reception', className: 'detail-card reception-card' }, [
+                                React.createElement('div', { key: 'reception-header', className: 'detail-card-header' }, [
+                                    React.createElement('div', { key: 'reception-icon', className: 'detail-icon green' },
+                                        React.createElement(Users, { className: 'detail-heart' })
+                                    ),
+                                    React.createElement('h3', { key: 'reception-title', className: 'detail-title' }, 'Reception')
+                                ]),
+                                React.createElement('div', { key: 'reception-details', className: 'detail-items' },
+                                    [
+                                        { icon: Calendar, text: 'June 27, 2026', sub: 'Immediately following ceremony' },
+                                        { icon: Clock, text: '4:00 PM - 10:00 PM', sub: 'Cocktails, dinner, and dancing' },
+                                        { icon: MapPin, text: 'The Heritage Hotel Manila', sub: 'Roxas Boulevard, Manila' }
+                                    ].map((item, i) =>
+                                        React.createElement('div', { key: i, className: 'detail-item green' }, [
+                                            React.createElement(item.icon, { key: 'icon', className: 'detail-item-icon' }),
+                                            React.createElement('div', { key: 'content' }, [
+                                                React.createElement('p', { key: 'text', className: 'detail-item-text' }, item.text),
+                                                React.createElement('p', { key: 'sub', className: 'detail-item-sub' }, item.sub)
+                                            ])
+                                        ])
+                                    )
+                                )
+                            ])
+                        ])
+                    ])
+                ),
+
+                // Map Section
+                React.createElement('section', { key: 'location', id: 'location', className: 'map-section' },
+                    React.createElement('div', { className: 'map-container' }, [
+                        React.createElement('div', { key: 'map-header', className: 'section-header' }, [
+                            React.createElement('h2', { className: 'section-title' }, 'Location & Directions'),
+                            React.createElement('div', { className: 'section-divider' })
+                        ]),
+                        React.createElement('div', { key: 'location-tabs', className: 'location-tabs' }, [
+                            React.createElement('button', {
+                                key: 'ceremony-tab',
+                                className: `location-tab ${activeLocationTab === 'ceremony' ? 'active' : ''}`,
+                                onClick: () => setActiveLocationTab('ceremony')
+                            }, [
+                                React.createElement(Heart, { key: 'ceremony-icon', className: 'location-tab-icon' }),
+                                'Ceremony'
+                            ]),
+                            React.createElement('button', {
+                                key: 'reception-tab',
+                                className: `location-tab ${activeLocationTab === 'reception' ? 'active' : ''}`,
+                                onClick: () => setActiveLocationTab('reception')
+                            }, [
+                                React.createElement(Users, { key: 'reception-icon', className: 'location-tab-icon' }),
+                                'Reception'
+                            ])
+                        ]),
+                        React.createElement('div', { key: 'ceremony-content', className: `location-content ceremony-content ${activeLocationTab === 'ceremony' ? 'active' : ''}` }, [
+                            React.createElement('div', { key: 'ceremony-info', className: 'map-info' }, [
+                                React.createElement('h3', { key: 'church-name', className: 'map-church-name' }, 'San Agustin Church'),
+                                React.createElement('p', { key: 'address', className: 'map-address' }, 'General Luna Street, Intramuros, Manila'),
+                                React.createElement('p', { key: 'description', className: 'map-description' }, 'The oldest stone church in the Philippines, a UNESCO World Heritage Site located in the historic walled city of Intramuros.'),
+                                React.createElement('div', { key: 'map-actions', className: 'map-actions' }, [
+                                    React.createElement('a', {
+                                        key: 'directions',
+                                        href: 'https://www.google.com/maps/dir//San+Agustin+Church,+General+Luna+St,+Intramuros,+Manila,+1002+Metro+Manila/@14.5888889,120.9752778,17z',
+                                        target: '_blank',
+                                        rel: 'noopener noreferrer',
+                                        className: 'map-button'
+                                    }, [
+                                        React.createElement(MapPin, { key: 'icon', className: 'map-button-icon' }),
+                                        'Get Directions'
+                                    ])
+                                ])
+                            ]),
+                            React.createElement('div', { key: 'ceremony-map', className: 'map-embed' },
+                                React.createElement('iframe', {
+                                    src: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.1741333110404!2d120.97260371073054!3d14.589151385837042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ca3d23445363%3A0x6c2d1781ec26636a!2sSan%20Agustin%20Church!5e0!3m2!1sen!2sph!4v1770128488693!5m2!1sen!2sph',
+                                    width: '100%',
+                                    height: '400',
+                                    style: { border: 0, borderRadius: '12px' },
+                                    allowFullScreen: true,
+                                    loading: 'lazy',
+                                    referrerPolicy: 'no-referrer-when-downgrade',
+                                    title: 'San Agustin Church Location'
+                                })
+                            )
+                        ]),
+                        React.createElement('div', { key: 'reception-content', className: `location-content reception-content ${activeLocationTab === 'reception' ? 'active' : ''}` }, [
+                            React.createElement('div', { key: 'reception-info', className: 'map-info' }, [
+                                React.createElement('h3', { key: 'hotel-name', className: 'map-church-name' }, 'The Heritage Hotel Manila'),
+                                React.createElement('p', { key: 'hotel-address', className: 'map-address' }, 'Roxas Boulevard, Manila'),
+                                React.createElement('p', { key: 'hotel-description', className: 'map-description' }, 'A luxury heritage hotel offering elegant venues and exceptional service, perfect for celebrating our special day with family and friends.'),
+                                React.createElement('div', { key: 'hotel-actions', className: 'map-actions' }, [
+                                    React.createElement('a', {
+                                        key: 'hotel-directions',
+                                        href: 'https://www.google.com/maps/dir//The+Heritage+Hotel+Manila,+Roxas+Boulevard,+Manila',
+                                        target: '_blank',
+                                        rel: 'noopener noreferrer',
+                                        className: 'map-button'
+                                    }, [
+                                        React.createElement(MapPin, { key: 'icon', className: 'map-button-icon' }),
+                                        'Get Directions'
+                                    ])
+                                ])
+                            ]),
+                            React.createElement('div', { key: 'reception-map', className: 'map-embed' },
+                                React.createElement('iframe', {
+                                    src: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3862.0912215536123!2d120.99041561072958!3d14.536774485883395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c95a03a03a65%3A0xc78b6e0c562f13bf!2sThe%20Heritage%20Hotel%20Manila!5e0!3m2!1sen!2sph!4v1770128316216!5m2!1sen!2sph',
+                                    width: '100%',
+                                    height: '400',
+                                    style: { border: 0, borderRadius: '12px' },
+                                    allowFullScreen: true,
+                                    loading: 'lazy',
+                                    referrerPolicy: 'no-referrer-when-downgrade',
+                                    title: 'The Heritage Hotel Manila Location'
+                                })
+                            )
+                        ])
+                    ])
+                ),
+
+                // Timeline Section
+                React.createElement('section', { key: 'timeline', id: 'timeline', className: 'timeline-section' },
+                    React.createElement('div', { className: 'timeline-container' }, [
+                        React.createElement('div', { key: 'timeline-header', className: 'section-header' }, [
+                            React.createElement('h2', { className: 'section-title' }, 'Timeline'),
+                            React.createElement('div', { className: 'section-divider' })
+                        ]),
+                        React.createElement('div', { key: 'timeline-content', className: 'timeline-content' }, [
+                            React.createElement('div', { key: 'timeline-line', className: 'timeline-line' }),
+                            [
+                                { time: '11:30 AM', title: 'Guest Arrival', desc: 'Welcome to the church', color: 'rose' },
+                                { time: '12:00 PM', title: 'Ceremony Begins', desc: 'Please be seated by 12:00 PM', color: 'green' },
+                                { time: '3:00 PM', title: 'Cocktail Hour', desc: 'Transfer to The Heritage Hotel Manila', color: 'rose' },
+                                { time: '4:00 PM', title: 'Reception Begins', desc: 'Dinner service starts', color: 'green' },
+                                { time: '5:30 PM', title: 'First Dance & Toasts', desc: 'Speeches from loved ones', color: 'rose' },
+                                { time: '6:00 PM', title: 'Dancing & Celebration', desc: 'Live band performance', color: 'green' },
+                                { time: '10:00 PM', title: 'Send-Off', desc: 'Grand exit with sparklers', color: 'rose' }
+                            ].map((event, index) =>
+                                React.createElement('div', {
+                                    key: index,
+                                    className: `timeline-item ${index % 2 === 0 ? 'timeline-left' : 'timeline-right'}`
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'dot',
+                                        className: `timeline-dot ${event.color}`
+                                    }),
+                                    React.createElement('div', {
+                                        key: 'card',
+                                        className: `timeline-card ${event.color}`
+                                    }, [
+                                        React.createElement('p', { key: 'time', className: 'timeline-time' }, event.time),
+                                        React.createElement('h3', { key: 'title', className: 'timeline-title' }, event.title),
+                                        React.createElement('p', { key: 'desc', className: 'timeline-desc' }, event.desc)
+                                    ])
+                                ])
+                            )
+                        ])
+                    ])
+                ),
+
+                // Gallery Section - Commented out temporarily
+                /*
+                React.createElement('section', { key: 'gallery', id: 'gallery', className: 'gallery-section' },
+                    React.createElement('div', { className: 'gallery-container' }, [
+                        React.createElement('div', { key: 'gallery-header', className: 'section-header' }, [
+                            React.createElement('div', { key: 'gallery-icon', className: 'section-icon' },
+                                React.createElement(Camera, { className: 'section-icon-svg' })
+                            ),
+                            React.createElement('h2', { className: 'section-title' }, 'Our Gallery'),
+                            React.createElement('div', { className: 'section-divider' }),
+                            React.createElement('p', { className: 'section-subtitle' }, 'Moments from our journey together')
+                        ]),
+                        React.createElement('div', { key: 'gallery-grid', className: 'gallery-grid' },
+                            [...Array(6)].map((_, i) =>
+                                React.createElement('div', {
+                                    key: i,
+                                    className: 'gallery-item',
+                                    style: { animationDelay: `${i * 0.1}s` }
+                                }, [
+                                    React.createElement('div', { key: 'shimmer', className: 'gallery-shimmer' }),
+                                    React.createElement(Camera, { key: 'camera', className: 'gallery-camera' })
+                                ])
+                            )
+                        )
+                    ])
+                ),
+                */
+
+                // Registry Section
+                React.createElement('section', { key: 'registry', id: 'registry', className: 'registry-section' },
+                    React.createElement('div', { className: 'registry-container' }, [
+                        React.createElement('div', { key: 'registry-header', className: 'section-header' }, [
+                            React.createElement('div', { key: 'registry-gift', className: 'section-icon' },
+                                React.createElement(Gift, { className: 'section-icon-svg'})
+                            ),
+                            React.createElement('h2', { className: 'section-title' }, 'Registry'),
+                            React.createElement('div', { className: 'section-divider' })
+                        ]),
+                        React.createElement('div', { key: 'registry-content', className: 'registry-content' }, [
+                            React.createElement('p', { key: 'registry-intro', className: 'registry-intro' }, 
+                                'Your presence at our wedding is the greatest gift of all.'
+                            ),
+                            React.createElement('div', { key: 'registry-card', className: 'registry-card' }, [
+                                React.createElement('div', { key: 'registry-icon', className: 'registry-icon' },
+                                    // React.createElement(Gift, { className: 'registry-sparkle' })
+                                ),
+                                React.createElement('h3', { key: 'registry-title', className: 'registry-title' }, 'Wishing Well'),
+                                React.createElement('p', { key: 'registry-text', className: 'registry-text' }, 
+                                    'If you wish to bless us with a gift, a monetary contribution towards our future home would be deeply appreciated. A wishing well will be available at the reception.'
+                                ),
+                                React.createElement('div', { key: 'no-gifts-notice', className: 'no-gifts-notice' }, [
+                                    React.createElement('div', { key: 'no-gifts-content', className: 'no-gifts-content' }, [
+                                        React.createElement('div', { key: 'no-gifts-visual', className: 'no-gifts-visual' }, [
+                                            React.createElement('span', { key: 'gift-text', className: 'gift-text' }, 'GIFT'),
+                                            React.createElement('span', { key: 'cross-line', className: 'cross-line' })
+                                        ]),
+                                        React.createElement('p', { key: 'no-gifts-text', className: 'no-gifts-text' }, 'Your loving presence is the only gift we desire'),
+                                        React.createElement('p', { key: 'no-gifts-subtext', className: 'no-gifts-subtext' }, 'We kindly request no physical gifts')
+                                    ])
+                                ])
+                            ])
+                        ])
+                    ])
+                ),
+
+                // Dress Code Section
+                React.createElement('section', { key: 'dress-code', id: 'dress-code', className: 'dress-code-section' },
+                    React.createElement('div', { className: 'dress-code-container' }, [
+                        React.createElement('div', { key: 'dress-code-header', className: 'section-header' }, [
+                            React.createElement('h2', { className: 'section-title' }, 'Dress Code'),
+                            React.createElement('div', { className: 'section-divider' }),
+                            React.createElement('p', { className: 'dress-code-theme' }, 'Formal')
+                        ]),
+                        React.createElement('div', { key: 'dress-code-grid', className: 'dress-code-grid' }, [
+                            React.createElement('div', { key: 'for-her', className: 'dress-code-card' }, [
+                                React.createElement('div', { key: 'her-icon', className: 'dress-code-icon' },
+                                    React.createElement(Dress, { className: 'dress-icon' })
+                                ),
+                                React.createElement('h3', { key: 'her-title', className: 'dress-code-title' }, 'For Her'),
+                                React.createElement('p', { key: 'her-text', className: 'dress-code-text' }, 
+                                    'Floor-length gowns or elegant cocktail dresses in soft, romantic colors. Think flowing fabrics, floral prints, and pastel tones. Comfortable shoes recommended'
+                                )
+                            ]),
+                            React.createElement('div', { key: 'for-him', className: 'dress-code-card', style: { animationDelay: '0.2s' } }, [
+                                React.createElement('div', { key: 'him-icon', className: 'dress-code-icon' },
+                                    React.createElement(Suit, { className: 'suit-icon' })
+                                ),
+                                React.createElement('h3', { key: 'him-title', className: 'dress-code-title' }, 'For Him'),
+                                React.createElement('p', { key: 'him-text', className: 'dress-code-text' }, 
+                                    'Suits in light colors such as tan, beige, or light gray. Ties optional. Linen or lightweight fabrics perfect for the season. Dress shoes suitable for indoor settings.'
+                                )
+                            ])
+                        ]),
+                        React.createElement('div', { key: 'color-palette', className: 'color-palette' },
+                            [
+                                { name: 'Dusty Pink', color: 'dusty-pink' },
+                                { name: 'Sage Green', color: 'sage-green' },
+                                { name: 'Blush', color: 'blush' },
+                                { name: 'Ivory', color: 'ivory' },
+                                { name: 'Mint', color: 'mint' }
+                            ].map((item, i) =>
+                                React.createElement('div', { key: item.name, className: 'color-swatch', style: { animationDelay: `${i * 0.1}s` } }, [
+                                    React.createElement('div', { key: 'color', className: `color-circle ${item.color}` }),
+                                    React.createElement('p', { key: 'name', className: 'color-name' }, item.name)
+                                ])
+                            )
+                        )
+                    ])
+                ),
+
+                // RSVP Section
+                React.createElement('section', { key: 'rsvp', id: 'rsvp', className: 'rsvp-section' },
+                    React.createElement('div', { className: 'rsvp-container' }, [
+                        React.createElement('div', { key: 'rsvp-header', className: 'section-header' }, [
+                            React.createElement('div', { key: 'rsvp-icon', className: 'section-icon' },
+                                React.createElement(Mail, { className: 'section-icon-svg' })
+                            ),
+                            React.createElement('h2', { className: 'section-title' }, 'RSVP'),
+                            React.createElement('div', { className: 'section-divider' }),
+                            React.createElement('p', { className: 'section-subtitle' }, 'Please respond by April 15, 2026')
+                        ]),
+
+                        React.createElement('div', { key: 'rsvp-form', className: 'rsvp-form' }, [
+                            // Name Field
+                            React.createElement('div', { key: 'name', className: 'form-group' }, [
+                                React.createElement('label', { className: 'form-label' }, 'Full Name *'),
+                                React.createElement('input', {
+                                    type: 'text',
+                                    value: formData.name,
+                                    onChange: (e) => setFormData({...formData, name: e.target.value}),
+                                    className: 'form-input',
+                                    placeholder: 'Enter your full name'
+                                })
+                            ]),
+
+                            // Guests Field
+                            React.createElement('div', { key: 'guests', className: 'form-group' }, [
+                                React.createElement('label', { className: 'form-label' }, 'Number of Guests *'),
+                                React.createElement('select', {
+                                    value: formData.guests,
+                                    onChange: (e) => setFormData({...formData, guests: e.target.value}),
+                                    className: 'form-select'
+                                // }, [1, 2].map(n =>
+                                }, [1].map(n =>
+                                    React.createElement('option', { key: n, value: n }, `${n} ${n === 1 ? 'Guest' : 'Guests'}`)
+                                ))
+                            ]),
+
+                            // Attending Field
+                            React.createElement('div', { key: 'attending', className: 'form-group' }, [
+                                React.createElement('label', { className: 'form-label' }, 'Will you be attending? *'),
+                                React.createElement('div', { className: 'radio-group' }, [
+                                    React.createElement('label', { key: 'yes', className: `radio-label ${formData.attending === 'yes' ? 'selected' : ''}` }, [
+                                        React.createElement('input', {
+                                            type: 'radio',
+                                            name: 'attending',
+                                            value: 'yes',
+                                            checked: formData.attending === 'yes',
+                                            onChange: (e) => setFormData({...formData, attending: e.target.value}),
+                                            className: 'radio-input'
+                                        }),
+                                        React.createElement('span', { className: 'radio-text' }, 'Joyfully accept')
+                                    ]),
+                                    React.createElement('label', { key: 'no', className: `radio-label ${formData.attending === 'no' ? 'selected' : ''}` }, [
+                                        React.createElement('input', {
+                                            type: 'radio',
+                                            name: 'attending',
+                                            value: 'no',
+                                            checked: formData.attending === 'no',
+                                            onChange: (e) => setFormData({...formData, attending: e.target.value}),
+                                            className: 'radio-input'
+                                        }),
+                                        React.createElement('span', { className: 'radio-text' }, 'Regretfully decline')
+                                    ])
+                                ])
+                            ]),
+
+                            // Message Field
+                            React.createElement('div', { key: 'message', className: 'form-group' }, [
+                                React.createElement('label', { className: 'form-label' }, 'Message for the Couple'),
+                                React.createElement('textarea', {
+                                    value: formData.message,
+                                    onChange: (e) => setFormData({...formData, message: e.target.value}),
+                                    rows: 4,
+                                    className: 'form-textarea',
+                                    placeholder: 'Share your well wishes...'
+                                })
+                            ]),
+
+                            // Submit Button
+                            React.createElement('button', {
+                                key: 'submit',
+                                onClick: handleSubmit,
+                                disabled: isSubmitting,
+                                className: `form-submit ${isSubmitting ? 'submitting' : ''}`
+                            }, [
+                                isSubmitting ? React.createElement('span', { 
+                                    key: 'spinner',
+                                    className: 'button-spinner' 
+                                }, [
+                                    React.createElement('span', { key: 'dot1', className: 'spinner-dot' }),
+                                    React.createElement('span', { key: 'dot2', className: 'spinner-dot' }),
+                                    React.createElement('span', { key: 'dot3', className: 'spinner-dot' })
+                                ]) : React.createElement('span', { 
+                                    key: 'text',
+                                    className: 'button-text'
+                                }, 'Send RSVP')
+                            ])
+                        ])
+                    ])
+                ),
+
+                // Footer
+                React.createElement('footer', { key: 'footer', className: 'footer' },
+                    React.createElement('div', { className: 'footer-container' }, [
+                        React.createElement('div', { key: 'footer-heart', className: 'footer-heart' },
+                            React.createElement(Heart, { className: 'footer-heart-icon' })
+                        ),
+                        React.createElement('p', { key: 'footer-title', className: 'footer-title' }, 'Thank You'),
+                        React.createElement('div', { key: 'footer-divider', className: 'footer-divider' }),
+                        React.createElement('p', { key: 'footer-text', className: 'footer-text' }, 
+                            'We are so grateful for your love and support as we begin this new chapter. Your presence means the world to us, and we cannot wait to celebrate with you.'
+                        ),
+                        React.createElement('p', { key: 'footer-info', className: 'footer-info' }, 
+                            'Ira & Angel • June 27, 2026 • #IraAndAngel2026'
+                        ),
+                        React.createElement('p', { key: 'footer-copyright', className: 'footer-copyright' }, 
+                            '© 2026 Ira & Angel Anonuevo. All rights reserved.'
+                        )
+                    ])
+                )
+            ]);
+        };
+
+        ReactDOM.render(React.createElement(WeddingWebsite), document.getElementById('root'));
+        
+        // Simple hash navigation function
+        window.handleRSVPNavigation = function() {
+            console.log('Handling RSVP navigation...');
+            
+            // Check sessionStorage first
+            const shouldScrollToRSVP = sessionStorage.getItem('scrollToRSVP');
+            if (shouldScrollToRSVP) {
+                console.log('SessionStorage flag found, scrolling to RSVP...');
+                sessionStorage.removeItem('scrollToRSVP');
+                
+                setTimeout(() => {
+                    const element = document.getElementById('rsvp');
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        console.log('Scrolled to RSVP via sessionStorage');
+                    }
+                }, 1000);
+                return;
+            }
+            
+            // Check hash
+            const hash = window.location.hash.substring(1);
+            if (hash === 'rsvp') {
+                console.log('Hash navigation to RSVP...');
+                setTimeout(() => {
+                    const element = document.getElementById('rsvp');
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        console.log('Scrolled to RSVP via hash');
+                    }
+                }, 1000);
+            }
+        };
+        
+        // Call the function on page load
+        setTimeout(window.handleRSVPNavigation, 500);
+        setTimeout(window.handleRSVPNavigation, 1500);
+        setTimeout(window.handleRSVPNavigation, 3000);
+        
+        // Also handle hash changes
+        window.addEventListener('hashchange', window.handleRSVPNavigation);
+    </script>
+</body>
+</html>

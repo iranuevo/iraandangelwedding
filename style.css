@@ -15,27 +15,27 @@ body {
     overflow-x: hidden;
     font-weight: 400;
     background: 
-        radial-gradient(circle at 10% 20%, rgba(253, 164, 175, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 90% 80%, rgba(134, 239, 172, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 10% 20%, rgba(134, 239, 172, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(253, 164, 175, 0.04) 0%, transparent 50%),
         #ffffff;
     background-attachment: fixed;
 }
 
 /* Color Variables */
 :root {
+    --sage-50: #f0fdf4;
+    --sage-100: #dcfce7;
+    --sage-200: #bbf7d0;
+    --sage-300: #86efac;
+    --sage-400: #4ade80;
+    --sage-500: #22c55e;
+    --sage-600: #16a34a;
     --rose-50: #fdf2f8;
     --rose-100: #fce7f3;
     --rose-200: #fecdd3;
     --rose-300: #fda4af;
     --rose-400: #fb7185;
     --rose-500: #f43f5e;
-    --green-50: #f0fdf4;
-    --green-100: #dcfce7;
-    --green-200: #bbf7d0;
-    --green-300: #86efac;
-    --green-400: #4ade80;
-    --green-500: #22c55e;
-    --green-600: #16a34a;
 }
 
 /* Wedding Container */
@@ -216,7 +216,7 @@ body {
 }
 
 .nav-cta {
-    background: linear-gradient(to right, var(--rose-400), #ec4899);
+    background: linear-gradient(to right, var(--sage-400), var(--sage-500));
     color: white;
     padding: 10px 28px;
     border-radius: 9999px;
@@ -329,7 +329,7 @@ body {
     left: 65%;
     width: 120px;
     height: 120px;
-    background: radial-gradient(circle, #fbb6ce 0%, var(--rose-100) 70%, transparent 100%);
+    background: radial-gradient(circle, var(--sage-200) 0%, var(--sage-100) 70%, transparent 100%);
     filter: blur(30px);
     animation-delay: 10s;
 }
@@ -937,7 +937,7 @@ body {
 
 .gallery-item {
     aspect-ratio: 1;
-    background: linear-gradient(135deg, var(--rose-100), #fce7f3, var(--green-100));
+    background: linear-gradient(135deg, var(--sage-100), var(--rose-50), var(--sage-50));
     border-radius: 24px;
     overflow: hidden;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -1100,7 +1100,7 @@ body {
 }
 
 .rsvp-form {
-    background: linear-gradient(135deg, var(--rose-50), #fce7f3, var(--rose-50));
+    background: linear-gradient(135deg, var(--sage-50), var(--rose-50), var(--sage-50));
     padding: 48px;
     border-radius: 24px;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
@@ -1181,7 +1181,7 @@ body {
 .form-submit {
     width: 100%;
     padding: 18px 32px;
-    background: linear-gradient(to right, var(--rose-400), #ec4899);
+    background: linear-gradient(to right, var(--sage-400), var(--sage-500));
     color: white;
     border: none;
     border-radius: 12px;
@@ -1646,13 +1646,13 @@ body {
 }
 
 .timeline-card.rose {
-    background: linear-gradient(135deg, var(--rose-50), #fce7f3);
-    border-color: var(--rose-100);
+    background: linear-gradient(135deg, var(--rose-50), var(--rose-100));
+    border-color: var(--rose-200);
 }
 
 .timeline-card.green {
-    background: linear-gradient(135deg, var(--green-50), #dcfce7);
-    border-color: var(--green-100);
+    background: linear-gradient(135deg, var(--sage-50), var(--sage-100));
+    border-color: var(--sage-200);
 }
 
 .timeline-time {
@@ -1803,11 +1803,11 @@ body {
 }
 
 .party-avatar.rose {
-    background: linear-gradient(135deg, var(--rose-200), #fbb6ce);
+    background: linear-gradient(135deg, var(--rose-200), var(--rose-300));
 }
 
 .party-avatar.green {
-    background: linear-gradient(135deg, var(--green-200), #86efac);
+    background: linear-gradient(135deg, var(--sage-200), var(--sage-300));
 }
 
 .party-avatar-icon {
@@ -2006,7 +2006,7 @@ body {
     left: 0;
     right: 0;
     height: 5px;
-    background: #f43f5e;
+    background: var(--sage-400);
     transform: translateY(-50%) rotate(-12deg);
     border-radius: 3px;
     opacity: 0.95;
@@ -2200,15 +2200,15 @@ body {
 }
 
 .color-circle.dusty-pink {
-    background-color: #fda4af;
+    background-color: var(--rose-300);
 }
 
 .color-circle.sage-green {
-    background-color: #86efac;
+    background-color: var(--sage-400);
 }
 
 .color-circle.blush {
-    background-color: #fbb6ce;
+    background-color: var(--rose-200);
 }
 
 .color-circle.ivory {
@@ -2216,7 +2216,7 @@ body {
 }
 
 .color-circle.mint {
-    background-color: #a7f3d0;
+    background-color: var(--sage-200);
 }
 
 .color-name {
@@ -2573,7 +2573,7 @@ body {
     align-items: center;
     gap: 12px;
     padding: 16px 32px;
-    background: linear-gradient(to right, var(--rose-400), #ec4899);
+    background: linear-gradient(to right, var(--sage-500), var(--sage-600));
     color: white;
     text-decoration: none;
     border-radius: 12px;
@@ -2684,7 +2684,7 @@ body {
 }
 
 .story-cta-content {
-    background: linear-gradient(135deg, var(--rose-50), #fce7f3);
+    background: linear-gradient(135deg, var(--sage-50), var(--accent-cream));
     padding: 48px;
     border-radius: 24px;
     border: 2px solid var(--rose-100);
@@ -2712,7 +2712,7 @@ body {
     align-items: center;
     gap: 8px;
     padding: 16px 32px;
-    background: linear-gradient(to right, var(--rose-400), #ec4899);
+    background: linear-gradient(to right, var(--sage-500), var(--sage-600));
     color: white;
     text-decoration: none;
     border-radius: 12px;
