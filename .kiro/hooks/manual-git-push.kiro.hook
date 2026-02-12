@@ -8,7 +8,7 @@
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Please run the following git commands to push changes: 1) `git add .` to stage all changes, 2) `git commit -m \"udpate: color palette\"` to commit with a message, and 3) `git push` to push to the remote repository. If there are any errors, please help resolve them."
+    "prompt": "Please run the following git commands to push changes: 1) `git add .` to stage all changes, 2) `git commit -m \"update: cover photo\"` to commit with a message, and 3) `git push` to push to the remote repository. If there are any errors, please help resolve them."
   },
   "workspaceFolderName": "iraandangelwedding",
   "shortName": "manual-git-push"
