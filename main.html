@@ -46,10 +46,10 @@
                 <circle cx="12" cy="12" r="2.5" fill="#fbbf24"/>
                 
                 {/* Stem - Sage Green */}
-                <rect x="11.5" y="14.5" width="1" height="7" fill="#86a489" rx="0.5"/>
+                <rect x="11.5" y="14.5" width="1" height="7" fill="#395711" rx="0.5"/>
                 
                 {/* Leaf - Sage Green */}
-                <ellipse cx="9" cy="18" rx="2" ry="1" fill="#86a489" transform="rotate(-30 9 18)"/>
+                <ellipse cx="9" cy="18" rx="2" ry="1" fill="#395711" transform="rotate(-30 9 18)"/>
             </svg>
         );
 
@@ -89,6 +89,55 @@
                 <circle cx="9" cy="7" r="4"></circle>
                 <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+        );
+
+        const Church = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                {/* Church base with rounded corners */}
+                <path d="M6 12 L6 21 C6 21.5 6.5 22 7 22 L17 22 C17.5 22 18 21.5 18 21 L18 12" strokeWidth="1.8" strokeLinecap="round"/>
+                {/* Elegant roof */}
+                <path d="M4 12 L12 5 L20 12" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" fillOpacity="0.08"/>
+                {/* Decorative cross with heart detail */}
+                <line x1="12" y1="1.5" x2="12" y2="5.5" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="10" y1="3" x2="14" y2="3" strokeWidth="2" strokeLinecap="round"/>
+                {/* Arched door */}
+                <path d="M10 17 L10 22 L14 22 L14 17 Q14 15 12 15 Q10 15 10 17" strokeWidth="1.5" fill="currentColor" fillOpacity="0.1"/>
+                {/* Decorative arched windows */}
+                <path d="M8 14 Q8 13 8.5 13 Q9 13 9 14 L9 16 L8 16 Z" fill="currentColor" fillOpacity="0.25"/>
+                <path d="M15 14 Q15 13 15.5 13 Q16 13 16 14 L16 16 L15 16 Z" fill="currentColor" fillOpacity="0.25"/>
+                {/* Small heart detail on door */}
+                <path d="M11.5 18.5 Q11.5 18 12 18 Q12.5 18 12.5 18.5 Q12.5 19 12 19.5 Q11.5 19 11.5 18.5" fill="currentColor" fillOpacity="0.3"/>
+                {/* Bell tower accent */}
+                <circle cx="12" cy="7" r="0.8" fill="currentColor" fillOpacity="0.4"/>
+            </svg>
+        );
+
+        const Hotel = ({ className, ...props }) => (
+            <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
+                {/* Elegant building with rounded top */}
+                <path d="M5 22 L5 6 C5 5 5.5 4 6.5 4 L17.5 4 C18.5 4 19 5 19 6 L19 22" strokeWidth="1.8" strokeLinecap="round"/>
+                {/* Decorative roof detail */}
+                <path d="M4 6 L6.5 4 L17.5 4 L20 6" strokeWidth="1.5" strokeLinecap="round" fill="currentColor" fillOpacity="0.1"/>
+                {/* Elegant entrance with awning */}
+                <path d="M9 17 L9 22 L15 22 L15 17" strokeWidth="1.5" strokeLinecap="round"/>
+                <path d="M8 17 Q12 15 16 17" strokeWidth="1.8" strokeLinecap="round" fill="currentColor" fillOpacity="0.12"/>
+                {/* Decorative scalloped awning */}
+                <path d="M8 17 Q9 16.5 10 17 Q11 16.5 12 17 Q13 16.5 14 17 Q15 16.5 16 17" strokeWidth="1" fill="none"/>
+                {/* Cute window arrangements with curtains */}
+                <rect x="7" y="8" width="2.5" height="3" rx="0.5" strokeWidth="1" fill="currentColor" fillOpacity="0.15"/>
+                <rect x="10.75" y="8" width="2.5" height="3" rx="0.5" strokeWidth="1" fill="currentColor" fillOpacity="0.15"/>
+                <rect x="14.5" y="8" width="2.5" height="3" rx="0.5" strokeWidth="1" fill="currentColor" fillOpacity="0.15"/>
+                {/* Heart details on windows */}
+                <circle cx="8.25" cy="9" r="0.4" fill="currentColor" fillOpacity="0.4"/>
+                <circle cx="12" cy="9" r="0.4" fill="currentColor" fillOpacity="0.4"/>
+                <circle cx="15.75" cy="9" r="0.4" fill="currentColor" fillOpacity="0.4"/>
+                {/* Chandelier/elegant light fixture */}
+                <path d="M11.5 19 L12 18.5 L12.5 19" strokeWidth="0.8" strokeLinecap="round"/>
+                <circle cx="12" cy="18.2" r="0.6" fill="currentColor" fillOpacity="0.3"/>
+                {/* Decorative entrance pillars */}
+                <line x1="9.5" y1="17" x2="9.5" y2="22" strokeWidth="1" strokeOpacity="0.3"/>
+                <line x1="14.5" y1="17" x2="14.5" y2="22" strokeWidth="1" strokeOpacity="0.3"/>
             </svg>
         );
 
@@ -512,7 +561,7 @@
                     ]),
                     React.createElement('div', { key: 'hero-content', className: 'hero-content' }, [
                         React.createElement('div', { key: 'hero-heart', className: 'hero-heart' },
-                            React.createElement(Heart, { className: 'hero-heart-icon' })
+                            React.createElement(Heart, { className: 'hero-heart-icon', style: { color: '#550000' } })
                         ),
                         React.createElement('div', { key: 'hero-title', className: 'hero-title' },
                             React.createElement('h1', { className: 'hero-heading' }, 'Ira & Angel')
@@ -580,7 +629,7 @@
                             React.createElement('div', { key: 'ceremony', className: 'detail-card ceremony-card' }, [
                                 React.createElement('div', { key: 'ceremony-header', className: 'detail-card-header' }, [
                                     React.createElement('div', { key: 'ceremony-icon', className: 'detail-icon rose' },
-                                        React.createElement(Heart, { className: 'detail-heart' })
+                                        React.createElement(Church, { className: 'detail-heart' })
                                     ),
                                     React.createElement('h3', { key: 'ceremony-title', className: 'detail-title' }, 'Ceremony')
                                 ]),
@@ -604,7 +653,7 @@
                             React.createElement('div', { key: 'reception', className: 'detail-card reception-card' }, [
                                 React.createElement('div', { key: 'reception-header', className: 'detail-card-header' }, [
                                     React.createElement('div', { key: 'reception-icon', className: 'detail-icon green' },
-                                        React.createElement(Users, { className: 'detail-heart' })
+                                        React.createElement(Hotel, { className: 'detail-heart' })
                                     ),
                                     React.createElement('h3', { key: 'reception-title', className: 'detail-title' }, 'Reception')
                                 ]),
@@ -641,7 +690,7 @@
                                 className: `location-tab ${activeLocationTab === 'ceremony' ? 'active' : ''}`,
                                 onClick: () => setActiveLocationTab('ceremony')
                             }, [
-                                React.createElement(Heart, { key: 'ceremony-icon', className: 'location-tab-icon' }),
+                                React.createElement(Church, { key: 'ceremony-icon', className: 'location-tab-icon' }),
                                 'Ceremony'
                             ]),
                             React.createElement('button', {
@@ -649,7 +698,7 @@
                                 className: `location-tab ${activeLocationTab === 'reception' ? 'active' : ''}`,
                                 onClick: () => setActiveLocationTab('reception')
                             }, [
-                                React.createElement(Users, { key: 'reception-icon', className: 'location-tab-icon' }),
+                                React.createElement(Hotel, { key: 'reception-icon', className: 'location-tab-icon' }),
                                 'Reception'
                             ])
                         ]),
@@ -853,11 +902,11 @@
                         ]),
                         React.createElement('div', { key: 'color-palette', className: 'color-palette' },
                             [
-                                { name: 'Dusty Pink', color: 'dusty-pink' },
-                                { name: 'Sage Green', color: 'sage-green' },
-                                { name: 'Blush', color: 'blush' },
-                                { name: 'Ivory', color: 'ivory' },
-                                { name: 'Mint', color: 'mint' }
+                                { name: 'Bow', color: 'bow' },
+                                { name: 'Warm Wood', color: 'warm-wood' },
+                                { name: 'Candle', color: 'candle' },
+                                { name: 'Leaf', color: 'leaf' },
+                                { name: 'Juniper', color: 'juniper' }
                             ].map((item, i) =>
                                 React.createElement('div', { key: item.name, className: 'color-swatch', style: { animationDelay: `${i * 0.1}s` } }, [
                                     React.createElement('div', { key: 'color', className: `color-circle ${item.color}` }),

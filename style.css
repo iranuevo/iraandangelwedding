@@ -28,18 +28,18 @@ body {
     --sage-100: #e8ede8;
     --sage-200: #d4ddd4;
     --sage-300: #a8bd9f;
-    --sage-400: #86a489;
-    --sage-500: #6b8e6f;
-    --sage-600: #557a59;
-    --sage-dark: #3d5a40;
+    --sage-400: #395711;
+    --sage-500: #395711;
+    --sage-600: #2d4509;
+    --sage-dark: #1f2f06;
     
     /* Lively Sage - Accents (vibrant highlights) */
     --sage-lively-100: #e1f0e3;
     --sage-lively-200: #c3e1c7;
     --sage-lively-300: #9ac99f;
-    --sage-lively-400: #7ab87f;
-    --sage-lively-500: #5fa665;
-    --sage-lively-600: #4a8f50;
+    --sage-lively-400: #4a6e15;
+    --sage-lively-500: #395711;
+    --sage-lively-600: #2d4509;
     
     /* Soft Rose/Blush */
     --rose-50: #fdf8f9;
@@ -2217,24 +2217,24 @@ body {
     transform: scale(1.1);
 }
 
-.color-circle.dusty-pink {
-    background-color: var(--sage-400);
+.color-circle.bow {
+    background-color: #550000;
 }
 
-.color-circle.sage-green {
-    background-color: var(--sage-400);
+.color-circle.warm-wood {
+    background-color: #8B6F47;
 }
 
-.color-circle.blush {
-    background-color: var(--rose-200);
+.color-circle.candle {
+    background-color: #FFF8DC;
 }
 
-.color-circle.ivory {
-    background-color: #f5f5f4;
+.color-circle.leaf {
+    background-color: #395711;
 }
 
-.color-circle.mint {
-    background-color: var(--sage-200);
+.color-circle.juniper {
+    background-color: #4A5D23;
 }
 
 .color-name {
