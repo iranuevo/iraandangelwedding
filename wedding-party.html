@@ -17,8 +17,14 @@
     <div id="root"></div>
     
     <!-- Bottom-right RSVP link -->
-    <div id="fallback-rsvp" style="position: fixed; bottom: 20px; right: 20px; background: #f43f5e; color: white; padding: 15px 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1000; display: none;">
-        <a href="index.html#rsvp" onclick="goToRSVP(); return false;" style="color: white; text-decoration: none; font-weight: bold;">📝 RSVP Now</a>
+    <div id="fallback-rsvp" style="position: fixed; bottom: 20px; right: 20px; background: linear-gradient(to right, #7ab87f, #5fa665); color: white; padding: 15px 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(95, 166, 101, 0.3); z-index: 1000; display: none;">
+        <a href="main.html#rsvp" onclick="goToRSVP(); return false;" style="color: white; text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 8px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            RSVP Now
+        </a>
     </div>
 
     <script type="text/babel">
@@ -33,28 +39,28 @@
 
         const DaisyFlower = ({ className, ...props }) => (
             <svg className={className} viewBox="0 0 24 24" fill="none" {...props}>
-                {/* Petals - Dusty Pink */}
-                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(0 12 12)"/>
-                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(30 12 12)"/>
-                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(60 12 12)"/>
-                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(90 12 12)"/>
-                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(120 12 12)"/>
-                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(150 12 12)"/>
-                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(180 12 12)"/>
-                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(210 12 12)"/>
-                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(240 12 12)"/>
-                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(270 12 12)"/>
-                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(300 12 12)"/>
-                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#fda4af" transform="rotate(330 12 12)"/>
+                {/* Petals - Soft Pink */}
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#f5b5c3" transform="rotate(0 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#f5b5c3" transform="rotate(30 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#f5b5c3" transform="rotate(60 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#f5b5c3" transform="rotate(90 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#f5b5c3" transform="rotate(120 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#f5b5c3" transform="rotate(150 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#f5b5c3" transform="rotate(180 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#f5b5c3" transform="rotate(210 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#f5b5c3" transform="rotate(240 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#f5b5c3" transform="rotate(270 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#f5b5c3" transform="rotate(300 12 12)"/>
+                <ellipse cx="12" cy="6" rx="1.5" ry="4" fill="#f5b5c3" transform="rotate(330 12 12)"/>
                 
                 {/* Center - Yellow */}
                 <circle cx="12" cy="12" r="2.5" fill="#fbbf24"/>
                 
                 {/* Stem - Sage Green */}
-                <rect x="11.5" y="14.5" width="1" height="7" fill="#86efac" rx="0.5"/>
+                <rect x="11.5" y="14.5" width="1" height="7" fill="#86a489" rx="0.5"/>
                 
                 {/* Leaf - Sage Green */}
-                <ellipse cx="9" cy="18" rx="2" ry="1" fill="#86efac" transform="rotate(-30 9 18)"/>
+                <ellipse cx="9" cy="18" rx="2" ry="1" fill="#86a489" transform="rotate(-30 9 18)"/>
             </svg>
         );
 
@@ -253,11 +259,11 @@
             console.log('Navigating to RSVP...');
             try {
                 sessionStorage.setItem('scrollToRSVP', 'true');
-                window.location.href = 'index.html';
+                window.location.href = 'main.html';
             } catch (e) {
                 console.error('Error:', e);
                 // Fallback to direct hash navigation
-                window.location.href = 'index.html#rsvp';
+                window.location.href = 'main.html#rsvp';
             }
         };
     </script>

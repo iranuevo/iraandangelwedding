@@ -17,6 +17,9 @@
             --sage-500: #6b8e6f;
             --sage-600: #557a59;
             --sage-dark: #3d5a40;
+            --sage-lively-400: #7ab87f;
+            --sage-lively-500: #5fa665;
+            --sage-lively-600: #4a8f50;
             --rose-50: #fdf8f9;
             --rose-100: #fce7ec;
             --rose-200: #fad4dc;
@@ -110,7 +113,7 @@
 
         .envelope-container:hover .envelope {
             transform: translateY(-12px);
-            box-shadow: 0 30px 80px rgba(107, 142, 111, 0.2);
+            box-shadow: 0 30px 80px rgba(95, 166, 101, 0.25);
         }
 
         .envelope-container.opening {
@@ -131,7 +134,7 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, #fdfdfb 0%, var(--sage-50) 100%);
-            border: 2px solid var(--sage-400);
+            border: 2px solid var(--sage-lively-400);
             border-radius: 2px;
             position: relative;
             overflow: hidden;
@@ -198,7 +201,7 @@
             height: 0;
             border-left: 190px solid transparent;
             border-right: 190px solid transparent;
-            border-top: 125px solid var(--sage-400);
+            border-top: 125px solid var(--sage-lively-400);
             transform-origin: top center;
             transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             z-index: 3;
@@ -226,10 +229,10 @@
             transform: translateX(-50%);
             width: 75px;
             height: 75px;
-            background: radial-gradient(circle at 35% 35%, var(--sage-400), var(--sage-600) 70%);
+            background: radial-gradient(circle at 35% 35%, var(--sage-lively-400), var(--sage-lively-600) 70%);
             border-radius: 50%;
             box-shadow: 
-                0 8px 20px rgba(107, 142, 111, 0.35),
+                0 8px 20px rgba(95, 166, 101, 0.4),
                 inset -3px -3px 8px rgba(0, 0, 0, 0.2),
                 inset 2px 2px 5px rgba(255, 255, 255, 0.2);
             z-index: 4;
@@ -300,35 +303,35 @@
         }
 
         .confetti.burst-up {
-            animation: confettiBurstUp 2.5s ease-out forwards;
+            animation: confettiBurstUp 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
 
         .confetti.burst-down {
-            animation: confettiBurstDown 2.5s ease-out forwards;
+            animation: confettiBurstDown 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
 
         .confetti.burst-left {
-            animation: confettiBurstLeft 2.5s ease-out forwards;
+            animation: confettiBurstLeft 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
 
         .confetti.burst-right {
-            animation: confettiBurstRight 2.5s ease-out forwards;
+            animation: confettiBurstRight 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
 
         .confetti.burst-diagonal-tl {
-            animation: confettiBurstDiagonalTL 2.5s ease-out forwards;
+            animation: confettiBurstDiagonalTL 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
 
         .confetti.burst-diagonal-tr {
-            animation: confettiBurstDiagonalTR 2.5s ease-out forwards;
+            animation: confettiBurstDiagonalTR 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
 
         .confetti.burst-diagonal-bl {
-            animation: confettiBurstDiagonalBL 2.5s ease-out forwards;
+            animation: confettiBurstDiagonalBL 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
 
         .confetti.burst-diagonal-br {
-            animation: confettiBurstDiagonalBR 2.5s ease-out forwards;
+            animation: confettiBurstDiagonalBR 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
 
         @keyframes confettiBurstUp {
@@ -338,7 +341,7 @@
             }
             100% {
                 opacity: 0;
-                transform: translate(var(--tx), -400px) rotate(var(--rotation)) scale(0.5);
+                transform: translate(var(--tx), -600px) rotate(var(--rotation)) scale(0.3);
             }
         }
 
@@ -349,7 +352,7 @@
             }
             100% {
                 opacity: 0;
-                transform: translate(var(--tx), 400px) rotate(var(--rotation)) scale(0.5);
+                transform: translate(var(--tx), 600px) rotate(var(--rotation)) scale(0.3);
             }
         }
 
@@ -360,7 +363,7 @@
             }
             100% {
                 opacity: 0;
-                transform: translate(-400px, var(--ty)) rotate(var(--rotation)) scale(0.5);
+                transform: translate(-600px, var(--ty)) rotate(var(--rotation)) scale(0.3);
             }
         }
 
@@ -371,7 +374,7 @@
             }
             100% {
                 opacity: 0;
-                transform: translate(400px, var(--ty)) rotate(var(--rotation)) scale(0.5);
+                transform: translate(600px, var(--ty)) rotate(var(--rotation)) scale(0.3);
             }
         }
 
@@ -382,7 +385,7 @@
             }
             100% {
                 opacity: 0;
-                transform: translate(-350px, -350px) rotate(var(--rotation)) scale(0.5);
+                transform: translate(-500px, -500px) rotate(var(--rotation)) scale(0.3);
             }
         }
 
@@ -393,7 +396,7 @@
             }
             100% {
                 opacity: 0;
-                transform: translate(350px, -350px) rotate(var(--rotation)) scale(0.5);
+                transform: translate(500px, -500px) rotate(var(--rotation)) scale(0.3);
             }
         }
 
@@ -404,7 +407,7 @@
             }
             100% {
                 opacity: 0;
-                transform: translate(-350px, 350px) rotate(var(--rotation)) scale(0.5);
+                transform: translate(-500px, 500px) rotate(var(--rotation)) scale(0.3);
             }
         }
 
@@ -415,10 +418,10 @@
             }
             100% {
                 opacity: 0;
-                transform: translate(350px, 350px) rotate(var(--rotation)) scale(0.5);
+                transform: translate(500px, 500px) rotate(var(--rotation)) scale(0.3);
             }
         }
-
+                transform: translate(0, 0) rotate(0deg) scale(1);
         /* Transition overlay */
         .transition-overlay {
             position: fixed;
@@ -602,7 +605,9 @@
                 { svg: daisySVG, color: '#f5b5c3' },
                 { svg: daisySVG, color: '#a8bd9f' },
                 { svg: leafSVG, color: '#86a489' },
-                { svg: leafSVG, color: '#6b8e6f' }
+                { svg: leafSVG, color: '#6b8e6f' },
+                { svg: daisySVG, color: '#7ab87f' },
+                { svg: leafSVG, color: '#5fa665' }
             ];
 
             const directions = [
@@ -616,7 +621,8 @@
                 'burst-diagonal-br'
             ];
 
-            for (let i = 0; i < 60; i++) {
+            // Create 100 confetti pieces for explosive effect
+            for (let i = 0; i < 100; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 const type = confettiTypes[Math.floor(Math.random() * confettiTypes.length)];
@@ -628,20 +634,21 @@
                 confetti.style.top = '50%';
                 confetti.style.color = type.color;
                 
-                // Random variations for each direction
+                // Wider random variations for more explosive spread
                 if (direction.includes('up') || direction.includes('down')) {
-                    confetti.style.setProperty('--tx', (Math.random() - 0.5) * 200 + 'px');
+                    confetti.style.setProperty('--tx', (Math.random() - 0.5) * 400 + 'px');
                 } else if (direction.includes('left') || direction.includes('right')) {
-                    confetti.style.setProperty('--ty', (Math.random() - 0.5) * 200 + 'px');
+                    confetti.style.setProperty('--ty', (Math.random() - 0.5) * 400 + 'px');
                 }
                 
-                confetti.style.setProperty('--rotation', (Math.random() * 720 - 360) + 'deg');
-                confetti.style.opacity = Math.random() * 0.8 + 0.2;
-                confetti.style.animationDelay = Math.random() * 0.2 + 's';
+                // More rotation for dramatic effect
+                confetti.style.setProperty('--rotation', (Math.random() * 1080 - 540) + 'deg');
+                confetti.style.opacity = Math.random() * 0.9 + 0.1;
+                confetti.style.animationDelay = Math.random() * 0.1 + 's';
                 
                 document.body.appendChild(confetti);
 
-                setTimeout(() => confetti.remove(), 2700);
+                setTimeout(() => confetti.remove(), 1700);
             }
         }
 
