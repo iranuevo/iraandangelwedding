@@ -2198,9 +2198,13 @@ body {
 }
 
 .color-swatch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     opacity: 0;
     animation: fadeInUp 0.6s ease-out forwards;
+    min-width: 120px;
 }
 
 .color-circle {
@@ -2217,24 +2221,16 @@ body {
     transform: scale(1.1);
 }
 
-.color-circle.bow {
-    background-color: #550000;
+.color-circle.cherry-red {
+    background-color: #74070E;
 }
 
-.color-circle.warm-wood {
-    background-color: #8B6F47;
+.color-circle.strawberry-latte {
+    background-color: #FFDEED;
 }
 
-.color-circle.candle {
-    background-color: #FFF8DC;
-}
-
-.color-circle.leaf {
-    background-color: #395711;
-}
-
-.color-circle.juniper {
-    background-color: #4A5D23;
+.color-circle.matcha-milky {
+    background-color: #DEE7B0;
 }
 
 .color-name {
@@ -2243,6 +2239,16 @@ body {
     letter-spacing: 0.1em;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
+    white-space: nowrap;
+    margin-bottom: 4px;
+}
+
+.color-hex {
+    font-size: 12px;
+    color: #a0aec0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.05em;
 }
 
 /* Map Section Styles */
@@ -3092,4 +3098,60 @@ body {
     .story-nav-links {
         display: none; /* Hide on mobile to keep navigation clean */
     }
+}
+
+/* Lazy Loading Styles */
+section[id] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+section[id].section-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero section should be visible immediately */
+#hero {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Iframe lazy loading placeholder */
+iframe[data-src] {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmerLoading 1.5s infinite;
+}
+
+@keyframes shimmerLoading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Reduce animations on slow connections */
+@media (prefers-reduced-motion: reduce) {
+    section[id] {
+        transition: opacity 0.3s ease-out;
+        transform: none;
+    }
+    
+    iframe[data-src] {
+        animation: none;
+    }
+}
+
+/* Background image lazy loading */
+.story-hero-background {
+    transition: opacity 0.5s ease-in;
+    opacity: 0;
+}
+
+.story-hero-background.loaded {
+    opacity: 1;
 }

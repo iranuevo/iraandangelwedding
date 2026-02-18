@@ -9,9 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&family=Great+Vibes&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script defer crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script defer crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script defer src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
     <div id="root"></div>
@@ -358,7 +358,8 @@
             }, []);
 
             useEffect(() => {
-                const observer = new IntersectionObserver(
+                // Lazy load sections
+                const sectionObserver = new IntersectionObserver(
                     (entries) => {
                         entries.forEach((entry) => {
                             if (entry.isIntersecting) {
@@ -367,12 +368,37 @@
                             }
                         });
                     },
-                    { threshold: 0.2 }
+                    { threshold: 0.2, rootMargin: '50px' }
                 );
 
+                // Lazy load iframes
+                const iframeObserver = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                const iframe = entry.target;
+                                if (iframe.dataset.src) {
+                                    iframe.src = iframe.dataset.src;
+                                    iframe.removeAttribute('data-src');
+                                    iframeObserver.unobserve(iframe);
+                                }
+                            }
+                        });
+                    },
+                    { threshold: 0.1, rootMargin: '200px' }
+                );
+
+                // Observe sections
                 document.querySelectorAll('section[id]').forEach((section) => {
-                    observer.observe(section);
+                    sectionObserver.observe(section);
                 });
+
+                // Observe iframes for lazy loading
+                setTimeout(() => {
+                    document.querySelectorAll('iframe[data-src]').forEach((iframe) => {
+                        iframeObserver.observe(iframe);
+                    });
+                }, 100);
 
                 const handleMouseMove = (e) => {
                     setMousePos({ x: e.clientX, y: e.clientY });
@@ -381,7 +407,8 @@
                 window.addEventListener('mousemove', handleMouseMove);
 
                 return () => {
-                    observer.disconnect();
+                    sectionObserver.disconnect();
+                    iframeObserver.disconnect();
                     window.removeEventListener('mousemove', handleMouseMove);
                 };
             }, []);
@@ -722,10 +749,10 @@
                             ]),
                             React.createElement('div', { key: 'ceremony-map', className: 'map-embed' },
                                 React.createElement('iframe', {
-                                    src: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.1741333110404!2d120.97260371073054!3d14.589151385837042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ca3d23445363%3A0x6c2d1781ec26636a!2sSan%20Agustin%20Church!5e0!3m2!1sen!2sph!4v1770128488693!5m2!1sen!2sph',
+                                    'data-src': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.1741333110404!2d120.97260371073054!3d14.589151385837042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ca3d23445363%3A0x6c2d1781ec26636a!2sSan%20Agustin%20Church!5e0!3m2!1sen!2sph!4v1770128488693!5m2!1sen!2sph',
                                     width: '100%',
                                     height: '400',
-                                    style: { border: 0, borderRadius: '12px' },
+                                    style: { border: 0, borderRadius: '12px', background: '#f0f0f0' },
                                     allowFullScreen: true,
                                     loading: 'lazy',
                                     referrerPolicy: 'no-referrer-when-downgrade',
@@ -753,10 +780,10 @@
                             ]),
                             React.createElement('div', { key: 'reception-map', className: 'map-embed' },
                                 React.createElement('iframe', {
-                                    src: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3862.0912215536123!2d120.99041561072958!3d14.536774485883395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c95a03a03a65%3A0xc78b6e0c562f13bf!2sThe%20Heritage%20Hotel%20Manila!5e0!3m2!1sen!2sph!4v1770128316216!5m2!1sen!2sph',
+                                    'data-src': 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3862.0912215536123!2d120.99041561072958!3d14.536774485883395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c95a03a03a65%3A0xc78b6e0c562f13bf!2sThe%20Heritage%20Hotel%20Manila!5e0!3m2!1sen!2sph!4v1770128316216!5m2!1sen!2sph',
                                     width: '100%',
                                     height: '400',
-                                    style: { border: 0, borderRadius: '12px' },
+                                    style: { border: 0, borderRadius: '12px', background: '#f0f0f0' },
                                     allowFullScreen: true,
                                     loading: 'lazy',
                                     referrerPolicy: 'no-referrer-when-downgrade',
@@ -902,15 +929,14 @@
                         ]),
                         React.createElement('div', { key: 'color-palette', className: 'color-palette' },
                             [
-                                { name: 'Bow', color: 'bow' },
-                                { name: 'Warm Wood', color: 'warm-wood' },
-                                { name: 'Candle', color: 'candle' },
-                                { name: 'Leaf', color: 'leaf' },
-                                { name: 'Juniper', color: 'juniper' }
+                                { name: 'Cherry Red', hex: '#74070E', color: 'cherry-red' },
+                                { name: 'Strawberry Latte', hex: '#FFDEED', color: 'strawberry-latte' },
+                                { name: 'Matcha Latte', hex: '#DEE7B0', color: 'matcha-milky' }
                             ].map((item, i) =>
                                 React.createElement('div', { key: item.name, className: 'color-swatch', style: { animationDelay: `${i * 0.1}s` } }, [
                                     React.createElement('div', { key: 'color', className: `color-circle ${item.color}` }),
-                                    React.createElement('p', { key: 'name', className: 'color-name' }, item.name)
+                                    React.createElement('p', { key: 'name', className: 'color-name' }, item.name),
+                                    React.createElement('p', { key: 'hex', className: 'color-hex' }, item.hex)
                                 ])
                             )
                         )
