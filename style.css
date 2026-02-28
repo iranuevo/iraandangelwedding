@@ -1688,6 +1688,42 @@ body {
     color: var(--sage-600);
 }
 
+.timeline-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid var(--rose-200);
+}
+
+.timeline-card.rose .timeline-icon {
+    background: rgba(253, 242, 248, 0.8);
+    border-color: var(--rose-300);
+}
+
+.timeline-card.green .timeline-icon {
+    background: rgba(240, 253, 244, 0.8);
+    border-color: var(--sage-300);
+}
+
+.timeline-icon-svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
+}
+
+.timeline-card.rose .timeline-icon-svg {
+    color: var(--sage-600);
+}
+
+.timeline-card.green .timeline-icon-svg {
+    color: var(--sage-600);
+}
+
 .timeline-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 32px;
@@ -2008,6 +2044,13 @@ body {
     background: rgba(251, 113, 133, 0.08);
     border-radius: 12px;
     border: 2px solid rgba(251, 113, 133, 0.15);
+}
+
+.wishing-well-icon {
+    width: 64px;
+    height: 64px;
+    color: var(--sage-500);
+    stroke-width: 2;
 }
 
 .gift-text {

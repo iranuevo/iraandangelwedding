@@ -179,37 +179,120 @@
 
         const Dress = ({ className, ...props }) => (
             <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
-                {/* Dress top/bodice */}
-                <path d="M8 6 L16 6 L15 10 L9 10 Z" strokeWidth="2" fill="currentColor" fillOpacity="0.1"/>
-                {/* Dress skirt - flowing */}
-                <path d="M9 10 L6 22 L18 22 L15 10" strokeWidth="2" fill="currentColor" fillOpacity="0.05"/>
+                {/* Shoulder straps */}
+                <line x1="9" y1="2" x2="9" y2="6" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="15" y1="2" x2="15" y2="6" strokeWidth="2" strokeLinecap="round"/>
+                
+                {/* V-neck bodice */}
+                <path d="M9 6 L12 10 L15 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M9 6 L9 10 L15 10 L15 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                
                 {/* Waistline */}
                 <line x1="9" y1="10" x2="15" y2="10" strokeWidth="2"/>
-                {/* Shoulder straps */}
-                <line x1="10" y1="6" x2="10" y2="3" strokeWidth="2"/>
-                <line x1="14" y1="6" x2="14" y2="3" strokeWidth="2"/>
-                {/* Decorative flowers */}
-                <circle cx="7" cy="16" r="1" fill="currentColor" fillOpacity="0.3"/>
-                <circle cx="17" cy="14" r="0.8" fill="currentColor" fillOpacity="0.3"/>
-                <circle cx="11" cy="18" r="0.6" fill="currentColor" fillOpacity="0.3"/>
+                
+                {/* Flowing A-line skirt with pleats */}
+                <path d="M9 10 L6 22 L18 22 L15 10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                
+                {/* Pleat lines */}
+                <line x1="10.5" y1="12" x2="8" y2="22" strokeWidth="1.5" opacity="0.4"/>
+                <line x1="12" y1="12" x2="12" y2="22" strokeWidth="1.5" opacity="0.4"/>
+                <line x1="13.5" y1="12" x2="16" y2="22" strokeWidth="1.5" opacity="0.4"/>
             </svg>
         );
 
         const Suit = ({ className, ...props }) => (
+            <svg className={className} viewBox="0 0 24 24" fill="none" {...props}>
+                {/* Jacket body */}
+                <path d="M6 8 L6 14 L8 14 L8 8 Z" fill="currentColor" opacity="0.8"/>
+                <path d="M18 8 L18 14 L16 14 L16 8 Z" fill="currentColor" opacity="0.8"/>
+                <path d="M8 8 L8 14 L10 16 L14 16 L16 14 L16 8 Z" fill="currentColor" opacity="0.9"/>
+                
+                {/* Lapels */}
+                <path d="M8 8 L10 12 L10 8 Z" fill="currentColor" opacity="0.6"/>
+                <path d="M16 8 L14 12 L14 8 Z" fill="currentColor" opacity="0.6"/>
+                
+                {/* Shirt/chest area */}
+                <path d="M10 8 L10 14 L14 14 L14 8 Z" fill="#f8faf8"/>
+                
+                {/* Necktie */}
+                <path d="M11.5 8 L12.5 8 L12.5 13 L13 14 L12 14.5 L11 14 L11.5 13 Z" fill="currentColor" opacity="0.7"/>
+                <circle cx="12" cy="8" r="0.4" fill="currentColor" opacity="0.8"/>
+                
+                {/* Buttons */}
+                <circle cx="12" cy="10" r="0.3" fill="currentColor" opacity="0.6"/>
+                <circle cx="12" cy="11.5" r="0.3" fill="currentColor" opacity="0.6"/>
+                <circle cx="12" cy="13" r="0.3" fill="currentColor" opacity="0.6"/>
+                
+                {/* Pants */}
+                <rect x="8" y="14" width="3.5" height="9" rx="0.5" fill="currentColor" opacity="0.9"/>
+                <rect x="12.5" y="14" width="3.5" height="9" rx="0.5" fill="currentColor" opacity="0.9"/>
+                
+                {/* Pockets */}
+                <line x1="9" y1="11" x2="10" y2="11" stroke="currentColor" strokeWidth="0.3" opacity="0.4"/>
+                <line x1="14" y1="11" x2="15" y2="11" stroke="currentColor" strokeWidth="0.3" opacity="0.4"/>
+            </svg>
+        );
+
+        const WineGlass = ({ className, ...props }) => (
             <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
-                {/* Suit jacket */}
-                <path d="M7 8 L17 8 L17 22 L7 22 Z" strokeWidth="2" fill="currentColor" fillOpacity="0.05"/>
-                {/* Jacket lapels */}
-                <path d="M7 8 L10 12 L12 10 L14 12 L17 8" strokeWidth="2" fill="none"/>
-                {/* Shirt */}
-                <rect x="9" y="10" width="6" height="12" strokeWidth="1.5" fill="white" fillOpacity="0.8"/>
-                {/* Tie */}
-                <path d="M12 10 L12 18 L11 20 L13 20 Z" strokeWidth="1.5" fill="currentColor" fillOpacity="0.2"/>
-                {/* Jacket buttons */}
-                <circle cx="11" cy="14" r="0.5" fill="currentColor"/>
-                <circle cx="11" cy="16" r="0.5" fill="currentColor"/>
-                {/* Collar */}
-                <path d="M9 10 L12 8 L15 10" strokeWidth="1.5" fill="none"/>
+                {/* Left wine glass - tilted for cheers */}
+                <g transform="rotate(-15 7 12)">
+                    {/* Glass bowl */}
+                    <path d="M4 6 L10 6 L9 11 Q8.5 12 7 12 L7 18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    {/* Base */}
+                    <line x1="5" y1="18" x2="9" y2="18" strokeWidth="2" strokeLinecap="round"/>
+                    {/* Wine liquid */}
+                    <path d="M4.5 6 L9.5 6 L8.8 9.5 L5.2 9.5 Z" fill="#fda4af" opacity="0.6"/>
+                </g>
+                
+                {/* Right wine glass - tilted for cheers */}
+                <g transform="rotate(15 17 12)">
+                    {/* Glass bowl */}
+                    <path d="M14 6 L20 6 L19 11 Q18.5 12 17 12 L17 18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    {/* Base */}
+                    <line x1="15" y1="18" x2="19" y2="18" strokeWidth="2" strokeLinecap="round"/>
+                    {/* Wine liquid */}
+                    <path d="M14.5 6 L19.5 6 L18.8 9.5 L15.2 9.5 Z" fill="#fda4af" opacity="0.6"/>
+                </g>
+                
+                {/* Cheers sparkles */}
+                <circle cx="12" cy="5" r="1.2" fill="currentColor" opacity="0.5"/>
+                <path d="M12 2.5 L12 4" strokeWidth="1.5" strokeLinecap="round" opacity="0.4"/>
+                <path d="M10 3.5 L11 4.2" strokeWidth="1.5" strokeLinecap="round" opacity="0.4"/>
+                <path d="M14 3.5 L13 4.2" strokeWidth="1.5" strokeLinecap="round" opacity="0.4"/>
+                
+                {/* Small bubbles */}
+                <circle cx="6" cy="8" r="0.6" fill="currentColor" opacity="0.3"/>
+                <circle cx="18" cy="8" r="0.6" fill="currentColor" opacity="0.3"/>
+                <circle cx="7" cy="10" r="0.5" fill="currentColor" opacity="0.25"/>
+                <circle cx="17" cy="10" r="0.5" fill="currentColor" opacity="0.25"/>
+            </svg>
+        );
+
+        const WishingWell = ({ className, ...props }) => (
+            <svg className={className} viewBox="0 0 24 24" fill="none" {...props}>
+                {/* Envelope back - rose pink */}
+                <rect x="3" y="8" width="18" height="12" rx="1" fill="#fad4dc" stroke="#f5b5c3" strokeWidth="0.5"/>
+                
+                {/* Envelope flap open - darker rose */}
+                <path d="M3 8 L12 14 L21 8" fill="#f5b5c3" stroke="#f5b5c3" strokeWidth="0.5"/>
+                <path d="M3 8 L12 2 L21 8" fill="#fce7ec" stroke="#f5b5c3" strokeWidth="0.5"/>
+                
+                {/* Card/letter - light sage/cream */}
+                <rect x="5" y="6" width="14" height="10" rx="0.5" fill="#f8faf8" stroke="#e8ede8" strokeWidth="0.5"/>
+                
+                {/* Heart on card - rose pink */}
+                <path d="M12 9 Q11 8 10 8 Q8.5 8 8.5 9.5 Q8.5 11 10 12.5 L12 14 L14 12.5 Q15.5 11 15.5 9.5 Q15.5 8 14 8 Q13 8 12 9 Z" fill="#f5b5c3"/>
+                
+                {/* Heart shading */}
+                <path d="M12 9 Q11.2 8.5 10.5 8.5 Q9.5 8.5 9.5 9.5 Q9.5 10.5 10.5 11.5 L12 13" fill="#fce7ec" opacity="0.6"/>
+                
+                {/* Envelope bottom flap - darker rose */}
+                <path d="M3 20 L12 14 L21 20" fill="#f5b5c3" stroke="#f5b5c3" strokeWidth="0.5"/>
+                
+                {/* Envelope side shadows */}
+                <path d="M3 8 L3 20 L12 14 L12 14 Z" fill="#395711" opacity="0.05"/>
+                <path d="M21 8 L21 20 L12 14 L12 14 Z" fill="#395711" opacity="0.05"/>
             </svg>
         );
 
@@ -804,13 +887,11 @@
                         React.createElement('div', { key: 'timeline-content', className: 'timeline-content' }, [
                             React.createElement('div', { key: 'timeline-line', className: 'timeline-line' }),
                             [
-                                { time: '11:30 AM', title: 'Guest Arrival', desc: 'Welcome to the church', color: 'rose' },
-                                { time: '12:00 PM', title: 'Ceremony Begins', desc: 'Please be seated by 12:00 PM', color: 'green' },
-                                { time: '3:00 PM', title: 'Cocktail Hour', desc: 'Transfer to The Heritage Hotel Manila', color: 'rose' },
-                                { time: '4:00 PM', title: 'Reception Begins', desc: 'Dinner service starts', color: 'green' },
-                                { time: '5:30 PM', title: 'First Dance & Toasts', desc: 'Speeches from loved ones', color: 'rose' },
-                                { time: '6:00 PM', title: 'Dancing & Celebration', desc: 'Live band performance', color: 'green' },
-                                { time: '10:00 PM', title: 'Send-Off', desc: 'Grand exit with sparklers', color: 'rose' }
+                                { time: '11:30 AM', title: 'Guest Arrival', desc: 'Welcome to the church', color: 'rose', icon: Users },
+                                { time: '12:00 PM', title: 'Ceremony Begins', desc: 'As the Church strictly starts at its scheduled time and finish the ceremony on time (1 hr only), we kindly request you to be seated by 12NN-1230PM for smooth flow of activity.', color: 'green', icon: Church },
+                                { time: '3:00 PM - 4:00 PM', title: 'Cocktail Hour', desc: 'Transfer to Heritage Hotel Manila. Enjoy the refreshments, photo booth and fun activities.', color: 'rose', icon: WineGlass },
+                                { time: '5:00 PM - 9:00 PM', title: 'Reception Begins', desc: 'Event Proper', color: 'green' },
+                                { time: '9:00 PM onwards', title: 'After Party', desc: 'Enjoy the rest of the night with a few shots & cocktails.', color: 'rose' }
                             ].map((event, index) =>
                                 React.createElement('div', {
                                     key: index,
@@ -824,6 +905,9 @@
                                         key: 'card',
                                         className: `timeline-card ${event.color}`
                                     }, [
+                                        event.icon && React.createElement('div', { key: 'icon', className: 'timeline-icon' },
+                                            React.createElement(event.icon, { className: 'timeline-icon-svg' })
+                                        ),
                                         React.createElement('p', { key: 'time', className: 'timeline-time' }, event.time),
                                         React.createElement('h3', { key: 'title', className: 'timeline-title' }, event.title),
                                         React.createElement('p', { key: 'desc', className: 'timeline-desc' }, event.desc)
@@ -886,10 +970,9 @@
                                 ),
                                 React.createElement('div', { key: 'no-gifts-notice', className: 'no-gifts-notice' }, [
                                     React.createElement('div', { key: 'no-gifts-content', className: 'no-gifts-content' }, [
-                                        React.createElement('div', { key: 'no-gifts-visual', className: 'no-gifts-visual' }, [
-                                            React.createElement('span', { key: 'gift-text', className: 'gift-text' }, 'GIFT'),
-                                            React.createElement('span', { key: 'cross-line', className: 'cross-line' })
-                                        ]),
+                                        React.createElement('div', { key: 'no-gifts-visual', className: 'no-gifts-visual' }, 
+                                            React.createElement(WishingWell, { className: 'wishing-well-icon' })
+                                        ),
                                         React.createElement('p', { key: 'no-gifts-text', className: 'no-gifts-text' }, 'Your loving presence is the only gift we desire'),
                                         React.createElement('p', { key: 'no-gifts-subtext', className: 'no-gifts-subtext' }, 'We kindly request no physical gifts')
                                     ])

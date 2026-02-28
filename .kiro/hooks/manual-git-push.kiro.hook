@@ -8,8 +8,8 @@
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Please run the following git commands to push changes: 1) `git add .` to stage all changes, 2) `git commit -m \"update: color palette\"` to commit with a message, and 3) `git push` to push to the remote repository. If there are any errors, please help resolve them."
+    "prompt": "Please run the following git commands to push changes: 1) `git add .` to stage all changes, 2) `git commit -m \"feat(dress-code): enhance SVG icons with detailed styling and new components\n\n- Redesign Dress icon with shoulder straps, V-neck bodice, and A-line skirt with pleats\n- Rebuild Suit icon with jacket lapels, shirt, necktie, buttons, and pants details\n- Add WineGlass icon component featuring two tilted glasses with wine liquid and cheers sparkles\n- Add WishingWell icon component with rose pink envelope design and decorative elements\n- Improve visual hierarchy and detail across all dress code related icons\n- Update CSS styling to support new icon variations and animations\"` to commit with a message, and 3) `git push` to push to the remote repository. If there are any errors, please help resolve them."
   },
-  "workspaceFolderName": "iraandangelwedding",
+  "workspaceFolderName": "Wedding_",
   "shortName": "manual-git-push"
 }
