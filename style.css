@@ -154,7 +154,7 @@ body {
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px 24px;
+    padding: 12px 24px;
 }
 
 .nav-content {
@@ -178,14 +178,14 @@ body {
 }
 
 .nav-heart {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     animation: gentle-sway 3s ease-in-out infinite;
 }
 
 .nav-text {
     font-family: 'Great Vibes', cursive;
-    font-size: 28px;
+    font-size: 24px;
     color: #1f2937;
     font-weight: 400;
 }
@@ -194,8 +194,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 32px;
-    font-size: 13px;
+    gap: 24px;
+    font-size: 12px;
     letter-spacing: 0.15em;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
@@ -234,9 +234,9 @@ body {
 .nav-cta {
     background: linear-gradient(to right, var(--sage-lively-400), var(--sage-lively-500));
     color: white;
-    padding: 10px 28px;
+    padding: 8px 20px;
     border-radius: 9999px;
-    font-size: 13px;
+    font-size: 12px;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
