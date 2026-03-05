@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, MapPin, Clock, Calendar, Camera, Users, Mail, ChevronDown, Sparkles } from 'lucide-react';
+import { Heart, MapPin, Clock, Calendar, Camera, Users, Mail, ChevronDown, Sparkles, Utensils } from 'lucide-react';
 
 const WeddingWebsite = () => {
   const [activeSection, setActiveSection] = useState('hero');
@@ -397,7 +397,7 @@ const WeddingWebsite = () => {
               { time: '1:30 PM', title: 'Guest Arrival', desc: 'Welcome to the church', color: 'rose' },
               { time: '2:00 PM', title: 'Ceremony Begins', desc: 'Please be seated by 1:55 PM', color: 'green' },
               { time: '3:00 PM', title: 'Cocktail Hour', desc: 'Transfer to Manila Peninsula', color: 'rose' },
-              { time: '4:00 PM', title: 'Reception Begins', desc: 'Dinner service starts', color: 'green' },
+              { time: '4:00 PM', title: 'Event Proper', desc: 'Dinner, laughter and love', color: 'green', icon: Utensils },
               { time: '5:30 PM', title: 'First Dance & Toasts', desc: 'Speeches from loved ones', color: 'rose' },
               { time: '6:00 PM', title: 'Dancing & Celebration', desc: 'Live band performance', color: 'green' },
               { time: '10:00 PM', title: 'Send-Off', desc: 'Grand exit with sparklers', color: 'rose' }
@@ -405,6 +405,7 @@ const WeddingWebsite = () => {
               <div key={index} className={`timeline-item relative mb-16 ${index % 2 === 0 ? 'md:pr-1/2 md:text-right' : 'md:pl-1/2 md:ml-auto'} pl-10 md:w-1/2`}>
                 <div className={`timeline-dot absolute left-0 md:left-auto md:right-0 top-3 w-5 h-5 rounded-full border-4 border-white transform md:translate-x-1/2 shadow-lg ${event.color === 'rose' ? 'bg-rose-400' : 'bg-green-500'}`}></div>
                 <div className={`timeline-card bg-gradient-to-br ${event.color === 'rose' ? 'from-rose-50 to-pink-50' : 'from-green-50 to-emerald-50'} p-8 rounded-2xl hover:shadow-xl transition-all duration-500`}>
+                  {event.icon && <event.icon className={`w-6 h-6 mb-3 ${event.color === 'rose' ? 'text-rose-400' : 'text-green-500'}`} />}
                   <p className={`${event.color === 'rose' ? 'text-rose-500' : 'text-green-600'} font-medium text-lg mb-2 tracking-wide`}>{event.time}</p>
                   <h3 className="font-serif text-2xl mb-2 text-gray-800">{event.title}</h3>
                   <p className="text-gray-500 text-sm">{event.desc}</p>
