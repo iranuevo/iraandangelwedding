@@ -256,12 +256,10 @@
         
         // Add a simple function to navigate to RSVP
         window.goToRSVP = function() {
-            console.log('Navigating to RSVP...');
             try {
                 sessionStorage.setItem('scrollToRSVP', 'true');
                 window.location.href = 'main.html';
             } catch (e) {
-                console.error('Error:', e);
                 // Fallback to direct hash navigation
                 window.location.href = 'main.html#rsvp';
             }

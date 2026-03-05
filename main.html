@@ -379,12 +379,8 @@
             // Add a global function for testing
             window.testScrollToRSVP = () => {
                 const element = document.getElementById('rsvp');
-                console.log('RSVP element:', element);
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    console.log('Scrolled to RSVP');
-                } else {
-                    console.log('RSVP element not found');
                 }
             };
 
@@ -440,26 +436,21 @@
 
             // Separate useEffect for hash navigation after component mount
             useEffect(() => {
-                console.log('Index page loaded, checking for RSVP flag...'); // Debug log
                 
                 // Check if we came from our-story page and need to scroll to RSVP
                 const shouldScrollToRSVP = sessionStorage.getItem('scrollToRSVP');
-                console.log('ScrollToRSVP flag:', shouldScrollToRSVP); // Debug log
                 
                 if (shouldScrollToRSVP) {
-                    console.log('RSVP flag found, attempting to scroll...'); // Debug log
                     sessionStorage.removeItem('scrollToRSVP'); // Clear the flag
                     
                     // Scroll to RSVP with multiple attempts
                     const scrollToRSVP = () => {
                         const element = document.getElementById('rsvp');
-                        console.log('RSVP element found:', element); // Debug log
                         if (element) {
                             element.scrollIntoView({ 
                                 behavior: 'smooth',
                                 block: 'start'
                             });
-                            console.log('Scrolled to RSVP successfully!'); // Debug log
                             return true;
                         }
                         return false;
@@ -468,10 +459,8 @@
                     // Multiple attempts with increasing delays
                     setTimeout(() => {
                         if (!scrollToRSVP()) {
-                            console.log('First attempt failed, trying again...'); // Debug log
                             setTimeout(() => {
                                 if (!scrollToRSVP()) {
-                                    console.log('Second attempt failed, final try...'); // Debug log
                                     setTimeout(scrollToRSVP, 1000);
                                 }
                             }, 500);
@@ -483,7 +472,6 @@
                 const handlePostMountHash = () => {
                     const hash = window.location.hash.substring(1);
                     if (hash) {
-                        console.log('Hash found:', hash); // Debug log
                         const element = document.getElementById(hash);
                         if (element) {
                             element.scrollIntoView({ 
@@ -593,7 +581,6 @@
                         message: ''
                     });
                 } catch (error) {
-                    console.error('Error submitting RSVP:', error);
                     setSubmitError('There was an error submitting your RSVP. Please try again or contact us directly.');
                 } finally {
                     setIsSubmitting(false);
@@ -601,14 +588,12 @@
             };
 
             const scrollToSection = (id) => {
-                console.log('Scrolling to:', id); // Debug log
                 const element = document.getElementById(id);
                 if (element) {
                     // Update URL hash for GitHub Pages compatibility
                     window.history.pushState(null, null, `#${id}`);
                     element.scrollIntoView({ behavior: 'smooth' });
                 } else {
-                    console.error('Element not found:', id);
                     // Fallback: try to find the element after a short delay
                     setTimeout(() => {
                         const retryElement = document.getElementById(id);
@@ -1236,19 +1221,16 @@
         
         // Simple hash navigation function
         window.handleRSVPNavigation = function() {
-            console.log('Handling RSVP navigation...');
             
             // Check sessionStorage first
             const shouldScrollToRSVP = sessionStorage.getItem('scrollToRSVP');
             if (shouldScrollToRSVP) {
-                console.log('SessionStorage flag found, scrolling to RSVP...');
                 sessionStorage.removeItem('scrollToRSVP');
                 
                 setTimeout(() => {
                     const element = document.getElementById('rsvp');
                     if (element) {
                         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        console.log('Scrolled to RSVP via sessionStorage');
                     }
                 }, 1000);
                 return;
@@ -1257,12 +1239,10 @@
             // Check hash
             const hash = window.location.hash.substring(1);
             if (hash === 'rsvp') {
-                console.log('Hash navigation to RSVP...');
                 setTimeout(() => {
                     const element = document.getElementById('rsvp');
                     if (element) {
                         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        console.log('Scrolled to RSVP via hash');
                     }
                 }, 1000);
             }

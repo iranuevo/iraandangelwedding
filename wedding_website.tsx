@@ -112,7 +112,6 @@ const WeddingWebsite = () => {
         message: ''
       });
     } catch (error) {
-      console.error('Error submitting RSVP:', error);
       setSubmitError('There was an error submitting your RSVP. Please try again or contact us directly.');
     } finally {
       setIsSubmitting(false);
