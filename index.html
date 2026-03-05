@@ -45,10 +45,13 @@
                 linear-gradient(to bottom, #f8faf8 0%, #f3f6f3 100%);
             background-attachment: fixed;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
+            min-height: 100vh;
+            padding: 20px;
         }
 
         /* Elegant background pattern */
@@ -111,9 +114,21 @@
             z-index: 10;
         }
 
-        .envelope-container:hover .envelope {
+        .envelope-image {
+            max-width: 700px;
+            width: 90vw;
+            height: auto;
+            max-height: 270px;
+            object-fit: cover;
+            object-position: center;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(0 15px 50px rgba(107, 142, 111, 0.15));
+            animation: sealPulse 3s ease-in-out infinite;
+        }
+
+        .envelope-container:hover .envelope-image {
             transform: translateY(-12px);
-            box-shadow: 0 30px 80px rgba(95, 166, 101, 0.25);
+            filter: drop-shadow(0 30px 80px rgba(95, 166, 101, 0.25));
         }
 
         .envelope-container.opening {
@@ -121,99 +136,51 @@
             pointer-events: none;
         }
 
-        /* Envelope */
-        .envelope {
-            width: 380px;
-            height: 250px;
-            position: relative;
-            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 15px 50px rgba(107, 142, 111, 0.15);
-        }
-
-        .envelope-back {
-            width: 100%;
-            height: 100%;
-            background: #8b9a75;
-            border-radius: 4px;
-            position: relative;
-            overflow: visible;
-            box-shadow: 
-                0 2px 8px rgba(0, 0, 0, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        /* Dried flowers decoration */
-        .dried-flowers {
-            position: absolute;
-            bottom: -20px;
-            right: -10px;
-            width: 110px;
-            height: 140px;
-            z-index: 5;
-            opacity: 0.9;
-            transform: rotate(30deg);
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
-        }
-
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 190px solid transparent;
-            border-right: 190px solid transparent;
-            border-top: 125px solid #7a8a68;
-            transform-origin: top center;
-            transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 3;
-        }
-
-        .envelope-container.opening .envelope-flap {
-            transform: rotateX(180deg) translateZ(0);
-        }
-
-        /* White wax seal */
-        .wax-seal {
-            position: absolute;
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: transparent;
-            border-radius: 50%;
-            z-index: 4;
-            transition: all 0.6s ease;
-            animation: sealPulse 3s ease-in-out infinite;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .envelope-container.opening .envelope-image {
+            opacity: 0;
+            transform: scale(0.8);
+            animation: none;
         }
 
         @keyframes sealPulse {
             0%, 100% {
-                transform: translate(-50%, -50%) scale(1);
+                transform: scale(1);
             }
             50% {
-                transform: translate(-50%, -50%) scale(1.08);
+                transform: scale(1.05);
             }
         }
 
-        .envelope-container.opening .wax-seal {
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0);
-            animation: none;
+        .welcome-text {
+            position: relative;
+            text-align: center;
+            z-index: 5;
+            margin-bottom: 30px;
+        }
+
+        .welcome-text .line1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #000000;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .welcome-text .line2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 96px;
+            color: #556B2F;
+            line-height: 1.2;
         }
 
         .instruction {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--sage-dark);
+            position: relative;
+            margin-top: 30px;
+            color: #000000;
             font-size: 16px;
-            font-weight: 400;
+            font-weight: 600;
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
             animation: pulse 2.5s ease-in-out infinite;
             opacity: 1;
@@ -230,11 +197,11 @@
         @keyframes pulse {
             0%, 100% {
                 opacity: 1;
-                transform: translateX(-50%) translateY(0);
+                transform: translateY(0);
             }
             50% {
                 opacity: 0.6;
-                transform: translateX(-50%) translateY(-4px);
+                transform: translateY(-4px);
             }
         }
 
@@ -386,32 +353,36 @@
         }
 
         @media (max-width: 768px) {
-            .envelope {
-                width: 320px;
-                height: 210px;
+            body {
+                padding: 0;
+                overflow: hidden;
+                justify-content: space-evenly;
+                height: 100vh;
             }
 
-            .envelope-flap {
-                border-left: 160px solid transparent;
-                border-right: 160px solid transparent;
-                border-top: 105px solid #7a8a68;
+            .envelope-image {
+                max-width: 90vw;
+                max-height: 35vh;
             }
 
-            .wax-seal {
-                width: 50px;
-                height: 50px;
+            .welcome-text {
+                margin-bottom: 0;
             }
 
-            .dried-flowers {
-                width: 70px;
-                height: 90px;
-                bottom: -15px;
-                right: -5px;
+            .welcome-text .line1 {
+                font-size: 3vw;
+                letter-spacing: 2px;
+                margin-bottom: 2vh;
+            }
+
+            .welcome-text .line2 {
+                font-size: 15vw;
             }
 
             .instruction {
-                font-size: 14px;
-                bottom: 35px;
+                font-size: 3.5vw;
+                margin-top: 0;
+                letter-spacing: 1.5px;
             }
         }
     </style>
@@ -466,72 +437,18 @@
         </svg>
     </div>
 
-    <!-- Envelope -->
-    <div class="envelope-container" id="envelopeContainer">
-        <div class="envelope">
-            <div class="envelope-back">
-                <!-- Dried flowers decoration -->
-                <svg class="dried-flowers" viewBox="0 0 80 100" fill="none">
-                    <!-- Calla lily stems (2 flowers) -->
-                    <path d="M35 100 L35 25" stroke="#6b7a5a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                    <path d="M50 100 L50 30" stroke="#6b7a5a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                    
-                    <!-- Left calla lily flower (detailed trumpet shape) -->
-                    <!-- Outer petal -->
-                    <path d="M35 25 Q28 24 24 18 Q22 14 22 10 Q22 6 25 4 Q28 2 32 4 Q35 6 36 10 Q37 14 36 18 Q35.5 21 35 25 Z" 
-                          fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" opacity="0.98"/>
-                    <!-- Inner shadow for depth -->
-                    <path d="M35 25 Q32 22 30 18 Q29 14 30 10 Q31 8 33 7" 
-                          fill="none" stroke="#f0f0f0" stroke-width="1.5" opacity="0.6"/>
-                    <!-- Spadix (yellow center) -->
-                    <ellipse cx="32" cy="14" rx="1.8" ry="5" fill="#fef3c7" opacity="0.95" transform="rotate(-10 32 14)"/>
-                    <ellipse cx="32.5" cy="14" rx="1" ry="4" fill="#fde68a" opacity="0.8" transform="rotate(-10 32.5 14)"/>
-                    
-                    <!-- Right calla lily flower (detailed trumpet shape) -->
-                    <!-- Outer petal -->
-                    <path d="M50 30 Q43 29 39 23 Q37 19 37 15 Q37 11 40 9 Q43 7 47 9 Q50 11 51 15 Q52 19 51 23 Q50.5 26 50 30 Z" 
-                          fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" opacity="0.98"/>
-                    <!-- Inner shadow for depth -->
-                    <path d="M50 30 Q47 27 45 23 Q44 19 45 15 Q46 13 48 12" 
-                          fill="none" stroke="#f0f0f0" stroke-width="1.5" opacity="0.6"/>
-                    <!-- Spadix (yellow center) -->
-                    <ellipse cx="47" cy="19" rx="1.8" ry="5" fill="#fef3c7" opacity="0.95" transform="rotate(-10 47 19)"/>
-                    <ellipse cx="47.5" cy="19" rx="1" ry="4" fill="#fde68a" opacity="0.8" transform="rotate(-10 47.5 19)"/>
-                    
-                    <!-- Detailed leaves -->
-                    <path d="M35 55 Q28 54 25 50 Q24 48 25 46 Q26 44 28 44 Q32 45 35 48 Z" 
-                          fill="#7a8a68" opacity="0.85" stroke="#6b7a5a" stroke-width="0.5"/>
-                    <path d="M50 65 Q43 64 40 60 Q39 58 40 56 Q41 54 43 54 Q47 55 50 58 Z" 
-                          fill="#7a8a68" opacity="0.85" stroke="#6b7a5a" stroke-width="0.5"/>
-                    <path d="M35 75 Q30 74 28 71 Q27 69 28 67 Q29 66 31 66 Q34 67 35 70 Z" 
-                          fill="#8b9a75" opacity="0.8" stroke="#7a8a68" stroke-width="0.5"/>
-                </svg>
-            </div>
-            <div class="envelope-flap"></div>
-            <div class="wax-seal">
-                <!-- White sunflower with pink center -->
-                <svg viewBox="0 0 80 80" width="60" height="60">
-                    <!-- Sunflower petals (white) -->
-                    <ellipse cx="40" cy="15" rx="6" ry="15" fill="#ffffff" transform="rotate(0 40 40)"/>
-                    <ellipse cx="40" cy="15" rx="6" ry="15" fill="#ffffff" transform="rotate(30 40 40)"/>
-                    <ellipse cx="40" cy="15" rx="6" ry="15" fill="#ffffff" transform="rotate(60 40 40)"/>
-                    <ellipse cx="40" cy="15" rx="6" ry="15" fill="#ffffff" transform="rotate(90 40 40)"/>
-                    <ellipse cx="40" cy="15" rx="6" ry="15" fill="#ffffff" transform="rotate(120 40 40)"/>
-                    <ellipse cx="40" cy="15" rx="6" ry="15" fill="#ffffff" transform="rotate(150 40 40)"/>
-                    <ellipse cx="40" cy="15" rx="6" ry="15" fill="#ffffff" transform="rotate(180 40 40)"/>
-                    <ellipse cx="40" cy="15" rx="6" ry="15" fill="#ffffff" transform="rotate(210 40 40)"/>
-                    <ellipse cx="40" cy="15" rx="6" ry="15" fill="#ffffff" transform="rotate(240 40 40)"/>
-                    <ellipse cx="40" cy="15" rx="6" ry="15" fill="#ffffff" transform="rotate(270 40 40)"/>
-                    <ellipse cx="40" cy="15" rx="6" ry="15" fill="#ffffff" transform="rotate(300 40 40)"/>
-                    <ellipse cx="40" cy="15" rx="6" ry="15" fill="#ffffff" transform="rotate(330 40 40)"/>
-                    <!-- Pink center -->
-                    <circle cx="40" cy="40" r="10" fill="#fda4af"/>
-                </svg>
-            </div>
-        </div>
+    <!-- Welcome Text -->
+    <div class="welcome-text">
+        <div class="line1">WELCOME TO THE WEDDING OF</div>
+        <div class="line2">Ira & Angel</div>
     </div>
 
-    <div class="instruction">Click to open your invitation</div>
+    <!-- Envelope -->
+    <div class="envelope-container" id="envelopeContainer">
+        <img src="image/Envelop.png" alt="Wedding Invitation Envelope" class="envelope-image">
+    </div>
+
+    <div class="instruction">CLICK TO OPEN YOUR INVITATION</div>
 
     <!-- Transition overlay -->
     <div id="transitionOverlay" class="transition-overlay"></div>
