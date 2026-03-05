@@ -151,15 +151,16 @@
                             }, [
                                 React.createElement(DaisyFlower, { key: 'nav-daisy', className: 'nav-heart' })
                             ]),
-                            React.createElement('div', { key: 'nav-center', className: 'nav-center' }, [
-                                React.createElement('h1', { className: 'story-page-title' }, 'Wedding Party')
+                            React.createElement('div', { key: 'nav-center', className: 'nav-center', style: { marginLeft: '120px' } }, [
+                                React.createElement('h1', { className: 'story-page-title', style: { fontFamily: "'Great Vibes', cursive", fontSize: '24px', color: '#2d3748', fontWeight: '400' } }, 'Wedding Party')
                             ]),
                             React.createElement('a', {
                                 key: 'back-button',
-                                href: 'index.html',
-                                className: 'back-button'
+                                href: 'main.html',
+                                className: 'back-button',
+                                style: { display: 'flex', alignItems: 'center', gap: '6px', color: '#4a5568', textDecoration: 'none', fontFamily: "'Montserrat', sans-serif", fontSize: '12px', fontWeight: '500', transition: 'color 0.3s ease' }
                             }, [
-                                React.createElement(ArrowLeft, { key: 'arrow', className: 'back-arrow' }),
+                                React.createElement(ArrowLeft, { key: 'arrow', className: 'back-arrow', style: { width: '16px', height: '16px' } }),
                                 'Back to Wedding'
                             ])
                         ])
@@ -167,12 +168,10 @@
                 ),
 
                 // Wedding Party Section
-                React.createElement('section', { key: 'wedding-party', id: 'wedding-party', className: 'party-section party-page' },
+                React.createElement('section', { key: 'wedding-party', id: 'wedding-party', className: 'party-section party-page', style: { paddingTop: '80px', paddingBottom: '20px' } },
                     React.createElement('div', { className: 'party-container' }, [
-                        React.createElement('div', { key: 'party-header', className: 'section-header' }, [
-                            React.createElement('h1', { className: 'section-title party-page-title' }, 'Our Wedding Party'),
-                            React.createElement('div', { className: 'section-divider' }),
-                            React.createElement('p', { className: 'party-intro' }, 'Meet the special people who will be standing with us on our big day')
+                        React.createElement('div', { key: 'party-header', className: 'section-header', style: { marginBottom: '16px', textAlign: 'center' } }, [
+                            React.createElement('p', { className: 'section-subtitle', style: { fontSize: '18px', lineHeight: '1.4', color: '#718096', fontStyle: 'italic', fontFamily: "'Cormorant Garamond', serif" } }, 'Meet the special people who will be standing with us on our big day')
                         ]),
                         React.createElement('div', { key: 'party-grid', className: 'party-grid' }, [
                             // Bridesmaids
@@ -180,9 +179,13 @@
                                 React.createElement('h2', { key: 'bridesmaids-title', className: 'party-group-title rose' }, 'Bridesmaids'),
                                 React.createElement('div', { key: 'bridesmaids-list', className: 'party-members' },
                                     [
-                                        { name: 'Sharmaine Balino', role: 'Maid of Honor', relation: 'Sister' },
-                                        { name: 'Julie', role: 'Bridesmaid', relation: 'Soul Sister' },
-                                        { name: 'Pau Llaneta', role: 'Bridesmaid', relation: 'Sister in Law' }
+                                        { name: 'Sharmaine L. Balino', role: 'Maid of Honor', relation: 'Sister' },
+                                        { name: 'Julie Ann B. Mediana', role: 'Bridesmaid', relation: 'Soul Sister' },
+                                        { name: 'Pauline Jean L. Llaneta', role: 'Bridesmaid', relation: 'Sister in Law' },
+                                        { name: 'Diana Jane L. Naag', role: 'Bridesmaid', relation: 'High school bestie' },
+                                        { name: 'Maryka Dianne D. Exconde', role: 'Bridesmaid', relation: 'Sister in law' },
+                                        { name: 'Danny Marie C. Vallejo', role: 'Bridesmaid', relation: 'Bestie from Ira\'s best man' },
+                                        { name: 'Sabrina Fatima T. Alarma', role: 'Cord', relation: 'Work bestie' }
                                     ].map((person, i) =>
                                         React.createElement('div', { key: i, className: 'party-member', style: { animationDelay: `${i * 0.15}s` } }, [
                                             React.createElement('div', { key: 'avatar', className: 'party-avatar rose' },
@@ -200,9 +203,13 @@
                                 React.createElement('h2', { key: 'groomsmen-title', className: 'party-group-title green' }, 'Groomsmen'),
                                 React.createElement('div', { key: 'groomsmen-list', className: 'party-members' },
                                     [
-                                        { name: 'Armand Vallejo', role: 'Best Man', relation: 'Childhood friend' },
+                                        { name: 'Armand D. Vallejo', role: 'Best Man', relation: 'Childhood friend' },
                                         { name: 'Jayson Avestrus', role: 'Groomsman', relation: 'College friend' },
-                                        { name: 'Jurineil Llaneta', role: 'Groomsman', relation: 'Brother in law' }
+                                        { name: 'Jurineil L. Llaneta', role: 'Groomsman', relation: 'Brother in law' },
+                                        { name: 'Edgarico L. Llaneta', role: 'Groomsman', relation: 'Brother in law' },
+                                        { name: 'Jon Jayvee G. Llaneta', role: 'Groomsman', relation: 'Cousin in law' },
+                                        { name: 'Deane Martin Brion', role: 'Groomsman', relation: 'High school friend' },
+                                        { name: 'Michael Benjamin Diaz', role: 'Groomsman', relation: 'High school friend' }
                                     ].map((person, i) =>
                                         React.createElement('div', { key: i, className: 'party-member', style: { animationDelay: `${i * 0.15}s` } }, [
                                             React.createElement('div', { key: 'avatar', className: 'party-avatar green' },
@@ -219,25 +226,9 @@
                     ])
                 ),
 
-                // Call to Action
-                React.createElement('section', { key: 'cta', className: 'party-cta-section' },
-                    React.createElement('div', { className: 'party-cta-container' }, [
-                        React.createElement('h2', { key: 'cta-title', className: 'party-cta-title' }, 'Ready to Celebrate With Us?'),
-                        React.createElement('p', { key: 'cta-text', className: 'party-cta-text' }, 'We can\'t wait to share this special day with all our loved ones')
-                    ])
-                ),
-
                 // Footer
                 React.createElement('footer', { key: 'footer', className: 'footer' },
                     React.createElement('div', { className: 'footer-container' }, [
-                        React.createElement('div', { key: 'footer-heart', className: 'footer-heart' },
-                            React.createElement(Heart, { className: 'footer-heart-icon' })
-                        ),
-                        React.createElement('p', { key: 'footer-title', className: 'footer-title' }, 'Ira & Angel'),
-                        React.createElement('div', { key: 'footer-divider', className: 'footer-divider' }),
-                        React.createElement('p', { key: 'footer-info', className: 'footer-info' }, 
-                            'June 27, 2026 • #IraAndAngel2026'
-                        ),
                         React.createElement('p', { key: 'footer-copyright', className: 'footer-copyright' }, 
                             '© 2026 Ira & Angel Anonuevo. All rights reserved.'
                         )
