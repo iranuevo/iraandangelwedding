@@ -178,8 +178,8 @@ body {
 }
 
 .nav-heart {
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     animation: gentle-sway 3s ease-in-out infinite;
 }
 
@@ -1990,6 +1990,7 @@ body {
     background: linear-gradient(135deg, var(--rose-200), var(--sage-200), var(--rose-200));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
     opacity: 0.6;
 }
