@@ -366,6 +366,7 @@
             const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
             const [isWeddingDay, setIsWeddingDay] = useState(false);
             const [activeLocationTab, setActiveLocationTab] = useState('ceremony');
+            const [imageModal, setImageModal] = useState({ isOpen: false, imageSrc: '', imageAlt: '' });
             const [formData, setFormData] = useState({
                 name: '',
                 guests: '1',
@@ -1029,36 +1030,52 @@
                         ]),
                         React.createElement('div', { key: 'dress-code-grid', className: 'dress-code-grid' }, [
                             React.createElement('div', { key: 'for-her', className: 'dress-code-card' }, [
-                                React.createElement('div', { key: 'her-icon', className: 'dress-code-icon' },
-                                    React.createElement(Dress, { className: 'dress-icon' })
-                                ),
+                                React.createElement('div', { key: 'her-images', className: 'dress-code-images' }, [
+                                    React.createElement('img', { 
+                                        key: 'her-image-1',
+                                        src: 'image/ForHer1.png', 
+                                        alt: 'For Her Style 1',
+                                        className: 'dress-code-reference-image',
+                                        onClick: () => setImageModal({ isOpen: true, imageSrc: 'image/ForHer1.png', imageAlt: 'For Her Style 1' }),
+                                        style: { cursor: 'pointer' }
+                                    }),
+                                    React.createElement('img', { 
+                                        key: 'her-image-2',
+                                        src: 'image/ForHer2.png', 
+                                        alt: 'For Her Style 2',
+                                        className: 'dress-code-reference-image',
+                                        onClick: () => setImageModal({ isOpen: true, imageSrc: 'image/ForHer2.png', imageAlt: 'For Her Style 2' }),
+                                        style: { cursor: 'pointer' }
+                                    })
+                                ]),
                                 React.createElement('h3', { key: 'her-title', className: 'dress-code-title' }, 'For Her'),
                                 React.createElement('p', { key: 'her-text', className: 'dress-code-text' }, 
                                     'Floor-length gowns or elegant cocktail dresses in soft, romantic colors. Think flowing fabrics, and pastel tones. Comfortable shoes recommended.'
-                                ),
-                                React.createElement('a', {
-                                    key: 'her-link',
-                                    href: 'https://www.pinterest.com/pin/9148005522021544/',
-                                    target: '_blank',
-                                    rel: 'noopener noreferrer',
-                                    className: 'dress-code-link'
-                                }, 'View Inspiration →')
+                                )
                             ]),
                             React.createElement('div', { key: 'for-him', className: 'dress-code-card', style: { animationDelay: '0.2s' } }, [
-                                React.createElement('div', { key: 'him-icon', className: 'dress-code-icon' },
-                                    React.createElement(Suit, { className: 'suit-icon' })
-                                ),
+                                React.createElement('div', { key: 'him-images', className: 'dress-code-images' }, [
+                                    React.createElement('img', { 
+                                        key: 'him-image-1',
+                                        src: 'image/ForHim1.png', 
+                                        alt: 'For Him Style 1',
+                                        className: 'dress-code-reference-image',
+                                        onClick: () => setImageModal({ isOpen: true, imageSrc: 'image/ForHim1.png', imageAlt: 'For Him Style 1' }),
+                                        style: { cursor: 'pointer' }
+                                    }),
+                                    React.createElement('img', { 
+                                        key: 'him-image-2',
+                                        src: 'image/ForHim2.png', 
+                                        alt: 'For Him Style 2',
+                                        className: 'dress-code-reference-image',
+                                        onClick: () => setImageModal({ isOpen: true, imageSrc: 'image/ForHim2.png', imageAlt: 'For Him Style 2' }),
+                                        style: { cursor: 'pointer' }
+                                    })
+                                ]),
                                 React.createElement('h3', { key: 'him-title', className: 'dress-code-title' }, 'For Him'),
                                 React.createElement('p', { key: 'him-text', className: 'dress-code-text' }, 
                                     'Barong Tagalog or suits in nude/light colors such as tan, beige, or light gray. Ties optional. Linen or lightweight fabrics perfect for the season. Dress shoes suitable for indoor settings.'
-                                ),
-                                React.createElement('a', {
-                                    key: 'him-link',
-                                    href: 'https://www.pinterest.com/pin/539235755404868158/',
-                                    target: '_blank',
-                                    rel: 'noopener noreferrer',
-                                    className: 'dress-code-link'
-                                }, 'View Barong & Suit Inspiration →')
+                                )
                             ])
                         ]),
                         React.createElement('div', { key: 'smoothie-palette', className: 'smoothie-palette' }, [
@@ -1213,7 +1230,33 @@
                             '© 2026 Ira & Angel Anonuevo. All rights reserved.'
                         )
                     ])
-                )
+                ),
+
+                // Image Modal
+                imageModal.isOpen && React.createElement('div', { 
+                    key: 'image-modal',
+                    className: 'image-modal-overlay',
+                    onClick: () => setImageModal({ isOpen: false, imageSrc: '', imageAlt: '' })
+                }, [
+                    React.createElement('div', { 
+                        key: 'modal-content',
+                        className: 'image-modal-content',
+                        onClick: (e) => e.stopPropagation()
+                    }, [
+                        React.createElement('button', {
+                            key: 'close-button',
+                            className: 'image-modal-close',
+                            onClick: () => setImageModal({ isOpen: false, imageSrc: '', imageAlt: '' }),
+                            'aria-label': 'Close modal'
+                        }, '×'),
+                        React.createElement('img', {
+                            key: 'modal-image',
+                            src: imageModal.imageSrc,
+                            alt: imageModal.imageAlt,
+                            className: 'image-modal-img'
+                        })
+                    ])
+                ])
             ]);
         };
 
