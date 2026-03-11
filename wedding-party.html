@@ -9,12 +9,50 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&family=Great+Vibes&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <!-- Preload critical scripts -->
+    <link rel="preload" href="https://unpkg.com/react@18/umd/react.production.min.js" as="script" crossorigin>
+    <link rel="preload" href="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" as="script" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com">
+    <!-- Prefetch main page for RSVP navigation -->
+    <link rel="prefetch" href="main.html">
     <script defer crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script defer crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script defer src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
     <div id="root"></div>
+    
+    <!-- Loading indicator -->
+    <style>
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to bottom, #f8faf8 0%, #f3f6f3 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease-out;
+        }
+        #loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid #e8ede8;
+            border-top-color: #395711;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+    <div id="loading-screen">
+        <div class="loading-spinner"></div>
+    </div>
     
     <!-- Bottom-right RSVP link -->
     <div id="fallback-rsvp" style="position: fixed; bottom: 20px; right: 20px; background: linear-gradient(to right, #4a6e15, #395711); color: white; padding: 15px 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(57, 87, 17, 0.3); z-index: 1000; display: none;">
@@ -238,6 +276,15 @@
         };
 
         ReactDOM.render(React.createElement(WeddingPartyPage), document.getElementById('root'));
+        
+        // Hide loading screen after render
+        requestAnimationFrame(() => {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                loadingScreen.classList.add('hidden');
+                setTimeout(() => loadingScreen.remove(), 300);
+            }
+        });
         
         // Show RSVP button immediately
         const fallback = document.getElementById('fallback-rsvp');
