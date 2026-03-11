@@ -1027,9 +1027,11 @@
                             React.createElement('h2', { className: 'section-title' }, 'Dress Code'),
                             React.createElement('div', { className: 'section-divider' }),
                             React.createElement('p', { className: 'dress-code-theme' }, 'Formal'),
-                            React.createElement('p', { className: 'dress-code-note' }, 
-                                "We'd love for you to wear colors from our palette below. We kindly ask, Please note that white is reserved for the bride and groom."
-                            )
+                            React.createElement('p', { className: 'dress-code-note' }, [
+                                "We'd love for you to wear colors from our palette below.",
+                                React.createElement('br', { key: 'br' }),
+                                React.createElement('strong', { key: 'avoid-white' }, 'Please avoid wearing white.')
+                            ])
                         ]),
                         React.createElement('div', { key: 'dress-code-grid', className: 'dress-code-grid' }, [
                             React.createElement('div', { key: 'for-her', className: 'dress-code-card' }, [
