@@ -2205,9 +2205,30 @@ body {
     font-family: 'Cormorant Garamond', serif;
     font-size: 48px;
     color: var(--sage-500);
-    margin-bottom: 64px;
+    margin-bottom: 24px;
     font-style: italic;
     font-weight: 500;
+}
+
+.dress-code-note {
+    font-family: 'Crimson Text', serif;
+    font-size: 18px;
+    color: #4a5568;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto 64px;
+    padding: 20px 32px;
+    background: linear-gradient(135deg, rgba(253, 242, 248, 0.5), rgba(240, 253, 244, 0.5));
+    border-left: 4px solid var(--sage-400);
+    border-radius: 8px;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .dress-code-note {
+        font-size: 16px;
+        padding: 16px 24px;
+    }
 }
 
 .dress-code-grid {
