@@ -9,12 +9,47 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&family=Great+Vibes&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <!-- Preload critical scripts -->
+    <link rel="preload" href="https://unpkg.com/react@18/umd/react.production.min.js" as="script" crossorigin>
+    <link rel="preload" href="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" as="script" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com">
     <script defer crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script defer crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script defer src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
     <div id="root"></div>
+    <!-- Loading indicator -->
+    <style>
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to bottom, #f8faf8 0%, #f3f6f3 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease-out;
+        }
+        #loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid #e8ede8;
+            border-top-color: #395711;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+    <div id="loading-screen">
+        <div class="loading-spinner"></div>
+    </div>
 
     <script type="text/babel">
         const { useState, useEffect } = React;
@@ -816,7 +851,7 @@
                                 ]),
                                 React.createElement('div', { key: 'reception-details', className: 'detail-items' },
                                     [
-                                        { icon: Calendar, text: 'June 27, 2026', sub: 'Immediately following ceremony' },
+                                        { icon: Calendar, text: 'June 27, 2026', sub: 'Immediately follows after the ceremony' },
                                         { icon: Clock, text: '4:00 PM - 10:00 PM', sub: 'Cocktails, dinner, and dancing' },
                                         { icon: MapPin, text: 'The Heritage Hotel Manila', sub: 'Roxas Boulevard, Manila' }
                                     ].map((item, i) =>
@@ -1028,9 +1063,9 @@
                             React.createElement('div', { className: 'section-divider' }),
                             React.createElement('p', { className: 'dress-code-theme' }, 'Formal'),
                             React.createElement('p', { className: 'dress-code-note' }, [
-                                "We'd love for you to wear colors from our palette below.",
+                                "We love to see you wearing our color palettes below!",
                                 React.createElement('br', { key: 'br' }),
-                                React.createElement('strong', { key: 'avoid-white' }, 'Please avoid wearing white.')
+                                React.createElement('strong', { key: 'avoid-white' }, 'Just please avoid wearing white.')
                             ])
                         ]),
                         React.createElement('div', { key: 'dress-code-grid', className: 'dress-code-grid' }, [
@@ -1055,7 +1090,7 @@
                                 ]),
                                 React.createElement('h3', { key: 'her-title', className: 'dress-code-title' }, 'For Her'),
                                 React.createElement('p', { key: 'her-text', className: 'dress-code-text' }, 
-                                    'Floor-length gowns or elegant cocktail dresses in soft, romantic colors. Think flowing fabrics, and pastel tones. Comfortable shoes recommended.'
+                                    'Floor-length gowns or elegant cocktail dresses in soft, romantic colors (pink, olive). Think flowing fabrics, and minimalist tones. Comfortable shoes recommended.'
                                 )
                             ]),
                             React.createElement('div', { key: 'for-him', className: 'dress-code-card', style: { animationDelay: '0.2s' } }, [
@@ -1079,7 +1114,7 @@
                                 ]),
                                 React.createElement('h3', { key: 'him-title', className: 'dress-code-title' }, 'For Him'),
                                 React.createElement('p', { key: 'him-text', className: 'dress-code-text' }, 
-                                    'Barong Tagalog or suits in nude/light colors such as tan, beige, or light gray. Ties optional. Linen or lightweight fabrics perfect for the season. Dress shoes suitable for indoor settings.'
+                                    'Barong Tagalog or suits in nude/light colors such as tan, beige, or olive. Ties optional. Linen or lightweight fabrics perfect for the season. Dress shoes suitable for indoor settings.'
                                 )
                             ])
                         ]),
@@ -1266,6 +1301,15 @@
         };
 
         ReactDOM.render(React.createElement(WeddingWebsite), document.getElementById('root'));
+        
+        // Hide loading screen after render
+        requestAnimationFrame(() => {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                loadingScreen.classList.add('hidden');
+                setTimeout(() => loadingScreen.remove(), 300);
+            }
+        });
         
         // Simple hash navigation function
         window.handleRSVPNavigation = function() {
