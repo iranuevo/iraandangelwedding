@@ -9,6 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&family=Great+Vibes&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <!-- Preload critical scripts -->
+    <link rel="preload" href="https://unpkg.com/react@18/umd/react.production.min.js" as="script" crossorigin>
+    <link rel="preload" href="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" as="script" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com">
+    <!-- Prefetch main page for RSVP navigation -->
+    <link rel="prefetch" href="main.html">
     <script defer crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script defer crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script defer src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -16,9 +22,109 @@
 <body>
     <div id="root"></div>
     
+    <!-- Loading indicator -->
+    <style>
+        /* Prevent scroll issues - CRITICAL FIX */
+        html {
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: 100%;
+        }
+        
+        body {
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: 100%;
+            min-height: 100vh;
+        }
+        
+        #root {
+            min-height: 100vh;
+            overflow: visible;
+        }
+        
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to bottom, #f8faf8 0%, #f3f6f3 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease-out;
+        }
+        #loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid #e8ede8;
+            border-top-color: #395711;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Fix cursor trail to not interfere with scrolling */
+        .cursor-trail {
+            pointer-events: none !important;
+            position: fixed !important;
+        }
+        
+        /* Ensure floating hearts don't interfere */
+        .floating-hearts-container {
+            pointer-events: none !important;
+            position: fixed !important;
+        }
+        
+        /* Ensure wedding container doesn't create inner scroll */
+        .wedding-container {
+            overflow: visible !important;
+            min-height: 100vh;
+            height: auto !important;
+            position: relative;
+        }
+        
+        /* Ensure party section doesn't create scroll */
+        .party-section {
+            overflow: visible !important;
+            height: auto !important;
+        }
+        
+        /* Ensure party container doesn't create scroll */
+        .party-container {
+            overflow: visible !important;
+            height: auto !important;
+        }
+        
+        /* Remove extra space after footer */
+        .footer {
+            margin-bottom: 0 !important;
+            padding-bottom: 40px !important;
+        }
+        
+        /* Ensure no extra space at bottom of page */
+        body {
+            padding-bottom: 0 !important;
+            margin-bottom: 0 !important;
+        }
+        
+        .wedding-container {
+            padding-bottom: 0 !important;
+            margin-bottom: 0 !important;
+        }
+    </style>
+    <div id="loading-screen">
+        <div class="loading-spinner"></div>
+    </div>
+    
     <!-- Bottom-right RSVP link -->
-    <div id="fallback-rsvp" style="position: fixed; bottom: 20px; right: 20px; background: linear-gradient(to right, #4a6e15, #395711); color: white; padding: 15px 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(57, 87, 17, 0.3); z-index: 1000; display: none;">
-        <a href="main.html#rsvp" onclick="goToRSVP(); return false;" style="color: white; text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 8px;">
+    <div id="fallback-rsvp" style="position: fixed; bottom: 20px; right: 20px; background: linear-gradient(to right, #4a6e15, #395711); color: white; padding: 15px 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(57, 87, 17, 0.3); z-index: 1000; display: none; pointer-events: auto;">
+        <a href="main.html#rsvp" onclick="goToRSVP(); return false;" style="color: white; text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 8px; pointer-events: auto;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -80,14 +186,27 @@
         );
 
         const WeddingPartyPage = () => {
-            const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+            // Removed mouse tracking to fix scroll issues
+            // const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
             useEffect(() => {
-                const handleMouseMove = (e) => {
-                    setMousePos({ x: e.clientX, y: e.clientY });
-                };
+                // Removed mouse move handler to fix scroll issues
+                // let rafId = null;
+                // let currentMousePos = { x: 0, y: 0 };
+                
+                // const handleMouseMove = (e) => {
+                //     currentMousePos = { x: e.clientX, y: e.clientY };
+                //     
+                //     // Throttle updates using requestAnimationFrame
+                //     if (!rafId) {
+                //         rafId = requestAnimationFrame(() => {
+                //             setMousePos(currentMousePos);
+                //             rafId = null;
+                //         });
+                //     }
+                // };
 
-                window.addEventListener('mousemove', handleMouseMove);
+                // window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
                 // Add fade-in animation to sections
                 const observer = new IntersectionObserver(
@@ -98,47 +217,53 @@
                             }
                         });
                     },
-                    { threshold: 0.2 }
+                    { threshold: 0.2, rootMargin: '0px' }
                 );
 
-                document.querySelectorAll('section[id]').forEach((section) => {
-                    observer.observe(section);
-                });
+                // Wait for DOM to be ready
+                setTimeout(() => {
+                    document.querySelectorAll('section[id]').forEach((section) => {
+                        observer.observe(section);
+                    });
+                }, 100);
 
                 return () => {
-                    window.removeEventListener('mousemove', handleMouseMove);
+                    // window.removeEventListener('mousemove', handleMouseMove);
+                    // if (rafId) {
+                    //     cancelAnimationFrame(rafId);
+                    // }
                     observer.disconnect();
                 };
             }, []);
 
             return React.createElement('div', { className: 'wedding-container' }, [
-                // Floating Hearts Animation
-                React.createElement('div', { 
-                    key: 'floating-hearts',
-                    className: 'floating-hearts-container' 
-                }, 
-                    [...Array(6)].map((_, i) =>
-                        React.createElement('div', {
-                            key: i,
-                            className: 'floating-heart',
-                            style: {
-                                left: `${15 + i * 15}%`,
-                                animationDelay: `${i * 2}s`,
-                                animationDuration: `${15 + i * 2}s`
-                            }
-                        }, React.createElement(Heart, { className: 'heart-icon-float' }))
-                    )
-                ),
+                // Floating Hearts Animation - DISABLED FOR TESTING
+                // React.createElement('div', { 
+                //     key: 'floating-hearts',
+                //     className: 'floating-hearts-container' 
+                // }, 
+                //     [...Array(6)].map((_, i) =>
+                //         React.createElement('div', {
+                //             key: i,
+                //             className: 'floating-heart',
+                //             style: {
+                //                 left: `${15 + i * 15}%`,
+                //                 animationDelay: `${i * 2}s`,
+                //                 animationDuration: `${15 + i * 2}s`
+                //             }
+                //         }, React.createElement(Heart, { className: 'heart-icon-float' }))
+                //     )
+                // ),
 
-                // Cursor Trail Effect
-                React.createElement('div', {
-                    key: 'cursor-trail',
-                    className: 'cursor-trail',
-                    style: {
-                        left: mousePos.x - 16,
-                        top: mousePos.y - 16
-                    }
-                }, React.createElement('div', { className: 'cursor-trail-inner' })),
+                // Cursor Trail Effect - DISABLED FOR TESTING
+                // React.createElement('div', {
+                //     key: 'cursor-trail',
+                //     className: 'cursor-trail',
+                //     style: {
+                //         left: mousePos.x - 16,
+                //         top: mousePos.y - 16
+                //     }
+                // }, React.createElement('div', { className: 'cursor-trail-inner' })),
 
                 // Navigation
                 React.createElement('nav', { key: 'nav', className: 'navigation' },
@@ -168,7 +293,7 @@
                 ),
 
                 // Wedding Party Section
-                React.createElement('section', { key: 'wedding-party', id: 'wedding-party', className: 'party-section party-page', style: { paddingTop: '80px', paddingBottom: '20px' } },
+                React.createElement('section', { key: 'wedding-party', id: 'wedding-party', className: 'party-section party-page', style: { paddingTop: '100px', paddingBottom: '40px' } },
                     React.createElement('div', { className: 'party-container' }, [
                         React.createElement('div', { key: 'party-header', className: 'section-header', style: { marginBottom: '16px', textAlign: 'center' } }, [
                             React.createElement('p', { className: 'section-subtitle', style: { fontSize: '18px', lineHeight: '1.4', color: '#718096', fontStyle: 'italic', fontFamily: "'Cormorant Garamond', serif" } }, 'Meet the special people who will be standing with us on our big day')
@@ -238,6 +363,15 @@
         };
 
         ReactDOM.render(React.createElement(WeddingPartyPage), document.getElementById('root'));
+        
+        // Hide loading screen after render
+        requestAnimationFrame(() => {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                loadingScreen.classList.add('hidden');
+                setTimeout(() => loadingScreen.remove(), 300);
+            }
+        });
         
         // Show RSVP button immediately
         const fallback = document.getElementById('fallback-rsvp');

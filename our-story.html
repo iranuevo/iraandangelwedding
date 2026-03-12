@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&family=Great+Vibes&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <!-- Prefetch main page for RSVP navigation -->
+    <link rel="prefetch" href="main.html">
     <style>
         /* Carousel Styles */
         .carousel-container {
@@ -48,6 +50,12 @@
             width: 100%;
             height: 500px;
             object-fit: contain;
+            /* Performance optimization */
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .carousel-slide.active .carousel-image {
             display: block;
             background: #f8f9fa;
         }
@@ -96,6 +104,8 @@
             transition: all 0.3s ease;
             z-index: 10;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            /* Performance optimization */
+            will-change: transform;
         }
 
         .carousel-btn:hover {
@@ -297,7 +307,7 @@
                         <div class="carousel-slide active">
                             <img src="image/our-strory-slide1.jpeg" alt="Our cupids: Ate Sab & Drew with Ed" class="carousel-image portrait">
                             <div class="carousel-caption">
-                                <p><strong>Our main cupids: Ate Sab & Drew w/ Ed</strong><br><br>Ate Sab & Andrew is my (Angel) work beshies, they introduced Ira to me through their viber work GC, where Ed is also part of it. Ira from IT Department supports the Department where Angel, Sab and Drew all worked. Group dinner, where Ira met Angel. (To our cupids, we are now getting married. We love you!)</p>
+                                <p><strong>Our main cupids: Ate Sab & Drew w/ Ed</strong><br><br>Ate Sab & Andrew is my (Angel) work beshies, they introduced Ira to me through their viber work GC, where Ed is also part of it. Ira from IT Department supports the Department where Angel, Sab and Drew all worked. (To our cupids, we are now getting married. We love you!)</p>
                             </div>
                         </div>
 
@@ -337,7 +347,7 @@
                         <div class="carousel-slide">
                             <img src="image/our-strory-slide6.jpeg" alt="4th of July 2025" class="carousel-image portrait">
                             <div class="carousel-caption">
-                                <p><strong>4th of July 2025</strong><br><br>4 years of creating memories & solving problems together! 😄</p>
+                                <p><strong>4th on July 2025</strong><br><br>4 years of creating memories & solving problems together! 😄</p>
                             </div>
                         </div>
 
@@ -345,7 +355,7 @@
                         <div class="carousel-slide">
                             <img src="image/our-strory-slide7.png" alt="The Proposal" class="carousel-image portrait">
                             <div class="carousel-caption">
-                                <p><strong>The Proposal</strong><br><br>To: "Will you marry me?"</p>
+                                <p><strong>The Proposal</strong><br><br>From: "You want to eat dinner before going home?"<br>To: "Will you marry me?"</p>
                             </div>
                         </div>
                     </div>
