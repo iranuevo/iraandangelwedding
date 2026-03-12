@@ -1032,8 +1032,8 @@ body {
 }
 
 .toast-success {
-    background: linear-gradient(135deg, rgba(134, 239, 172, 0.95), rgba(74, 222, 128, 0.95));
-    border: 2px solid rgba(134, 239, 172, 1);
+    background: linear-gradient(135deg, rgba(139, 142, 93, 0.95), rgba(115, 118, 77, 0.95));
+    border: 2px solid rgba(139, 142, 93, 1);
 }
 
 .toast-error {

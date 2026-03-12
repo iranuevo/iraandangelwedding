@@ -612,7 +612,7 @@
                     key: 'toast-success',
                     className: 'toast toast-success'
                 }, [
-                    React.createElement('div', { key: 'icon', className: 'toast-icon' }, '✨'),
+                    React.createElement('div', { key: 'icon', className: 'toast-icon' }, '🥂'),
                     React.createElement('p', { key: 'text', className: 'toast-text' }, 'Thank you for your RSVP! We can\'t wait to celebrate with you.')
                 ]),
 
@@ -1138,18 +1138,12 @@
                                 })
                             ]),
 
-                            // Guests Field
-                            React.createElement('div', { key: 'guests', className: 'form-group' }, [
-                                React.createElement('label', { className: 'form-label' }, 'Number of Guests *'),
-                                React.createElement('select', {
-                                    value: formData.guests,
-                                    onChange: (e) => setFormData({...formData, guests: e.target.value}),
-                                    className: 'form-select'
-                                // }, [1, 2].map(n =>
-                                }, [1].map(n =>
-                                    React.createElement('option', { key: n, value: n }, `${n} ${n === 1 ? 'Guest' : 'Guests'}`)
-                                ))
-                            ]),
+                            // Guests Field (hidden, defaults to 1)
+                            React.createElement('input', {
+                                key: 'guests-hidden',
+                                type: 'hidden',
+                                value: formData.guests
+                            }),
 
                             // Attending Field
                             React.createElement('div', { key: 'attending', className: 'form-group' }, [
@@ -1191,6 +1185,19 @@
                                     placeholder: 'Share your well wishes...'
                                 })
                             ]),
+
+                            // Polite note
+                            React.createElement('p', {
+                                key: 'rsvp-note',
+                                style: {
+                                    marginTop: '8px',
+                                    marginBottom: '16px',
+                                    fontSize: '14px',
+                                    color: '#666',
+                                    textAlign: 'center',
+                                    fontStyle: 'italic'
+                                }
+                            }, 'Please note that this RSVP is for you only.'),
 
                             // Submit Button
                             React.createElement('button', {
