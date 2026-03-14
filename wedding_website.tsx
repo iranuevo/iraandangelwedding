@@ -695,7 +695,7 @@ const WeddingWebsite = () => {
             <a href="#" className="footer-link text-gray-400 hover:text-rose-400 transition-all duration-300 text-sm tracking-widest">Email Us</a>
           </div>
           <p className="text-sm text-gray-500 tracking-wide">
-            Ira & Angel • June 27, 2026 • #IraAndAngel2026
+            Ira & Angel • June 27, 2026 • #thepeaches
           </p>
         </div>
       </footer>
