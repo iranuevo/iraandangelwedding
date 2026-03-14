@@ -970,7 +970,7 @@
                             React.createElement('div', { key: 'timeline-line', className: 'timeline-line' }),
                             [
                                 { time: '11:30 AM', title: 'Guest Arrival', desc: 'Welcome to the church', color: 'rose', icon: Users },
-                                { time: '12:00 PM', title: 'Ceremony Begins', desc: 'As the Church strictly starts at its scheduled time and finish the ceremony on time (1 hr only), we kindly request you to be seated by 12NN-1230PM for smooth flow of activity.', color: 'green', icon: Church },
+                                { time: '12:00 PM', title: 'Ceremony Begins', desc: 'As the Church strictly starts at its scheduled time and finish the ceremony on time (1 hr only), we kindly request you to be seated by 12NN-1230PM for smooth flow of event.', color: 'green', icon: Church },
                                 { time: '3:00 PM - 4:00 PM', title: 'Cocktail Hour', desc: 'Transfer to Heritage Hotel Manila. Enjoy the refreshments, photo booth and fun activities.', color: 'rose', icon: WineGlass },
                                 { time: '5:00 PM - 9:00 PM', title: 'Event Proper', desc: 'Dinner, laughter and love', color: 'green', icon: Utensils },
                                 { time: '9:00 PM onwards', title: 'After Party', desc: 'Enjoy the rest of the night with a few shots & cocktails.', color: 'rose', icon: Dance }
@@ -1040,8 +1040,13 @@
                                 React.createElement('div', { key: 'registry-icon', className: 'registry-icon' },
                                     // React.createElement(Gift, { className: 'registry-sparkle' })
                                 ),
-                                React.createElement('p', { key: 'registry-text', className: 'registry-text' }, 
-                                    'If you wish to bless us with a gift, a monetary contribution towards our future home would be deeply appreciated. A wishing well will be available at the reception.'
+                                React.createElement('p', { key: 'registry-text', className: 'registry-text registry-poem' }, 
+                                    React.createElement('em', null, 
+                                        React.createElement('span', { style: { display: 'block' } }, '\u201cAs finding a gift is hard to do,'),
+                                        React.createElement('span', { style: { display: 'block' } }, 'Our wishing well is just for you.'),
+                                        React.createElement('span', { style: { display: 'block' } }, 'A monetary gift placed in the well\u2014'),
+                                        React.createElement('span', { style: { display: 'block' } }, 'Then make a wish... but do not tell.\u201d')
+                                    )
                                 ),
                                 React.createElement('div', { key: 'no-gifts-notice', className: 'no-gifts-notice' }, [
                                     React.createElement('div', { key: 'no-gifts-content', className: 'no-gifts-content' }, [
@@ -1090,32 +1095,40 @@
                                 ]),
                                 React.createElement('h3', { key: 'her-title', className: 'dress-code-title' }, 'For Her'),
                                 React.createElement('p', { key: 'her-text', className: 'dress-code-text' }, 
-                                    'Floor-length gowns or elegant cocktail dresses in soft, romantic colors (pink, olive). Think flowing fabrics, and minimalist tones. Comfortable shoes recommended.'
-                                )
+                                    'Dress in the shades of our favorite sips: matcha latte, strawberry latte, or espresso. Floor-length gowns or elegant cocktail dresses in soft, minimalist, or romantic colors.'
+                                ),
+                                React.createElement('p', { key: 'her-florals', className: 'dress-code-text' },
+                                    React.createElement('strong', null, 'Please avoid floral patterns.')
+                                ),
+                                React.createElement('p', { key: 'her-shop', className: 'dress-code-shop-note' }, [
+                                    'Need inspo? Browse dresses here: ',
+                                    React.createElement('br', { key: 'shop-br1' }),
+                                    React.createElement('a', { key: 'shein-link-1', href: 'https://onelink.shein.com/32/5jc208duf6fv', target: '_blank', rel: 'noopener noreferrer', className: 'dress-code-link' }, 'Inspo 1'),
+                                    React.createElement('br', { key: 'shop-br2' }),
+                                    React.createElement('a', { key: 'shein-link-2', href: 'https://onelink.shein.com/32/5jc39o2gtd9b', target: '_blank', rel: 'noopener noreferrer', className: 'dress-code-link' }, 'Inspo 2'),
+                                    React.createElement('br', { key: 'shop-br3' }),
+                                    React.createElement('a', { key: 'shopee-link-her', href: 'https://s.shopee.ph/1BHbi6CVQ1', target: '_blank', rel: 'noopener noreferrer', className: 'dress-code-link' }, 'Inspo 3')
+                                ])
                             ]),
                             React.createElement('div', { key: 'for-him', className: 'dress-code-card', style: { animationDelay: '0.2s' } }, [
                                 React.createElement('div', { key: 'him-images', className: 'dress-code-images' }, [
                                     React.createElement('img', { 
-                                        key: 'him-image-1',
-                                        src: 'image/ForHim1.png', 
-                                        alt: 'For Him Style 1',
+                                        key: 'him-image',
+                                        src: 'image/ForHim.png', 
+                                        alt: 'For Him Style',
                                         className: 'dress-code-reference-image',
-                                        onClick: () => setImageModal({ isOpen: true, imageSrc: 'image/ForHim1.png', imageAlt: 'For Him Style 1' }),
-                                        style: { cursor: 'pointer' }
-                                    }),
-                                    React.createElement('img', { 
-                                        key: 'him-image-2',
-                                        src: 'image/ForHim2.png', 
-                                        alt: 'For Him Style 2',
-                                        className: 'dress-code-reference-image',
-                                        onClick: () => setImageModal({ isOpen: true, imageSrc: 'image/ForHim2.png', imageAlt: 'For Him Style 2' }),
+                                        onClick: () => setImageModal({ isOpen: true, imageSrc: 'image/ForHim.png', imageAlt: 'For Him Style' }),
                                         style: { cursor: 'pointer' }
                                     })
                                 ]),
                                 React.createElement('h3', { key: 'him-title', className: 'dress-code-title' }, 'For Him'),
                                 React.createElement('p', { key: 'him-text', className: 'dress-code-text' }, 
-                                    'Barong Tagalog or suits in nude/light colors such as tan, beige, or olive. Ties optional. Linen or lightweight fabrics perfect for the season. Dress shoes suitable for indoor settings.'
-                                )
+                                    'Espresso yourself by wearing a Barong Tagalog with black pants. Rich, bold, and perfectly brewed for the occasion.'
+                                ),
+                                React.createElement('p', { key: 'him-shop', className: 'dress-code-shop-note' }, [
+                                    "Don't have a Barong yet? Explore: ",
+                                    React.createElement('a', { key: 'shopee-link', href: 'https://s.shopee.ph/8KkmAJQO6J', target: '_blank', rel: 'noopener noreferrer', className: 'dress-code-link' }, 'Barong Collection')
+                                ])
                             ])
                         ]),
                         React.createElement('div', { key: 'smoothie-palette', className: 'smoothie-palette' }, [
