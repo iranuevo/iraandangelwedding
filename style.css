@@ -1355,6 +1355,15 @@ body {
     letter-spacing: 0.05em;
 }
 
+.footer-hashtag {
+    color: #a0aec0;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.05em;
+    margin-top: 8px;
+}
+
 .footer-copyright {
     color: #9ca3af;
     font-size: 14px;
@@ -2547,6 +2556,166 @@ body {
     }
 }
 
+/* Godfather & Godmother Dress Code Section */
+.godparents-dress-code-section {
+    max-width: 1024px;
+    margin: 0 auto 64px;
+    padding: 0 24px;
+}
+
+.godparents-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    color: #2d3748;
+    margin-bottom: 40px;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+.godparents-grid {
+    display: grid;
+    gap: 40px;
+}
+
+@media (min-width: 768px) {
+    .godparents-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.godparents-card {
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    transition: all 0.5s ease;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.godparents-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.godparents-card:hover {
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.2);
+    transform: translateY(-8px);
+}
+
+.godparents-images {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.godparents-reference-image {
+    width: 100px;
+    height: 130px;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.godparents-card:hover .godparents-reference-image {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.godparents-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    margin-bottom: 16px;
+    color: #2d3748;
+    font-weight: 500;
+    text-align: center;
+}
+
+.godparents-card-text {
+    color: #4a5568;
+    line-height: 1.8;
+    font-size: 16px;
+    font-family: 'Crimson Text', serif;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.godparents-color-palette {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 32px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.godparents-color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 140px;
+}
+
+.godparents-color-image {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    transition: all 0.5s ease;
+}
+
+.godparents-color-image:hover {
+    transform: scale(1.05);
+}
+
+.godparents-color-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #4a5568;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .godparents-card {
+        padding: 32px;
+    }
+    
+    .godparents-reference-image {
+        width: 80px;
+        height: 110px;
+    }
+    
+    .godparents-card-title {
+        font-size: 24px;
+    }
+    
+    .godparents-card-text {
+        font-size: 15px;
+    }
+    
+    .godparents-color-palette {
+        gap: 24px;
+    }
+    
+    .godparents-color-item {
+        flex: 0 0 120px;
+    }
+    
+    .godparents-color-image {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .godparents-color-label {
+        font-size: 16px;
+    }
+}
+
 /* Map Section Styles */
 .map-section {
     padding: 6rem 0;
@@ -3332,6 +3501,44 @@ body {
 
 /* Responsive adjustments for wedding party page */
 @media (max-width: 768px) {
+    .party-section {
+        padding: 80px 16px;
+    }
+    
+    .party-container {
+        max-width: 100%;
+    }
+    
+    .party-grid {
+        gap: 48px;
+    }
+    
+    .party-group-title {
+        font-size: 32px;
+        margin-bottom: 32px;
+    }
+    
+    .party-members {
+        gap: 24px;
+    }
+    
+    .party-page .party-member {
+        padding: 24px 16px;
+    }
+    
+    .party-page .party-avatar {
+        width: 64px;
+        height: 64px;
+    }
+    
+    .party-page .party-member-name {
+        font-size: 18px;
+    }
+    
+    .party-page .party-member-role {
+        font-size: 13px;
+    }
+    
     .party-page-title {
         font-size: 48px;
     }
@@ -3365,6 +3572,52 @@ body {
         max-width: 280px;
     }
 }
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .party-section {
+        padding: 60px 12px;
+    }
+    
+    .party-group-title {
+        font-size: 24px;
+        margin-bottom: 24px;
+    }
+    
+    .party-members {
+        gap: 16px;
+    }
+    
+    .party-page .party-member {
+        padding: 16px 12px;
+    }
+    
+    .party-page .party-avatar {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 12px;
+    }
+    
+    .party-page .party-member-name {
+        font-size: 16px;
+        margin-bottom: 4px;
+    }
+    
+    .party-page .party-member-role {
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+    
+    .party-page .party-member-relation {
+        font-size: 12px;
+    }
+    
+    .party-avatar-icon {
+        width: 32px;
+        height: 32px;
+    }
+}
+
 /* Story page navigation links */
 .story-nav-links {
     display: flex;

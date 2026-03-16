@@ -1164,6 +1164,70 @@
                     ])
                 ),
 
+                // Godfather & Godmother Dress Code Section
+                React.createElement('div', { key: 'godparents-dress-code', className: 'godparents-dress-code-section' }, [
+                    React.createElement('div', { key: 'godparents-header', className: 'section-header' }, [
+                        React.createElement('h2', { className: 'section-title' }, 'Special Roles'),
+                        React.createElement('div', { className: 'section-divider' }),
+                    ]),
+                    React.createElement('div', { key: 'godparents-grid', className: 'godparents-grid' }, [
+                        React.createElement('div', { key: 'godfather', className: 'godparents-card' }, [
+                            React.createElement('div', { key: 'godfather-images', className: 'godparents-images' }, [
+                                React.createElement('img', { 
+                                    key: 'godfather-image',
+                                    src: 'image/ForGodFather.png', 
+                                    alt: 'Godfather Style',
+                                    className: 'godparents-reference-image',
+                                    onClick: () => setImageModal({ isOpen: true, imageSrc: 'image/ForGodFather.png', imageAlt: 'Godfather Style' }),
+                                    style: { cursor: 'pointer' }
+                                })
+                            ]),
+                            React.createElement('h4', { key: 'godfather-title', className: 'godparents-card-title' }, 'Godfather'),
+                            React.createElement('p', { key: 'godfather-text', className: 'godparents-card-text' }, 
+                                'Embody timeless elegance in black. A classic suit or formal attire that reflects the sophistication and grace of this cherished role.'
+                            ),
+                            React.createElement('div', { key: 'godfather-colors', className: 'godparents-color-palette' }, [
+                                React.createElement('div', { key: 'godfather-black', className: 'godparents-color-item' }, [
+                                    React.createElement('img', { 
+                                        key: 'godfather-black-image',
+                                        src: 'image/color-black.png', 
+                                        alt: 'Black',
+                                        className: 'godparents-color-image'
+                                    }),
+                                    React.createElement('p', { key: 'godfather-black-label', className: 'godparents-color-label' }, 'Black')
+                                ])
+                            ])
+                        ]),
+                        React.createElement('div', { key: 'godmother', className: 'godparents-card', style: { animationDelay: '0.2s' } }, [
+                            React.createElement('div', { key: 'godmother-images', className: 'godparents-images' }, [
+                                React.createElement('img', { 
+                                    key: 'godmother-image',
+                                    src: 'image/ForGodmother.png', 
+                                    alt: 'Godmother Style',
+                                    className: 'godparents-reference-image',
+                                    onClick: () => setImageModal({ isOpen: true, imageSrc: 'image/ForGodmother.png', imageAlt: 'Godmother Style' }),
+                                    style: { cursor: 'pointer' }
+                                })
+                            ]),
+                            React.createElement('h4', { key: 'godmother-title', className: 'godparents-card-title' }, 'Godmother'),
+                            React.createElement('p', { key: 'godmother-text', className: 'godparents-card-text' }, 
+                                'Radiate refined beauty in latte hues. An elegant gown or sophisticated dress that honors the warmth and wisdom of this treasured role.'
+                            ),
+                            React.createElement('div', { key: 'godmother-colors', className: 'godparents-color-palette' }, [
+                                React.createElement('div', { key: 'godmother-latte', className: 'godparents-color-item' }, [
+                                    React.createElement('img', { 
+                                        key: 'godmother-latte-image',
+                                        src: 'image/color-latte.png', 
+                                        alt: 'Latte',
+                                        className: 'godparents-color-image'
+                                    }),
+                                    React.createElement('p', { key: 'godmother-latte-label', className: 'godparents-color-label' }, 'Latte')
+                                ])
+                            ])
+                        ])
+                    ])
+                ]),
+
                 // RSVP Section
                 React.createElement('section', { key: 'rsvp', id: 'rsvp', className: 'rsvp-section' },
                     React.createElement('div', { className: 'rsvp-container' }, [
@@ -1284,8 +1348,11 @@
                         React.createElement('p', { key: 'footer-text', className: 'footer-text' }, 
                             'We are so grateful for your love and support as we begin this new chapter. Your presence means the world to us, and we cannot wait to celebrate with you.'
                         ),
+                        React.createElement('p', { key: 'footer-hashtag', className: 'footer-hashtag' }, 
+                            '#thepeaches'
+                        ),
                         React.createElement('p', { key: 'footer-info', className: 'footer-info' }, 
-                            'Ira & Angel • June 27, 2026 • #thepeaches'
+                            'Ira & Angel • June 27, 2026'
                         ),
                         React.createElement('p', { key: 'footer-copyright', className: 'footer-copyright' }, 
                             '© 2026 Ira & Angel Anonuevo. All rights reserved.'
