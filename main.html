@@ -404,7 +404,7 @@
             const [imageModal, setImageModal] = useState({ isOpen: false, imageSrc: '', imageAlt: '' });
             const [formData, setFormData] = useState({
                 name: '',
-                guests: '1',
+                mobile: '',
                 attending: 'yes',
                 message: ''
             });
@@ -586,6 +586,15 @@
                     setSubmitError('Please fill in your name.');
                     return;
                 }
+                if (!formData.mobile) {
+                    setSubmitError('Please fill in your contact mobile number.');
+                    return;
+                }
+                const mobileRegex = /^09\d{9}$/;
+                if (!mobileRegex.test(formData.mobile.trim())) {
+                    setSubmitError('Please enter a valid mobile number in the format 09XXXXXXXXX.');
+                    return;
+                }
 
                 setIsSubmitting(true);
                 setSubmitError('');
@@ -593,29 +602,30 @@
                 try {
                     const response = await fetch(GOOGLE_SCRIPT_URL, {
                         method: 'POST',
-                        mode: 'no-cors',
                         headers: {
-                            'Content-Type': 'application/json',
+                            'Content-Type': 'text/plain',
                         },
                         body: JSON.stringify({
                             name: formData.name,
-                            guests: formData.guests,
+                            mobile: formData.mobile,
                             attending: formData.attending,
                             message: formData.message,
                             timestamp: new Date().toLocaleString()
                         })
                     });
 
-                    // Since we're using no-cors, we can't read the response
-                    // We'll assume success if no error is thrown
-                    setShowRsvpConfirm(true);
-                    setTimeout(() => setShowRsvpConfirm(false), 5000);
-                    setFormData({
-                        name: '',
-                        guests: '1',
-                        attending: 'yes',
-                        message: ''
-                    });
+                    const result = await response.json();
+                    if (result.status === 'success') {
+                        setShowRsvpConfirm(true);
+                        setFormData({
+                            name: '',
+                            mobile: '',
+                            attending: 'yes',
+                            message: ''
+                        });
+                    } else {
+                        setSubmitError('There was an error submitting your RSVP. Please try again or contact us directly.');
+                    }
                 } catch (error) {
                     setSubmitError('There was an error submitting your RSVP. Please try again or contact us directly.');
                 } finally {
@@ -648,7 +658,8 @@
                     className: 'toast toast-success'
                 }, [
                     React.createElement('div', { key: 'icon', className: 'toast-icon' }, '🥂'),
-                    React.createElement('p', { key: 'text', className: 'toast-text' }, 'Thank you for your RSVP! We can\'t wait to celebrate with you.')
+                    React.createElement('p', { key: 'text', className: 'toast-text' }, 'Thank you for your RSVP! We can\'t wait to celebrate with you.'),
+                    React.createElement('button', { key: 'close', className: 'toast-close', onClick: () => setShowRsvpConfirm(false) }, '✕')
                 ]),
 
                 submitError && React.createElement('div', { 
@@ -1247,18 +1258,24 @@
                                 React.createElement('input', {
                                     type: 'text',
                                     value: formData.name,
-                                    onChange: (e) => setFormData({...formData, name: e.target.value}),
+                                    onChange: (e) => setFormData({...formData, name: e.target.value.toUpperCase()}),
                                     className: 'form-input',
-                                    placeholder: 'Last Name, First Name M.I.'
+                                    placeholder: 'LAST NAME, FIRST NAME M.I.'
                                 })
                             ]),
 
-                            // Guests Field (hidden, defaults to 1)
-                            React.createElement('input', {
-                                key: 'guests-hidden',
-                                type: 'hidden',
-                                value: formData.guests
-                            }),
+                            // Mobile Field
+                            React.createElement('div', { key: 'mobile', className: 'form-group' }, [
+                                React.createElement('label', { className: 'form-label' }, 'Mobile Number *'),
+                                React.createElement('input', {
+                                    type: 'tel',
+                                    value: formData.mobile,
+                                    onChange: (e) => setFormData({...formData, mobile: e.target.value}),
+                                    className: 'form-input',
+                                    placeholder: '09XXXXXXXXX',
+                                    required: true
+                                })
+                            ]),
 
                             // Attending Field
                             React.createElement('div', { key: 'attending', className: 'form-group' }, [
