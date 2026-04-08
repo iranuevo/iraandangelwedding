@@ -2804,6 +2804,7 @@ body {
     font-weight: 600;
     color: var(--sage-600);
     margin-bottom: 1rem;
+    font-variant-numeric: lining-nums;
 }
 
 .map-address {
